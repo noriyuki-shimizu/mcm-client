@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "puppeteer": "^1.13.0",
     "uikit": "^3.0.3",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
