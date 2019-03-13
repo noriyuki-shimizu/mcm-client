@@ -1,6 +1,6 @@
 <template>
   <div class="side-bar">
-    <span class="uk-margin-auto-right" uk-icon="menu" uk-toggle="target: #offcanvas-push">Menu</span>
+    <span class="uk-margin-auto-right uk-text-large" uk-icon="menu" uk-toggle="target: #offcanvas-push">Menu</span>
 
     <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
         <div class="uk-offcanvas-bar">
@@ -43,9 +43,11 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 
-export default {
-  name: 'side-bar',
-};
+@Component
+export default class SideBar extends Vue {
+
+}
 
 </script>
