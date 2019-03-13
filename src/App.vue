@@ -10,7 +10,7 @@
 <script>
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import SideBar from '@/components/SideBar.vue';
+import SideBar from '@/components/bar/SideBar.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
 UIkit.use(Icons);
