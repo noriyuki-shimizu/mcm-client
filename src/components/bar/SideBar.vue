@@ -1,6 +1,6 @@
 <template>
   <div class="side-bar">
-    <span class="uk-margin-auto-right uk-text-large" uk-icon="menu" uk-toggle="target: #offcanvas-push">Menu</span>
+    <span class="uk-margin-auto-right uk-text-large" uk-icon="menu" uk-sticky="bottom: #offset" uk-toggle="target: #offcanvas-push"></span>
 
     <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
         <div class="uk-offcanvas-bar">
