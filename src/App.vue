@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <side-bar/>
-    </div>
+    <side-bar/>
     <router-view/>
   </div>
 </template>
 
 <script>
+
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import SideBar from '@/components/bar/SideBar.vue';
@@ -15,10 +14,11 @@ import { Component, Vue } from 'vue-property-decorator';
 
 UIkit.use(Icons);
 
-Vue.component('side-bar', SideBar);
-
 export default {
   name: 'App',
+  components: {
+    'side-bar': SideBar,
+  },
 };
 
 </script>
