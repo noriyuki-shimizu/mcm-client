@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <home-top />
+
+    <hr class="uk-divider-icon">
+
+    <home-brand />
+
+    <hr class="uk-divider-icon">
+    <!-- TODO: ここで一つのコンポーネント -->
+    <!-- お店情報 -->
+
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import HomeTop from '@/components/home/HomeTop.vue';
+import HomeBrand from '@/components/brand/HomeBrand.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    HomeBrand,
+    HomeTop,
   },
 })
-export default class Home extends Vue {}
+
+export default class Home extends Vue {
+}
+
 </script>
+
+
