@@ -10,9 +10,6 @@
               <li>
                 <router-link to="/">Home</router-link>
               </li>
-              <li>
-                <router-link to="/about">About</router-link>
-              </li>
               <li class="uk-parent">
                   <a href="#">My Clothes</a>
                   <ul class="uk-nav-sub">
