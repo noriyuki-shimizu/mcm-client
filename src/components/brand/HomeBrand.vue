@@ -22,6 +22,7 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class HomeBrand extends Vue {
+    // TODO: axiosを用いて以下のリストデータを取得する
     private brandList: any[] = [
     {
       link: 'http://bukht.com/',
@@ -46,7 +47,7 @@ export default class HomeBrand extends Vue {
     {
       link: 'http://henderscheme.com/',
       imagePass: require('../../images/brand/icon/hender-scheme_icon.jpg'),
-    },// yohjiyamamoto_icon
+    },
     {
       link: 'http://www.yohjiyamamoto.co.jp/',
       imagePass: require('../../images/brand/icon/yohjiyamamoto_icon.png'),
