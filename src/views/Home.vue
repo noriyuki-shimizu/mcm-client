@@ -7,8 +7,8 @@
     <home-brand />
 
     <hr class="uk-divider-icon">
-    <!-- TODO: ここで一つのコンポーネント -->
-    <!-- お店情報 -->
+    
+    <home-shop />
 
   </div>
 </template>
@@ -17,11 +17,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HomeTop from '@/components/home/HomeTop.vue';
 import HomeBrand from '@/components/brand/HomeBrand.vue';
+import HomeShop from '@/components/shop/HomeShop.vue';
 
 @Component({
   components: {
     HomeBrand,
     HomeTop,
+    HomeShop,
   },
 })
 
