@@ -5,29 +5,35 @@
     <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
         <div class="uk-offcanvas-bar">
 
-          <div class="uk-width-1-2@s uk-width-2-5@m">
+          <div class="uk-width-1-1@s uk-width-2-4@m">
             <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
               <li>
-                <router-link to="/">Home</router-link>
+                <router-link to="/">
+                  <span uk-icon="icon: home"></span> Home
+                </router-link>
               </li>
               <li class="uk-parent">
-                  <a href="#">My Clothes</a>
+                  <a href="#"><span uk-icon="icon: user"></span> My Clothes</a>
                   <ul class="uk-nav-sub">
-                      <li><a href="#">Sub item</a></li>
                       <li>
-                          <a href="#">Sub item</a>
-                          <ul>
-                              <li><a href="#">Sub item</a></li>
-                              <li><a href="#">Sub item</a></li>
-                          </ul>
+                        <router-link to="/clothesList">Clothes list</router-link>
+                      </li>
+                      <li>
+                        <router-link to="/totalPrice">Total price</router-link>
                       </li>
                   </ul>
               </li>
               <li class="uk-parent">
-                  <a href="#">Parent</a>
+                  <a href="#"><span uk-icon="icon: cog"></span> Master</a>
                   <ul class="uk-nav-sub">
-                      <li><a href="#">Sub item</a></li>
-                      <li><a href="#">Sub item</a></li>
+                    <li>
+                      <a href="#"><span uk-icon="icon: pencil"></span> Maintenance</a>
+                        <ul>
+                          <li><a href="#">Brand</a></li>
+                          <li><a href="#">Shop</a></li>
+                          <li><a href="#">Genre</a></li>
+                        </ul>
+                    </li>
                   </ul>
               </li>
             </ul>
