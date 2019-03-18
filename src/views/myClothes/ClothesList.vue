@@ -7,22 +7,17 @@
         </h1>
         <div>
             <ul class="uk-child-width-expand" uk-tab>
-                <li class="uk-active"><a href="#">Tops</a></li>
-                <li><a href="#">Tee</a></li>
-                <li><a href="#">Outer</a></li>
-                <li><a href="#">Bottoms</a></li>
-                <li><a href="#">Hat</a></li>
-                <li><a href="#">Bag</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Shoes &amp; Boots</a></li>
-                <li><a href="#">All Item</a></li>
+                <li v-for="(genre, index) in genreList" :key="(genre, index)" :class="{ 'uk-active': isFirst(index) }">
+                    <a href="#">{{ genre }}</a>
+                </li>
             </ul>
         </div>
 
         <clothes-list-form />
 
         <div class="uk-section uk-section-muted">
-            <table class="uk-table uk-table-divider">
+            <table class="uk-table uk-table-small uk-table-middle uk-table-divider uk-overflow-auto">
+                <caption>Clothes list</caption>
                 <thead>
                     <tr>
                         <th>image</th>
@@ -34,33 +29,15 @@
                         <th>delete flg</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-for="clothes in clothesList" :key="clothes">
                     <tr>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                    </tr>
-                    <tr>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                    </tr>
-                    <tr>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
-                        <td>Table Data</td>
+                        <td><img :src="clothes.imagePath" width="100px" height="100px"></td>
+                        <td>{{ clothes.genre }}</td>
+                        <td>{{ clothes.brand }}</td>
+                        <td>{{ clothes.shop }}</td>
+                        <td>{{ clothes.price | priceFormat }}</td>
+                        <td>{{ clothes.buyDate }}</td>
+                        <td>{{ clothes.deleteFlg }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -89,11 +66,74 @@ import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
         Breadcrumb,
         ClothesListForm,
     },
+    filters: {
+        priceFormat(price: number): string | null {
+            if (!price === null) {
+                return null;
+            }
+            return '¥ ' + price.toLocaleString();
+        },
+    },
 })
 export default class ClothesList extends Vue {
     private hierarchyList: string[] = [
         'My Clothes',
-        'clothes list',
+        'Clothes list',
     ];
+
+    private genreList: string[] = [
+        'Tops',
+        'Tee',
+        'Outer',
+        'Bottoms',
+        'Hat',
+        'Bag',
+        'Accessories',
+        'Shoes & Boots',
+        'All Items',
+    ];
+
+    private clothesList: any[] = [
+        {
+            imagePath: require('@/images/noimage.jpg'),
+            genre: 'Table Data',
+            brand: 'Table Data',
+            shop: 'Table Data',
+            price: 10000,
+            buyDate: '2019/04/12',
+            deleteFlg: 'Deleted',
+        },
+        {
+            imagePath: require('@/images/noimage.jpg'),
+            genre: 'Table Data',
+            brand: 'Table Data',
+            shop: 'Table Data',
+            price: 20000,
+            buyDate: 'Table Data',
+            deleteFlg: 'Not deleted',
+        },
+        {
+            imagePath: require('@/images/noimage.jpg'),
+            genre: 'Table Data',
+            brand: 'Table Data',
+            shop: 'Table Data',
+            price: 30000,
+            buyDate: 'Table Data',
+            deleteFlg: 'Table Data',
+        },
+        {
+            imagePath: require('@/images/noimage.jpg'),
+            genre: 'Table Data',
+            brand: 'Table Data',
+            shop: 'Table Data',
+            price: 40000,
+            buyDate: 'Table Data',
+            deleteFlg: 'Table Data',
+        },
+    ];
+
+    private isFirst(index: number): boolean {
+        return index === 0;
+    }
 }
 </script>
