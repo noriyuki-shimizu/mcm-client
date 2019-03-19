@@ -16,31 +16,7 @@
         <clothes-list-form />
 
         <div class="uk-section uk-section-muted">
-            <table class="uk-table uk-table-small uk-table-middle uk-table-divider uk-overflow-auto">
-                <caption>Clothes list</caption>
-                <thead>
-                    <tr>
-                        <th>image</th>
-                        <th>genre</th>
-                        <th>brand</th>
-                        <th>shop</th>
-                        <th>price</th>
-                        <th>buy date</th>
-                        <th>delete flg</th>
-                    </tr>
-                </thead>
-                <tbody v-for="clothes in clothesList" :key="clothes">
-                    <tr>
-                        <td><img :src="clothes.imagePath" width="100px" height="100px"></td>
-                        <td>{{ clothes.genre }}</td>
-                        <td>{{ clothes.brand }}</td>
-                        <td>{{ clothes.shop }}</td>
-                        <td>{{ clothes.price | priceFormat }}</td>
-                        <td>{{ clothes.buyDate }}</td>
-                        <td>{{ clothes.deleteFlg }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <clothes-table :clothesList="clothesList" />
         </div>
 
         <ul class="uk-pagination uk-flex-center" uk-margin>
@@ -57,14 +33,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
+import ClothesTable from '@/components/clothes/ClothesTable.vue';
 
 @Component({
     components: {
         Breadcrumb,
         ClothesListForm,
+        ClothesTable,
     },
     filters: {
         priceFormat(price: number): string | null {
