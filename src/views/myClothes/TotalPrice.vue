@@ -7,6 +7,35 @@
                 <pie-chart :chartData='chartData' :chartOptions="chartOptions" />
             </div>
         </div>
+
+        <div class="uk-section uk-section-default">
+            <div class="uk-container uk-margin-medium">
+                <h3>Total price</h3>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand" uk-leader>Tops</div>
+                    <div>$20.90</div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand" uk-leader>Tee</div>
+                    <div>$20.90</div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand" uk-leader>Outer</div>
+                    <div>$20.90</div>
+                </div>
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand" uk-leader>Bottoms</div>
+                    <div>$20.90</div>
+                </div>
+                <hr>
+                <b>
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-expand" uk-leader>Total</div>
+                        <div>$20.90</div>
+                    </div>
+                </b>
+            </div>
+        </div>
     </div>
 </template>
 
