@@ -5,13 +5,8 @@
         <h1 class="uk-heading-divider">
             <div class="uk-margin-large-left">Clothes list</div>
         </h1>
-        <div>
-            <ul class="uk-child-width-expand" uk-tab>
-                <li v-for="(genre, index) in genreList" :key="(genre, index)" :class="{ 'uk-active': isFirst(index) }">
-                    <a href="#">{{ genre }}</a>
-                </li>
-            </ul>
-        </div>
+        
+        <genre-tab :genreList="genreList" />
 
         <clothes-list-form />
 
@@ -19,6 +14,7 @@
             <clothes-table :clothesList="clothesList" />
         </div>
 
+        <!-- TODO: ページングの仕様が決定したら、コンポーネントに分けること -->
         <ul class="uk-pagination uk-flex-center" uk-margin>
             <li><a href="#"><span uk-pagination-previous></span></a></li>
             <li><a href="#">1</a></li>
@@ -35,22 +31,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
+import GenreTab from '@/components/genre/GenreTab.vue';
 import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
 import ClothesTable from '@/components/clothes/ClothesTable.vue';
 
 @Component({
     components: {
         Breadcrumb,
+        GenreTab,
         ClothesListForm,
         ClothesTable,
-    },
-    filters: {
-        priceFormat(price: number): string | null {
-            if (!price === null) {
-                return null;
-            }
-            return '¥ ' + price.toLocaleString();
-        },
     },
 })
 export default class ClothesList extends Vue {
@@ -109,9 +99,5 @@ export default class ClothesList extends Vue {
             deleteFlg: 'Table Data',
         },
     ];
-
-    private isFirst(index: number): boolean {
-        return index === 0;
-    }
 }
 </script>

@@ -8,34 +8,7 @@
             </div>
         </div>
 
-        <div class="uk-section uk-section-default">
-            <div class="uk-container uk-margin-medium">
-                <h3>Total price</h3>
-                <div class="uk-grid-small" uk-grid>
-                    <div class="uk-width-expand" uk-leader>Tops</div>
-                    <div>$20.90</div>
-                </div>
-                <div class="uk-grid-small" uk-grid>
-                    <div class="uk-width-expand" uk-leader>Tee</div>
-                    <div>$20.90</div>
-                </div>
-                <div class="uk-grid-small" uk-grid>
-                    <div class="uk-width-expand" uk-leader>Outer</div>
-                    <div>$20.90</div>
-                </div>
-                <div class="uk-grid-small" uk-grid>
-                    <div class="uk-width-expand" uk-leader>Bottoms</div>
-                    <div>$20.90</div>
-                </div>
-                <hr>
-                <b>
-                    <div class="uk-grid-small" uk-grid>
-                        <div class="uk-width-expand" uk-leader>Total</div>
-                        <div>$20.90</div>
-                    </div>
-                </b>
-            </div>
-        </div>
+        <total-price-per-genre-list :list="totalPricePerGenreList" />
     </div>
 </template>
 
@@ -43,17 +16,42 @@
 import { Component, Vue} from 'vue-property-decorator';
 import PieChart from '@/components/chart/pie/PieChart';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
+import TotalPricePerGenreList from '@/components/genre/TotalPricePerGenreList.vue';
 
 @Component({
     components: {
         Breadcrumb,
         PieChart,
+        TotalPricePerGenreList,
     },
 })
 export default class TotalPrice extends Vue {
      private hierarchyList: string[] = [
         'My Clothes',
         'Total price',
+    ];
+
+    private totalPricePerGenreList: any[] = [
+        {
+            genre: 'Tops',
+            totalPrice: 10000,
+        },
+        {
+            genre: 'Tee',
+            totalPrice: 10000,
+        },
+        {
+            genre: 'Outer',
+            totalPrice: 10000,
+        },
+        {
+            genre: 'Bottoms',
+            totalPrice: 10000,
+        },
+        {
+            genre: 'Hat',
+            totalPrice: 10000,
+        },
     ];
 
     private chartData: any = {
