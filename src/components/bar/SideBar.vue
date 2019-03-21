@@ -29,7 +29,7 @@
                     <li>
                       <a href="#"><span uk-icon="icon: pencil"></span> Maintenance</a>
                         <ul>
-                          <li><a href="#">Brand</a></li>
+                          <li><router-link to="/brandMaintenance">Brand</router-link></li>
                           <li><a href="#">Shop</a></li>
                           <li><a href="#">Genre</a></li>
                         </ul>
