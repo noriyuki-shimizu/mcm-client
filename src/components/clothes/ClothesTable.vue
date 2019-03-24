@@ -19,9 +19,9 @@
                     <td>{{ clothes.genre }}</td>
                     <td>{{ clothes.brand }}</td>
                     <td>{{ clothes.shop }}</td>
-                    <td>{{ clothes.price | priceFormat }}</td>
+                    <td>{{ clothes.price | formatByPrice }}</td>
                     <td>{{ clothes.buyDate }}</td>
-                    <td>{{ clothes.deleteFlg }}</td>
+                    <td>{{ clothes.deleteFlg | formatByDeleteFlag }}</td>
                 </tr>
             </tbody>
         </table>
@@ -35,11 +35,14 @@ type CustomProp<T> = () => T;
 
 @Component({
     filters: {
-        priceFormat(price: number): string | null {
+        formatByPrice(price: number): string | null {
             if (!price === null) {
                 return null;
             }
             return '¥ ' + price.toLocaleString();
+        },
+        formatByDeleteFlag(deleteFlag: boolean): string {
+            return deleteFlag ? 'Deleted' : 'Not deleted';
         },
     },
 })

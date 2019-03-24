@@ -10,7 +10,7 @@
 
         <clothes-list-form />
 
-        <div class="uk-section uk-section-muted">
+        <div class="uk-section uk-section-default">
             <clothes-table :clothesList="clothesList" />
         </div>
 
@@ -32,7 +32,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import GenreTab from '@/components/genre/GenreTab.vue';
-import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
+import ClothesListForm from '@/components/clothes/form/search/ClothesListForm.vue';
 import ClothesTable from '@/components/clothes/ClothesTable.vue';
 
 @Component({
@@ -69,7 +69,7 @@ export default class ClothesList extends Vue {
             shop: 'Table Data',
             price: 10000,
             buyDate: '2019/04/12',
-            deleteFlg: 'Deleted',
+            deleteFlg: false,
         },
         {
             imagePath: require('@/images/noimage.jpg'),
@@ -78,7 +78,7 @@ export default class ClothesList extends Vue {
             shop: 'Table Data',
             price: 20000,
             buyDate: 'Table Data',
-            deleteFlg: 'Not deleted',
+            deleteFlg: false,
         },
         {
             imagePath: require('@/images/noimage.jpg'),
@@ -87,7 +87,7 @@ export default class ClothesList extends Vue {
             shop: 'Table Data',
             price: 30000,
             buyDate: 'Table Data',
-            deleteFlg: 'Table Data',
+            deleteFlg: false,
         },
         {
             imagePath: require('@/images/noimage.jpg'),
@@ -96,7 +96,7 @@ export default class ClothesList extends Vue {
             shop: 'Table Data',
             price: 40000,
             buyDate: 'Table Data',
-            deleteFlg: 'Table Data',
+            deleteFlg: false,
         },
     ];
 }
