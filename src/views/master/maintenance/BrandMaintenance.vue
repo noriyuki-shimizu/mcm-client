@@ -6,40 +6,7 @@
             <div class="uk-margin-large-left">Brand</div>
         </h1>
 
-        <div class="uk-section uk-section-muted">
-            <div class="uk-container">
-                <h3>Search form</h3>
-                <form class="uk-grid-small" uk-grid>
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-brand-name">Brand name</label>
-                        <div class="uk-form-controls">
-                            <input id="form-stacked-brand-name" class="uk-input" type="text" placeholder="50">
-                        </div>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-address">Address</label>
-                        <div class="uk-form-controls">
-                            <input id="form-stacked-address" class="uk-input" type="text" placeholder="50">
-                        </div>
-                    </div>
-                    <div class="uk-width-1-4@s">
-                        <label class="uk-form-label" for="form-stacked-station-name">Station name</label>
-                        <div class="uk-form-controls">
-                            <input id="form-stacked-station-name" class="uk-input" type="text" placeholder="50">
-                        </div>
-                    </div>
-                    <div class="uk-width-1-4@s">
-                        <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
-                        <div class="uk-form-controls">
-                            <select class="uk-select" id="form-stacked-delete-flg">
-                                <option>Deleted</option>
-                                <option>Not deleted</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <brand-search-form />
 
         <div class="uk-overflow-auto uk-margin-small-top">
             <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
@@ -82,10 +49,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
+import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
+
+// tslint:disable-next-line:no-var-requires
+const UIkit = require('uikit');
 
 @Component({
     components: {
         Breadcrumb,
+        BrandSearchForm,
     },
     filters: {
         formatByDeleteFlag(deleteFlag: boolean): string {
