@@ -1,6 +1,6 @@
 <template>
     <div class="clothes-list-form">
-        <div class="uk-section uk-section-default">
+        <div class="uk-section uk-section-muted">
             <div class="uk-container">
                 <h3>Search form</h3>
                 <form class="uk-grid-small" uk-grid>
