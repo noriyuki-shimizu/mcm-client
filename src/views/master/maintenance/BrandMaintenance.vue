@@ -8,41 +8,7 @@
 
         <brand-search-form />
 
-        <div class="uk-overflow-auto uk-margin-small-top">
-            <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
-                <caption>Brand list</caption>
-                <thead>
-                    <tr>
-                        <th class="uk-table-shrink">Image</th>
-                        <th class="uk-table-shrink uk-text-nowrap">Name</th>
-                        <th class="uk-width-shrink">Link</th>
-                        <th class="uk-table-shrink uk-text-nowrap">Address</th>
-                        <th class="uk-table-shrink uk-text-nowrap">Business hours</th>
-                        <th class="uk-table-shrink uk-text-nowrap">Tel</th>
-                        <th class="uk-table-small">Delete flag</th>
-                    </tr>
-                </thead>
-                <tbody v-for="brand in barndList" :key="brand">
-                    <tr @dblclick="test()">
-                        <td><img class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
-                        <td class="uk-text-nowrap">{{ brand.name }}</td>
-                        <td class="uk-text-truncate">{{ brand.link }}</td>
-                        <td class="uk-text-nowrap">{{ brand.address }}</td>
-                        <td class="uk-text-nowrap">{{ brand.businessHours }}</td>
-                        <td class="uk-text-nowrap">{{ brand.tel }}</td>
-                        <td>{{ brand.deleteFlag | formatByDeleteFlag }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="open_edit_modal" class="uk-modal-container" uk-modal>
-            <div class="uk-modal-dialog uk-modal-body">
-                <button class="uk-modal-close-default" type="button" uk-close></button>
-                <h2 class="uk-modal-title">Headline</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div>
+        <brand-table :brandList="brandList" />
     </div>
 </template>
 
@@ -50,19 +16,23 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
+import BrandTable from '@/components/brand/table/BrandTable.vue';
 
-// tslint:disable-next-line:no-var-requires
-const UIkit = require('uikit');
+type BrandDto = {
+    name: string,
+    link: string,
+    imagePath: string,
+    address: string,
+    businessHours: string,
+    tel: string,
+    deleteFlag: boolean,
+};
 
 @Component({
     components: {
         Breadcrumb,
         BrandSearchForm,
-    },
-    filters: {
-        formatByDeleteFlag(deleteFlag: boolean): string {
-            return deleteFlag ? 'Deleted' : 'Not deleted';
-        },
+        BrandTable,
     },
 })
 export default class BrandMaintenance extends Vue {
@@ -72,7 +42,7 @@ export default class BrandMaintenance extends Vue {
         'Brand',
     ];
 
-    private barndList: any[] = [
+    private brandList: BrandDto[] = [
         {
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
@@ -92,10 +62,5 @@ export default class BrandMaintenance extends Vue {
             deleteFlag: false,
         },
     ];
-
-    private test(): void {
-        // open_edit_modal
-        UIkit.modal('#open_edit_modal').show();
-    }
 }
 </script>
