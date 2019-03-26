@@ -2,9 +2,7 @@
     <div class="brand-maintenance">
         <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
 
-        <h1 class="uk-heading-divider">
-            <div class="uk-margin-large-left">Brand</div>
-        </h1>
+        <head-title titleName="Brand" />
 
         <brand-search-form />
 
@@ -14,11 +12,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
 import BrandTable from '@/components/brand/table/BrandTable.vue';
 
 type BrandDto = {
+    id: number,
     name: string,
     link: string,
     imagePath: string,
@@ -30,6 +30,7 @@ type BrandDto = {
 
 @Component({
     components: {
+        HeadTitle,
         Breadcrumb,
         BrandSearchForm,
         BrandTable,
@@ -44,6 +45,7 @@ export default class BrandMaintenance extends Vue {
 
     private brandList: BrandDto[] = [
         {
+            id: 1,
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
             imagePath: require('@/images/shop/icon/o_icon.jpg'),
@@ -53,6 +55,7 @@ export default class BrandMaintenance extends Vue {
             deleteFlag: false,
         },
         {
+            id: 2,
             name: '吾亦紅',
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             imagePath: require('@/images/shop/icon/waremokou_icon.jpeg'),

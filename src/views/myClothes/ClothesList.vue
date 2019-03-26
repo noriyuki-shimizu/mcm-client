@@ -2,9 +2,7 @@
     <div class="clothes-list">
         <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
 
-        <h1 class="uk-heading-divider">
-            <div class="uk-margin-large-left">Clothes list</div>
-        </h1>
+        <head-title titleName="Clothes List" />
         
         <genre-tab :genreList="genreList" />
 
@@ -30,6 +28,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import GenreTab from '@/components/genre/GenreTab.vue';
 import ClothesListForm from '@/components/clothes/form/search/ClothesListForm.vue';
@@ -37,6 +36,7 @@ import ClothesTable from '@/components/clothes/ClothesTable.vue';
 
 @Component({
     components: {
+        HeadTitle,
         Breadcrumb,
         GenreTab,
         ClothesListForm,

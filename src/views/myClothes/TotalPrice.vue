@@ -2,6 +2,8 @@
     <div class='total-price'>
         <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
 
+        <head-title titleName="Total price" />
+        
         <div class="uk-section uk-section-muted">
             <div class="uk-container">
                 <pie-chart :chartData='chartData' :chartOptions="chartOptions" />
@@ -14,12 +16,14 @@
 
 <script lang='ts'>
 import { Component, Vue} from 'vue-property-decorator';
+import HeadTitle from '@/components/title/HeadTitle.vue';
 import PieChart from '@/components/chart/pie/PieChart';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import TotalPricePerGenreList from '@/components/genre/TotalPricePerGenreList.vue';
 
 @Component({
     components: {
+        HeadTitle,
         Breadcrumb,
         PieChart,
         TotalPricePerGenreList,
