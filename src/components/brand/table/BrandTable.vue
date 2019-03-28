@@ -14,7 +14,16 @@
                         <th class="uk-table-small">Delete flag</th>
                     </tr>
                 </thead>
-                <tbody v-for="brand in brandList" :key="brand">
+                <tbody v-for="brand in brandList"
+                    :key="brand.id"
+                    :imagePath="brand.imagePath"
+                    :name="brand.name"
+                    :link="brand.link"
+                    :address="brand.address"
+                    :businessHours="brand.businessHours"
+                    :tel="brand.tel"
+                    :deleteFlg="brand.deleteFlag"
+                    >
                     <tr @dblclick="edit(brand)">
                         <td><img class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ brand.name }}</td>
@@ -28,19 +37,20 @@
             </table>
         </div>
 
-        <brand-edit-modal />
+        <brand-edit-modal-form :brandDto="brandDto" />
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import BrandEditModal from '@/components/brand/modal/BrandEditModal.vue';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import BrandEditModalForm from '@/components/brand/form/edit/BrandEditModalForm.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
 type BrandDto = {
+    id: number,
     name: string,
     link: string,
     imagePath: string,
@@ -52,7 +62,7 @@ type BrandDto = {
 
 @Component({
     components: {
-        BrandEditModal,
+        BrandEditModalForm,
     },
     filters: {
         formatByDeleteFlag(deleteFlag: boolean): string {
@@ -64,7 +74,19 @@ export default class BrandTable extends Vue {
     @Prop({type: Array as CustomProp<BrandDto[]>})
     private brandList!: BrandDto[];
 
-    private edit(brand: BrandDto): void {
+    private brandDto: BrandDto = {
+        id: -1,
+        name: '',
+        link: '',
+        imagePath: '',
+        address: '',
+        businessHours: '',
+        tel: '',
+        deleteFlag: false,
+    };
+
+    private edit(brandDto: BrandDto): void {
+        this.brandDto = brandDto;
         // open_edit_modal
         UIkit.modal('#brand_edit_modal').show();
     }
