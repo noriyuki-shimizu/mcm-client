@@ -13,7 +13,7 @@
                     <th>delete flg</th>
                 </tr>
             </thead>
-            <tbody v-for="clothes in clothesList" :key="clothes">
+            <tbody v-for="clothes in clothesList" :key="clothes.id">
                 <tr>
                     <td><img :src="clothes.imagePath" width="100px" height="100px"></td>
                     <td>{{ clothes.genre }}</td>
@@ -31,6 +31,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import ClothesDto from '@/type/ClothesDto';
+
 type CustomProp<T> = () => T;
 
 @Component({
@@ -47,7 +49,7 @@ type CustomProp<T> = () => T;
     },
 })
 export default class ClothesTable extends Vue {
-    @Prop({type: Array as CustomProp<any[]>})
-    private clothesList!: any[];
+    @Prop({type: Array as CustomProp<ClothesDto[]>})
+    private clothesList!: ClothesDto[];
 }
 </script>
