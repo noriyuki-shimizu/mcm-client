@@ -20,37 +20,39 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import BrandDto from '@/type/BrandDto';
+
 @Component
 export default class HomeBrand extends Vue {
     // TODO: axiosを用いて以下のリストデータを取得する
-    private brandList: any[] = [
+    private brandList: BrandDto[] = [
     {
       link: 'http://bukht.com/',
-      imagePass: require('@/images/brand/icon/bukht_icon.jpg'),
+      imagePath: require('@/images/brand/icon/bukht_icon.jpg'),
     },
     {
       link: 'http://ne-on-sign.com/',
-      imagePass: require('@/images/brand/icon/neon-sign_icon.jpg'),
+      imagePath: require('@/images/brand/icon/neon-sign_icon.jpg'),
     },
     {
       link: 'https://www.fashion-press.net/brands/3332',
-      imagePass: require('@/images/brand/icon/min_icon.png'),
+      imagePath: require('@/images/brand/icon/min_icon.png'),
     },
     {
       link: 'https://auralee.jp/',
-      imagePass: require('@/images/brand/icon/auralee_icon.png'),
+      imagePath: require('@/images/brand/icon/auralee_icon.png'),
     },
     {
       link: 'https://sixty-nine.us/',
-      imagePass: require('@/images/brand/icon/69_icon.jpg'),
+      imagePath: require('@/images/brand/icon/69_icon.jpg'),
     },
     {
       link: 'http://henderscheme.com/',
-      imagePass: require('@/images/brand/icon/hender-scheme_icon.jpg'),
+      imagePath: require('@/images/brand/icon/hender-scheme_icon.jpg'),
     },
     {
       link: 'http://www.yohjiyamamoto.co.jp/',
-      imagePass: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
+      imagePath: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
     },
   ];
 }

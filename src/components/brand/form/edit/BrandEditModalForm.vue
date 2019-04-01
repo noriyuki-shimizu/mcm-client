@@ -11,16 +11,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+import BrandDto from '@/type/BrandDto';
+
 type CustomProp<T> = () => T;
-type BrandDto = {
-    name: string,
-    link: string,
-    imagePath: string,
-    address: string,
-    businessHours: string,
-    tel: string,
-    deleteFlag: boolean,
-};
 
 @Component
 export default class BrandEditModal extends Vue {

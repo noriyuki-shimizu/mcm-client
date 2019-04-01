@@ -14,16 +14,7 @@
                         <th class="uk-table-small">Delete flag</th>
                     </tr>
                 </thead>
-                <tbody v-for="brand in brandList"
-                    :key="brand.id"
-                    :imagePath="brand.imagePath"
-                    :name="brand.name"
-                    :link="brand.link"
-                    :address="brand.address"
-                    :businessHours="brand.businessHours"
-                    :tel="brand.tel"
-                    :deleteFlg="brand.deleteFlag"
-                    >
+                <tbody v-for="brand in brandList" :key="brand.id">
                     <tr @dblclick="edit(brand)">
                         <td><img class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ brand.name }}</td>
@@ -45,20 +36,12 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import BrandEditModalForm from '@/components/brand/form/edit/BrandEditModalForm.vue';
 
+import BrandDto from '@/type/BrandDto';
+
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
-type BrandDto = {
-    id: number,
-    name: string,
-    link: string,
-    imagePath: string,
-    address: string,
-    businessHours: string,
-    tel: string,
-    deleteFlag: boolean,
-};
 
 @Component({
     components: {

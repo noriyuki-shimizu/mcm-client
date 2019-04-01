@@ -17,16 +17,7 @@ import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
 import BrandTable from '@/components/brand/table/BrandTable.vue';
 
-type BrandDto = {
-    id: number,
-    name: string,
-    link: string,
-    imagePath: string,
-    address: string,
-    businessHours: string,
-    tel: string,
-    deleteFlag: boolean,
-};
+import BrandDto from '@/type/BrandDto';
 
 @Component({
     components: {
