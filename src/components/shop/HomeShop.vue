@@ -28,10 +28,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
+import ShopDto from '@/type/ShopDto';
+
 @Component
 export default class HomeShop extends Vue {
-    private shopList: any[] = [
+    private shopList: ShopDto[] = [
         {
+            id: 1,
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
             imagePath: require('@/images/shop/icon/o_icon.jpg'),
@@ -40,6 +43,7 @@ export default class HomeShop extends Vue {
             tel: '03-6416-1187',
         },
         {
+            id: 1,
             name: '吾亦紅',
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             imagePath: require('@/images/shop/icon/waremokou_icon.jpeg'),
