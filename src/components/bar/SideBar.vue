@@ -16,10 +16,10 @@
                   <a href="#"><span uk-icon="icon: user"></span> My Clothes</a>
                   <ul class="uk-nav-sub">
                       <li>
-                        <router-link to="/clothesList">Clothes list</router-link>
+                        <router-link to="/clothesList"> Clothes list</router-link>
                       </li>
                       <li>
-                        <router-link to="/totalPrice">Total price</router-link>
+                        <router-link to="/totalPrice"> Total price</router-link>
                       </li>
                   </ul>
               </li>
@@ -29,12 +29,18 @@
                     <li>
                       <a href="#"><span uk-icon="icon: pencil"></span> Maintenance</a>
                         <ul>
-                          <li><router-link to="/brandMaintenance">Brand</router-link></li>
+                          <li><router-link to="/brandMaintenance"> Brand</router-link></li>
                           <li><a href="#">Shop</a></li>
                           <li><a href="#">Genre</a></li>
                         </ul>
                     </li>
                   </ul>
+              </li>
+              <li class="uk-nav-divider"></li>
+              <li>
+                <a href="https://github.com/noriyuki-shimizu/mcm-client" target="_blank">
+                  <span class="uk-margin-small-right" uk-icon="icon: github"></span>Git
+                </a>
               </li>
             </ul>
           </div>
