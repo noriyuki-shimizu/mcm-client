@@ -7,19 +7,19 @@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-brand-name">Brand name</label>
                         <div class="uk-form-controls">
-                            <input id="form-stacked-brand-name" class="uk-input" type="text" placeholder="50">
+                            <input id="form-stacked-brand-name" class="uk-input" type="text">
                         </div>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-address">Address</label>
                         <div class="uk-form-controls">
-                            <input id="form-stacked-address" class="uk-input" type="text" placeholder="50">
+                            <input id="form-stacked-address" class="uk-input" type="text">
                         </div>
                     </div>
                     <div class="uk-width-1-4@s">
                         <label class="uk-form-label" for="form-stacked-station-name">Station name</label>
                         <div class="uk-form-controls">
-                            <input id="form-stacked-station-name" class="uk-input" type="text" placeholder="50">
+                            <input id="form-stacked-station-name" class="uk-input" type="text">
                         </div>
                     </div>
                     <div class="uk-width-1-4@s">

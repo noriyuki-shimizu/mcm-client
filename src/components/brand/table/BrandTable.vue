@@ -7,6 +7,7 @@
                     <tr>
                         <th class="uk-table-shrink">Image</th>
                         <th class="uk-table-shrink uk-text-nowrap">Name</th>
+                        <th class="uk-table-shrink uk-text-nowrap">Station</th>
                         <th class="uk-width-shrink">Link</th>
                         <th class="uk-table-shrink uk-text-nowrap">Address</th>
                         <th class="uk-table-shrink uk-text-nowrap">Business hours</th>
@@ -18,6 +19,7 @@
                     <tr @dblclick="edit(brand)">
                         <td><img class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ brand.name }}</td>
+                        <td class="uk-text-nowrap">{{ brand.stationName }}</td>
                         <td class="uk-text-truncate">{{ brand.link }}</td>
                         <td class="uk-text-nowrap">{{ brand.address }}</td>
                         <td class="uk-text-nowrap">{{ brand.businessHours }}</td>
@@ -28,7 +30,11 @@
             </table>
         </div>
 
-        <brand-edit-modal-form :brandDto="brandDto" />
+        <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
+            <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Brand</button>
+        </p>
+
+        <brand-edit-modal-form ref="brandEditModalForm" :addFlag="addFlag" :brandDto="brandDto" />
     </div>
 </template>
 
@@ -57,10 +63,12 @@ export default class BrandTable extends Vue {
     @Prop({type: Array as CustomProp<BrandDto[]>})
     private brandList!: BrandDto[];
 
+    private addFlag: boolean = false;
     private brandDto: BrandDto = {
         id: -1,
         name: '',
         link: '',
+        stationName: '',
         imagePath: '',
         address: '',
         businessHours: '',
@@ -69,8 +77,33 @@ export default class BrandTable extends Vue {
     };
 
     private edit(brandDto: BrandDto): void {
-        this.brandDto = brandDto;
-        // open_edit_modal
+        this.addFlag = false;
+        this.brandDto = {...brandDto};
+
+        this.modalShow();
+    }
+
+    private add(): void {
+        this.addFlag = true;
+        this.brandDto = {
+            id: -1,
+            name: '',
+            link: '',
+            stationName: '',
+            imagePath: '',
+            address: '',
+            businessHours: '',
+            tel: '',
+            deleteFlag: false,
+        };
+
+        this.modalShow();
+    }
+
+    private modalShow(): void {
+        // 子コンポーネントのイベント呼び出し
+        (this.$refs.brandEditModalForm as any).inputAllCheck();
+
         UIkit.modal('#brand_edit_modal').show();
     }
 
