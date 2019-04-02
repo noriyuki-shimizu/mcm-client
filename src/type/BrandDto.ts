@@ -1,10 +1,12 @@
-export default class BrandDto {
-    public id?: number;
-    public name?: string;
-    public link?: string;
-    public imagePath?: string;
-    public address?: string;
-    public businessHours?: string;
-    public tel?: string;
-    public deleteFlag?: boolean;
+export default interface BrandDto {
+    [key: string]: number | string | boolean;
+    id: number;
+    name: string;
+    link: string;
+    stationName: string;
+    imagePath: string;
+    address: string;
+    businessHours: string;
+    tel: string;
+    deleteFlag: boolean;
 }
