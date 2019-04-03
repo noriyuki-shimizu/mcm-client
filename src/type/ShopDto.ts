@@ -1,5 +1,5 @@
 export default class ShopDto {
-    public id?: number;
+    public id!: number;
     public name?: string;
     public link?: string;
     public imagePath?: string;
