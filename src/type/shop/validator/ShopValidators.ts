@@ -1,4 +1,4 @@
-import Validator from '@/type/Validator';
+import Validator from '@/type/validator/Validator';
 
 export default interface ShopValidators {
     [key: string]: Validator;

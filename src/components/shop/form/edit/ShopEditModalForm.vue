@@ -109,7 +109,7 @@
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
 import ShopDto from '@/type/shop/dto/ShopDto';
-import ValidateCheck from '@/type/shop/validator/ValidateCheck';
+import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/shop/validator/ShopValidators';
 import MaxChars from '@/type/shop/validator/MaxChars';
 
