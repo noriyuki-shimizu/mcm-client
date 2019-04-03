@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import ClothesList from './views/myClothes/ClothesList.vue';
 import TotalPrice from './views/myClothes/TotalPrice.vue';
 import ShopMaintenance from './views/master/maintenance/ShopMaintenance.vue';
+import BrandMaintenance from './views/master/maintenance/BrandMaintenance.vue';
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/shopMaintenance',
       name: 'shop-maintenance',
       component: ShopMaintenance,
+    },
+    {
+      path: '/brandMaintenance',
+      name: 'brand-maintenance',
+      component: BrandMaintenance,
     },
   ],
 });
