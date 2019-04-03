@@ -4,7 +4,7 @@
             <h3>Shop info</h3>
         </div>
         <div class="uk-margin-small-top uk-margin-medium-left uk-margin-medium-right">
-            <div v-bind:key="shop" v-for="shop in shopList">
+            <div v-bind:key="shop.id" v-for="shop in shopList">
                 <article class="uk-comment">
                     <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
                         <div class="uk-width-auto">
@@ -43,7 +43,7 @@ export default class HomeShop extends Vue {
             tel: '03-6416-1187',
         },
         {
-            id: 1,
+            id: 2,
             name: '吾亦紅',
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             imagePath: require('@/images/shop/icon/waremokou_icon.jpeg'),
