@@ -18,7 +18,7 @@ import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
 import BrandTable from '@/components/brand/table/BrandTable.vue';
 
-import BrandDto from '@/type/BrandDto';
+import BrandDto from '@/type/brand/dto/BrandDto';
 
 @Component({
     components: {
