@@ -42,7 +42,7 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import BrandEditModalForm from '@/components/brand/form/edit/BrandEditModalForm.vue';
 
-import BrandDto from '@/type/BrandDto';
+import BrandDto from '@/type/brand/dto/BrandDto';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
