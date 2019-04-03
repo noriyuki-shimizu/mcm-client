@@ -76,6 +76,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import BrandDto from '@/type/brand/dto/BrandDto';
 import ValidateCheck from '@/type/brand/validator/ValidateCheck';
 import BrandValidators from '@/type/brand/validator/BrandValidators';
+import MaxCharts from '@/type/brand/validator/MaxChars';
 
 @Component
 export default class BrandSearchForm extends Vue {
@@ -119,17 +120,17 @@ export default class BrandSearchForm extends Vue {
 
     @Watch('brandDto.name')
     private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
-        this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, 30);
+        this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxCharts.NAME);
     }
 
     @Watch('brandDto.stationName')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, 15);
+        this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxCharts.STATION_NAME);
     }
 
     @Watch('brandDto.address')
     private onAddressChange(newAddress: string, oldAddress: string): void {
-        this.brandValidators.address = this.validateCheck.lessEqual(newAddress, 100);
+        this.brandValidators.address = this.validateCheck.lessEqual(newAddress, MaxCharts.ADDRESS);
     }
 
     private search(): void {

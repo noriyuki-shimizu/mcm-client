@@ -111,6 +111,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import BrandDto from '@/type/brand/dto/BrandDto';
 import ValidateCheck from '@/type/brand/validator/ValidateCheck';
 import BrandValidators from '@/type/brand/validator/BrandValidators';
+import MaxChars from '@/type/brand/validator/MaxChars';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -163,7 +164,7 @@ export default class BrandEditModal extends Vue {
         this.brandValidators.name = this.validateCheck.required(newBrandName);
 
         if (!this.brandValidators.name.validate) {
-            this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, 30);
+            this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxChars.NAME);
         }
     }
 
@@ -172,7 +173,7 @@ export default class BrandEditModal extends Vue {
         this.brandValidators.stationName = this.validateCheck.required(newStationName);
 
         if (!this.brandValidators.stationName.validate) {
-            this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, 15);
+            this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.STATION_NAME);
         }
     }
 
@@ -181,7 +182,7 @@ export default class BrandEditModal extends Vue {
         this.brandValidators.address = this.validateCheck.required(newAddress);
 
         if (!this.brandValidators.address.validate) {
-            this.brandValidators.address = this.validateCheck.lessEqual(newAddress, 100);
+            this.brandValidators.address = this.validateCheck.lessEqual(newAddress, MaxChars.ADDRESS);
         }
     }
 
@@ -190,7 +191,10 @@ export default class BrandEditModal extends Vue {
         this.brandValidators.businessHours = this.validateCheck.required(newBusinessHours);
 
         if (!this.brandValidators.businessHours.validate) {
-            this.brandValidators.businessHours = this.validateCheck.lessEqual(newBusinessHours, 30);
+            this.brandValidators.businessHours = this.validateCheck.lessEqual(
+                newBusinessHours,
+                MaxChars.BUSINESS_HOURS,
+            );
         }
     }
 
