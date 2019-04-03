@@ -32,7 +32,9 @@ import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import GenreTab from '@/components/genre/GenreTab.vue';
 import ClothesListForm from '@/components/clothes/form/search/ClothesListForm.vue';
-import ClothesTable from '@/components/clothes/ClothesTable.vue';
+import ClothesTable from '@/components/clothes/table/ClothesTable.vue';
+
+import ClothesDto from '@/type/ClothesDto';
 
 @Component({
     components: {
@@ -61,8 +63,9 @@ export default class ClothesList extends Vue {
         'All Items',
     ];
 
-    private clothesList: any[] = [
+    private clothesList: ClothesDto[] = [
         {
+            id: 1,
             imagePath: require('@/images/noimage.jpg'),
             genre: 'Table Data',
             brand: 'Table Data',
@@ -72,6 +75,7 @@ export default class ClothesList extends Vue {
             deleteFlg: false,
         },
         {
+            id: 2,
             imagePath: require('@/images/noimage.jpg'),
             genre: 'Table Data',
             brand: 'Table Data',
@@ -81,6 +85,7 @@ export default class ClothesList extends Vue {
             deleteFlg: false,
         },
         {
+            id: 3,
             imagePath: require('@/images/noimage.jpg'),
             genre: 'Table Data',
             brand: 'Table Data',
@@ -90,6 +95,7 @@ export default class ClothesList extends Vue {
             deleteFlg: false,
         },
         {
+            id: 4,
             imagePath: require('@/images/noimage.jpg'),
             genre: 'Table Data',
             brand: 'Table Data',

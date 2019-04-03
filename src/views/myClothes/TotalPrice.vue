@@ -20,6 +20,7 @@ import HeadTitle from '@/components/title/HeadTitle.vue';
 import PieChart from '@/components/chart/pie/PieChart';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import TotalPricePerGenreList from '@/components/genre/TotalPricePerGenreList.vue';
+import Chart from 'chart.js';
 
 @Component({
     components: {
@@ -58,7 +59,7 @@ export default class TotalPrice extends Vue {
         },
     ];
 
-    private chartData: any = {
+    private chartData: Chart.ChartData = {
         labels: ['Tops', 'Tee', 'Outer', 'Bottoms', 'Hat', 'Bag', 'Accessories', 'Shoes & Boots'],
         datasets: [{
         backgroundColor: [
@@ -75,7 +76,7 @@ export default class TotalPrice extends Vue {
         }],
     };
 
-    private chartOptions: any = {
+    private chartOptions: Chart.ChartOptions = {
         legend: {
             labels: {
                 boxWidth: 30,
