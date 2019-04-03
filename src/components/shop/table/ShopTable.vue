@@ -30,6 +30,8 @@
             </table>
         </div>
 
+        <hr>
+
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Shop</button>
         </p>
