@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import ClothesList from './views/myClothes/ClothesList.vue';
 import TotalPrice from './views/myClothes/TotalPrice.vue';
-import BrandMaintenance from './views/master/maintenance/BrandMaintenance.vue';
+import ShopMaintenance from './views/master/maintenance/ShopMaintenance.vue';
 
 Vue.use(Router);
 
@@ -27,9 +27,9 @@ export default new Router({
       component: TotalPrice,
     },
     {
-      path: '/brandMaintenance',
-      name: 'brand-maintenance',
-      component: BrandMaintenance,
+      path: '/shopMaintenance',
+      name: 'shop-maintenance',
+      component: ShopMaintenance,
     },
   ],
 });

@@ -1,5 +1,5 @@
 import Validator from '@/type/Validator';
-import BrandValidators from '@/type/brand/validator/BrandValidators';
+import ShopValidators from '@/type/shop/validator/ShopValidators';
 
 export default class ValidateCheck {
 
@@ -54,7 +54,7 @@ export default class ValidateCheck {
         };
     }
 
-    public hasError(brandValidators: BrandValidators): boolean {
+    public hasError(brandValidators: ShopValidators): boolean {
         const keys: string[] = Object.keys(brandValidators);
 
         return keys.some((key: string) => {

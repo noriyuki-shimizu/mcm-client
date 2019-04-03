@@ -1,8 +1,8 @@
 <template>
-    <div id="brand_edit_modal" class="uk-modal-container" uk-modal>
+    <div id="shop_edit_modal" class="uk-modal-container" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <h2 class="uk-modal-title">Brand input</h2>
+            <h2 class="uk-modal-title">Shop input</h2>
             
             <div class="uk-section uk-section-muted">
                 <div class="uk-container">
@@ -10,21 +10,21 @@
                     <form class="uk-grid-small" uk-grid v-on:submit.prevent="registration">
 
                         <div class="uk-width-1-2@s">
-                            <label class="uk-form-label" for="form-stacked-brand-name">Brand name</label>
+                            <label class="uk-form-label" for="form-stacked-shop-name">Shop name</label>
                             <div class="uk-form-controls">
-                                <input id="form-stacked-brand-name"
-                                :class="{'uk-input': true, 'uk-form-danger': brandValidators.name.validate}"
+                                <input id="form-stacked-shop-name"
+                                :class="{'uk-input': true, 'uk-form-danger': shopValidators.name.validate}"
                                 type="text"
-                                v-model="brandDto.name"
+                                v-model="shopDto.name"
                                 >
-                                <span v-show="brandValidators.name.validate" class="uk-text-danger">{{ brandValidators.name.errorMessage }}</span>
+                                <span v-show="shopValidators.name.validate" class="uk-text-danger">{{ shopValidators.name.errorMessage }}</span>
                             </div>
                         </div>
 
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-link">Site link</label>
                             <div class="uk-form-controls">
-                                <input id="form-stacked-link" class="uk-input" type="text" v-model="brandDto.link">
+                                <input id="form-stacked-link" class="uk-input" type="text" v-model="shopDto.link">
                             </div>
                         </div>
 
@@ -32,13 +32,13 @@
                             <label class="uk-form-label" for="form-stacked-station-name">Station name</label>
                             <div class="uk-form-controls">
                                 <input id="form-stacked-station-name"
-                                :class="{'uk-input': true, 'uk-form-danger': brandValidators.stationName.validate}"
+                                :class="{'uk-input': true, 'uk-form-danger': shopValidators.stationName.validate}"
                                 type="text"
                                 autocomplete="on"
                                 list="auto_station"
-                                v-model="brandDto.stationName"
+                                v-model="shopDto.stationName"
                                 >
-                                <span v-show="brandValidators.stationName.validate" class="uk-text-danger">{{ brandValidators.stationName.errorMessage }}</span>
+                                <span v-show="shopValidators.stationName.validate" class="uk-text-danger">{{ shopValidators.stationName.errorMessage }}</span>
                                 <datalist id="auto_station">
                                     <option value="渋谷" />
                                     <option value="代官山" />
@@ -51,11 +51,11 @@
                             <label class="uk-form-label" for="form-stacked-address">Address</label>
                             <div class="uk-form-controls">
                                 <input id="form-stacked-address"
-                                :class="{'uk-input': true, 'uk-form-danger': brandValidators.address.validate}"
+                                :class="{'uk-input': true, 'uk-form-danger': shopValidators.address.validate}"
                                 type="text"
-                                v-model="brandDto.address"
+                                v-model="shopDto.address"
                                 >
-                                <span v-show="brandValidators.address.validate" class="uk-text-danger">{{ brandValidators.address.errorMessage }}</span>
+                                <span v-show="shopValidators.address.validate" class="uk-text-danger">{{ shopValidators.address.errorMessage }}</span>
                             </div>
                         </div>
 
@@ -63,11 +63,11 @@
                             <label class="uk-form-label" for="form-stacked-business-hours">Business hours</label>
                             <div class="uk-form-controls">
                                 <input id="form-stacked-business-hours"
-                                :class="{'uk-input': true, 'uk-form-danger': brandValidators.businessHours.validate}"
+                                :class="{'uk-input': true, 'uk-form-danger': shopValidators.businessHours.validate}"
                                 type="text"
-                                v-model="brandDto.businessHours"
+                                v-model="shopDto.businessHours"
                                 >
-                                <span v-show="brandValidators.businessHours.validate" class="uk-text-danger">{{ brandValidators.businessHours.errorMessage }}</span>
+                                <span v-show="shopValidators.businessHours.validate" class="uk-text-danger">{{ shopValidators.businessHours.errorMessage }}</span>
                             </div>
                         </div>
 
@@ -75,18 +75,18 @@
                             <label class="uk-form-label" for="form-stacked-tel">Tel</label>
                             <div class="uk-form-controls">
                                 <input id="form-stacked-tel"
-                                :class="{'uk-input': true, 'uk-form-danger': brandValidators.tel.validate}"
+                                :class="{'uk-input': true, 'uk-form-danger': shopValidators.tel.validate}"
                                 type="text"
-                                v-model="brandDto.tel"
+                                v-model="shopDto.tel"
                                 >
-                                <span v-show="brandValidators.tel.validate" class="uk-text-danger">{{ brandValidators.tel.errorMessage }}</span>
+                                <span v-show="shopValidators.tel.validate" class="uk-text-danger">{{ shopValidators.tel.errorMessage }}</span>
                             </div>
                         </div>
 
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-delete-flg" v-model="brandDto.deleteFlag" :disabled="addFlag">
+                                <select class="uk-select" id="form-stacked-delete-flg" v-model="shopDto.deleteFlag" :disabled="addFlag">
                                     <option value="true">Deleted</option>
                                     <option value="false">Not deleted</option>
                                 </select>
@@ -95,7 +95,7 @@
 
                         <div class="uk-width-1-1">
                             <p class="uk-align-right">
-                                <button class="uk-button uk-button-primary uk-button-large" :disabled="validateCheck.hasError(brandValidators)" type="submit">Entry</button>
+                                <button class="uk-button uk-button-primary uk-button-large" :disabled="validateCheck.hasError(shopValidators)" type="submit">Entry</button>
                             </p>
                         </div>
                     </form>
@@ -108,10 +108,10 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/brand/dto/BrandDto';
-import ValidateCheck from '@/type/brand/validator/ValidateCheck';
-import BrandValidators from '@/type/brand/validator/BrandValidators';
-import MaxChars from '@/type/brand/validator/MaxChars';
+import ShopDto from '@/type/shop/dto/ShopDto';
+import ValidateCheck from '@/type/shop/validator/ValidateCheck';
+import ShopValidators from '@/type/shop/validator/ShopValidators';
+import MaxChars from '@/type/shop/validator/MaxChars';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -119,16 +119,16 @@ const UIkit = require('uikit');
 type CustomProp<T> = () => T;
 
 @Component
-export default class BrandEditModal extends Vue {
-    @Prop({type: Object as CustomProp<BrandDto>})
-    private brandDto!: BrandDto;
+export default class ShopEditModalForm extends Vue {
+    @Prop({type: Object as CustomProp<ShopDto>})
+    private shopDto!: ShopDto;
 
     @Prop({type: Boolean})
     private addFlag!: boolean;
 
     private validateCheck: ValidateCheck = new ValidateCheck();
 
-    private brandValidators: BrandValidators = {
+    private shopValidators: ShopValidators = {
         name: {
             validate: false,
             errorMessage: '',
@@ -152,65 +152,65 @@ export default class BrandEditModal extends Vue {
     };
 
     public inputAllCheck(): void {
-        this.onBrandNameChange(this.brandDto.name, '');
-        this.onStationNameChange(this.brandDto.stationName, '');
-        this.onAddressChange(this.brandDto.address, '');
-        this.onBusinessHours(this.brandDto.businessHours, '');
-        this.onTelChange(this.brandDto.tel, '');
+        this.onShopNameChange(this.shopDto.name, '');
+        this.onStationNameChange(this.shopDto.stationName, '');
+        this.onAddressChange(this.shopDto.address, '');
+        this.onBusinessHours(this.shopDto.businessHours, '');
+        this.onTelChange(this.shopDto.tel, '');
     }
 
-    @Watch('brandDto.name')
-    private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
-        this.brandValidators.name = this.validateCheck.required(newBrandName);
+    @Watch('shopDto.name')
+    private onShopNameChange(newShopName: string, oldShopName: string): void {
+        this.shopValidators.name = this.validateCheck.required(newShopName);
 
-        if (!this.brandValidators.name.validate) {
-            this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxChars.NAME);
+        if (!this.shopValidators.name.validate) {
+            this.shopValidators.name = this.validateCheck.lessEqual(newShopName, MaxChars.NAME);
         }
     }
 
-    @Watch('brandDto.stationName')
+    @Watch('shopDto.stationName')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.brandValidators.stationName = this.validateCheck.required(newStationName);
+        this.shopValidators.stationName = this.validateCheck.required(newStationName);
 
-        if (!this.brandValidators.stationName.validate) {
-            this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.STATION_NAME);
+        if (!this.shopValidators.stationName.validate) {
+            this.shopValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.STATION_NAME);
         }
     }
 
-    @Watch('brandDto.address')
+    @Watch('shopDto.address')
     private onAddressChange(newAddress: string, oldAddress: string): void {
-        this.brandValidators.address = this.validateCheck.required(newAddress);
+        this.shopValidators.address = this.validateCheck.required(newAddress);
 
-        if (!this.brandValidators.address.validate) {
-            this.brandValidators.address = this.validateCheck.lessEqual(newAddress, MaxChars.ADDRESS);
+        if (!this.shopValidators.address.validate) {
+            this.shopValidators.address = this.validateCheck.lessEqual(newAddress, MaxChars.ADDRESS);
         }
     }
 
-    @Watch('brandDto.businessHours')
+    @Watch('shopDto.businessHours')
     private onBusinessHours(newBusinessHours: string, oldBusinessHours: string): void {
-        this.brandValidators.businessHours = this.validateCheck.required(newBusinessHours);
+        this.shopValidators.businessHours = this.validateCheck.required(newBusinessHours);
 
-        if (!this.brandValidators.businessHours.validate) {
-            this.brandValidators.businessHours = this.validateCheck.lessEqual(
+        if (!this.shopValidators.businessHours.validate) {
+            this.shopValidators.businessHours = this.validateCheck.lessEqual(
                 newBusinessHours,
                 MaxChars.BUSINESS_HOURS,
             );
         }
     }
 
-    @Watch('brandDto.tel')
+    @Watch('shopDto.tel')
     private onTelChange(newTel: string, oldTel: string): void {
-        this.brandValidators.tel = this.validateCheck.formatTelephone(newTel);
+        this.shopValidators.tel = this.validateCheck.formatTelephone(newTel);
     }
 
     private registration(): void {
-        console.log(this.brandDto);
+        console.log(this.shopDto);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
         }, () => {
-            UIkit.modal('#brand_edit_modal').show();
+            UIkit.modal('#shop_edit_modal').show();
         });
     }
 }

@@ -1,19 +1,19 @@
 <template>
-    <div class="brand-search-form">
+    <div class="shop-search-form">
         <div class="uk-section uk-section-muted">
             <div class="uk-container">
                 <h3>Search form</h3>
                 <form class="uk-grid-small" uk-grid　v-on:submit.prevent="search">
 
                     <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-brand-name">Brand name</label>
+                        <label class="uk-form-label" for="form-stacked-shop-name">Shop name</label>
                         <div class="uk-form-controls">
-                            <input id="form-stacked-brand-name"
-                            :class="{'uk-input': true, 'uk-form-danger': brandValidators.name.validate}"
+                            <input id="form-stacked-shop-name"
+                            :class="{'uk-input': true, 'uk-form-danger': shopValidators.name.validate}"
                             type="text"
-                            v-model="brandDto.name"
+                            v-model="shopDto.name"
                             >
-                            <span v-show="brandValidators.name.validate" class="uk-text-danger">{{ brandValidators.name.errorMessage }}</span>
+                            <span v-show="shopValidators.name.validate" class="uk-text-danger">{{ shopValidators.name.errorMessage }}</span>
                         </div>
                     </div>
 
@@ -21,13 +21,13 @@
                         <label class="uk-form-label" for="form-stacked-station-name">Station name</label>
                         <div class="uk-form-controls">
                             <input id="form-stacked-station-name"
-                            :class="{'uk-input': true, 'uk-form-danger': brandValidators.stationName.validate}"
+                            :class="{'uk-input': true, 'uk-form-danger': shopValidators.stationName.validate}"
                             type="text"
                             autocomplete="on"
                             list="auto_station"
-                            v-model="brandDto.stationName"
+                            v-model="shopDto.stationName"
                             >
-                            <span v-show="brandValidators.stationName.validate" class="uk-text-danger">{{ brandValidators.stationName.errorMessage }}</span>
+                            <span v-show="shopValidators.stationName.validate" class="uk-text-danger">{{ shopValidators.stationName.errorMessage }}</span>
                             <datalist id="auto_station">
                                 <option value="渋谷" />
                                 <option value="代官山" />
@@ -40,18 +40,18 @@
                         <label class="uk-form-label" for="form-stacked-address">Address</label>
                         <div class="uk-form-controls">
                             <input id="form-stacked-address"
-                            :class="{'uk-input': true, 'uk-form-danger': brandValidators.address.validate}"
+                            :class="{'uk-input': true, 'uk-form-danger': shopValidators.address.validate}"
                             type="text"
-                            v-model="brandDto.address"
+                            v-model="shopDto.address"
                             >
-                            <span v-show="brandValidators.address.validate" class="uk-text-danger">{{ brandValidators.address.errorMessage }}</span>
+                            <span v-show="shopValidators.address.validate" class="uk-text-danger">{{ shopValidators.address.errorMessage }}</span>
                         </div>
                     </div>
 
                     <div class="uk-width-1-4@s">
                         <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                         <div class="uk-form-controls">
-                            <select class="uk-select" id="form-stacked-delete-flg" v-model="brandDto.deleteFlag">
+                            <select class="uk-select" id="form-stacked-delete-flg" v-model="shopDto.deleteFlag">
                                 <option value="true">Deleted</option>
                                 <option value="false">Not deleted</option>
                             </select>
@@ -73,15 +73,15 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/brand/dto/BrandDto';
-import ValidateCheck from '@/type/brand/validator/ValidateCheck';
-import BrandValidators from '@/type/brand/validator/BrandValidators';
-import MaxCharts from '@/type/brand/validator/MaxChars';
+import ShopDto from '@/type/shop/dto/ShopDto';
+import ValidateCheck from '@/type/shop/validator/ValidateCheck';
+import ShopValidators from '@/type/shop/validator/ShopValidators';
+import MaxCharts from '@/type/shop/validator/MaxChars';
 
 @Component
-export default class BrandSearchForm extends Vue {
+export default class ShopSearchForm extends Vue {
 
-    private brandDto: BrandDto = {
+    private shopDto: ShopDto = {
         id: -1,
         name: '',
         link: '',
@@ -95,7 +95,7 @@ export default class BrandSearchForm extends Vue {
 
     private validateCheck: ValidateCheck = new ValidateCheck();
 
-    private brandValidators: BrandValidators = {
+    private shopValidators: ShopValidators = {
         name: {
             validate: false,
             errorMessage: '',
@@ -118,19 +118,19 @@ export default class BrandSearchForm extends Vue {
         },
     };
 
-    @Watch('brandDto.name')
-    private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
-        this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxCharts.NAME);
+    @Watch('shopDto.name')
+    private onBrandNameChange(newShopName: string, oldShopName: string): void {
+        this.shopValidators.name = this.validateCheck.lessEqual(newShopName, MaxCharts.NAME);
     }
 
-    @Watch('brandDto.stationName')
+    @Watch('shopDto.stationName')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxCharts.STATION_NAME);
+        this.shopValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxCharts.STATION_NAME);
     }
 
-    @Watch('brandDto.address')
+    @Watch('shopDto.address')
     private onAddressChange(newAddress: string, oldAddress: string): void {
-        this.brandValidators.address = this.validateCheck.lessEqual(newAddress, MaxCharts.ADDRESS);
+        this.shopValidators.address = this.validateCheck.lessEqual(newAddress, MaxCharts.ADDRESS);
     }
 
     private search(): void {

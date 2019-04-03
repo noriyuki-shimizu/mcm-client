@@ -30,7 +30,7 @@
                       <a href="#"><span uk-icon="icon: pencil"></span> Maintenance</a>
                         <ul>
                           <li><router-link to="/brandMaintenance"> Brand</router-link></li>
-                          <li><a href="#">Shop</a></li>
+                          <li><router-link to="/shopMaintenance"> Shop</router-link></li>
                           <li><a href="#">Genre</a></li>
                         </ul>
                     </li>
