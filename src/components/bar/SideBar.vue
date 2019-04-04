@@ -24,16 +24,11 @@
                   </ul>
               </li>
               <li class="uk-parent">
-                  <a href="#"><span uk-icon="icon: cog"></span> Master</a>
+                  <a href="#"><span uk-icon="icon: cog"></span> Maintenance</a>
                   <ul class="uk-nav-sub">
-                    <li>
-                      <a href="#"><span uk-icon="icon: pencil"></span> Maintenance</a>
-                        <ul>
-                          <li><router-link to="/brandMaintenance"> Brand</router-link></li>
-                          <li><router-link to="/shopMaintenance"> Shop</router-link></li>
-                          <li><a href="#">Genre</a></li>
-                        </ul>
-                    </li>
+                    <li><router-link to="/clothesMaintenance"> Clothes</router-link></li>
+                    <li><router-link to="/brandMaintenance"> Brand</router-link></li>
+                    <li><router-link to="/shopMaintenance"> Shop</router-link></li>
                   </ul>
               </li>
               <li class="uk-nav-divider"></li>
