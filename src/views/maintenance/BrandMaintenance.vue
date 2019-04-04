@@ -30,7 +30,6 @@ import BrandDto from '@/type/brand/dto/BrandDto';
 })
 export default class BrandMaintenance extends Vue {
     private hierarchyList: string[] = [
-        'Master',
         'Maintenance',
         'Brand',
     ];

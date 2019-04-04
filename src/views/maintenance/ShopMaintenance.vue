@@ -30,7 +30,6 @@ import ShopDto from '@/type/shop/dto/ShopDto';
 })
 export default class ShopMaintenance extends Vue {
     private hierarchyList: string[] = [
-        'Master',
         'Maintenance',
         'Shop',
     ];
