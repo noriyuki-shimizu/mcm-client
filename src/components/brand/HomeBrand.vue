@@ -8,7 +8,7 @@
             <div v-bind:key="brand.id" v-for="brand in brandList">
                 <div id="custom_card" class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-small-top">
                     <a :href="brand.link" target="_blank">
-                        <img class="uk-align-center" :src="brand.imagePass" width="170px" height="100px">
+                        <img class="uk-align-center" :src="brand.imagePath" width="170px" height="100px">
                     </a>
                 </div>
             </div>
