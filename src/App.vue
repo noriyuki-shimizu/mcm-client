@@ -25,4 +25,10 @@ export default {
 
 <style lang="scss">
 @import url('../node_modules/uikit/dist/css/uikit.css');
+
+.uk-custome-button-color-green {
+  background-color: lightgreen;
+  color: white;
+  border: 1px solid transparent;
+}
 </style>
