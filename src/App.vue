@@ -5,21 +5,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
 import SideBar from '@/components/bar/SideBar.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
+// tslint:disable-next-line:no-var-requires
+const UIkit = require('uikit');
+// tslint:disable-next-line:no-var-requires
+const Icons = require('uikit/dist/js/uikit-icons');
+
 UIkit.use(Icons);
 
-export default {
-  name: 'App',
+@Component({
   components: {
-    'side-bar': SideBar,
+      SideBar,
   },
-};
+})
+export default class App extends Vue {
+}
 
 </script>
 
