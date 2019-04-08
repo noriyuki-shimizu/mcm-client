@@ -14,7 +14,7 @@
                 </thead>
                 <tbody v-for="brand in brandList" :key="brand.id">
                     <tr @dblclick="edit(brand)">
-                        <td><img class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
+                        <td><img v-fallback-image class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ brand.name }}</td>
                         <td class="uk-text-truncate">{{ brand.link }}</td>
                         <td class="uk-text--nowrap">{{ brand.country }}</td>
@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import FallbackImage from '@/directives/fallback-image';
 import BrandEditModalForm from '@/components/brand/form/edit/BrandEditModalForm.vue';
 
 import BrandDto from '@/type/brand/dto/BrandDto';
@@ -46,6 +47,9 @@ const UIkit = require('uikit');
 type CustomProp<T> = () => T;
 
 @Component({
+    directives: {
+        FallbackImage,
+    },
     components: {
         BrandEditModalForm,
     },

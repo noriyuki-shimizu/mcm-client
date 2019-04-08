@@ -15,7 +15,7 @@
             </thead>
             <tbody v-for="clothes in clothesList" :key="clothes.id">
                 <tr>
-                    <td><img :src="clothes.imagePath" width="100px" height="100px"></td>
+                    <td><img v-fallback-image :src="clothes.imagePath" width="200px" height="200px"></td>
                     <td>{{ clothes.genre }}</td>
                     <td>{{ clothes.brand }}</td>
                     <td>{{ clothes.shop }}</td>
@@ -30,12 +30,16 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import FallbackImage from '@/directives/fallback-image';
 
 import ClothesDto from '@/type/ClothesDto';
 
 type CustomProp<T> = () => T;
 
 @Component({
+    directives: {
+        FallbackImage,
+    },
     filters: {
         formatByPrice(price: number): string | null {
             if (!price === null) {

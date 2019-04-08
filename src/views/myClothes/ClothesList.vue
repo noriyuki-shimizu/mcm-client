@@ -66,7 +66,7 @@ export default class ClothesList extends Vue {
     private clothesList: ClothesDto[] = [
         {
             id: 1,
-            imagePath: require('@/images/noimage.jpg'),
+            imagePath: '',
             genre: 'Table Data',
             brand: 'Table Data',
             shop: 'Table Data',
@@ -76,7 +76,7 @@ export default class ClothesList extends Vue {
         },
         {
             id: 2,
-            imagePath: require('@/images/noimage.jpg'),
+            imagePath: '',
             genre: 'Table Data',
             brand: 'Table Data',
             shop: 'Table Data',
@@ -86,7 +86,7 @@ export default class ClothesList extends Vue {
         },
         {
             id: 3,
-            imagePath: require('@/images/noimage.jpg'),
+            imagePath: '',
             genre: 'Table Data',
             brand: 'Table Data',
             shop: 'Table Data',
@@ -96,7 +96,7 @@ export default class ClothesList extends Vue {
         },
         {
             id: 4,
-            imagePath: require('@/images/noimage.jpg'),
+            imagePath: '',
             genre: 'Table Data',
             brand: 'Table Data',
             shop: 'Table Data',
