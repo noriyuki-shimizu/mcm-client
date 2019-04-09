@@ -83,6 +83,22 @@
                             </div>
                         </div>
 
+                        <div class="uk-width-1-1" uk-margin>
+                            <label class="uk-form-label" for="form-stacked-image-path">Image</label>
+                            <div class="uk-form-controls">
+                                <div uk-form-custom="target: true" class="js-upload uk-width-1-1">
+                                    <input type="file" accept="image/*" @change="imageChange">
+                                    <input class="uk-input uk-width-1-2@s"
+                                    type="text"
+                                    :placeholder="shopDto.image.name ? shopDto.image.name : 'Select file'"
+                                    disabled
+                                    tabindex="-1"
+                                    >
+                                    <button class="uk-button uk-button-default uk-custome-button-color-green" type="button" tabindex="-1">Select</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                             <div class="uk-form-controls">
@@ -107,6 +123,8 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import * as Filebase from 'firebase/app';
+import 'firebase/storage';
 
 import ShopDto from '@/type/shop/dto/ShopDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
@@ -203,12 +221,38 @@ export default class ShopEditModalForm extends Vue {
         this.shopValidators.tel = this.validateCheck.formatTelephone(newTel);
     }
 
+    private imageChange(ev: any): void {
+        const file: File = ev.target.files[0];
+
+        if (file === undefined) {
+            this.shopDto.image = {
+                name: '',
+                path: '',
+                file: null,
+            };
+            return ;
+        }
+
+        this.shopDto.image.name = file.name;
+        this.shopDto.image.file = file;
+    }
+
     private registration(): void {
         console.log(this.shopDto);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
+
+            const storageRef: Filebase.storage.Reference = Filebase.storage().ref();
+
+            const imageRef: Filebase.storage.Reference = storageRef.child('images/' + this.shopDto.image.name);
+            imageRef.put(this.shopDto.image.file).then((snapshot) => {
+                snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    this.shopDto.image.path = downloadURL;
+                    console.log(this.shopDto.image.path);
+                });
+            });
         }, () => {
             UIkit.modal('#shop_edit_modal').show();
         });
