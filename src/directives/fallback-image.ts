@@ -2,7 +2,6 @@ import { DirectiveOptions } from 'vue';
 
 const fallbackImage: DirectiveOptions = {
     bind(el: HTMLElement) {
-        console.log(el);
         el.addEventListener('error', () => {
             el.style.height = '150px';
             el.style.width = '200px';
