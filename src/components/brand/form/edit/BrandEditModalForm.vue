@@ -28,7 +28,7 @@
                             </div>
                         </div>
 
-                        <div class="uk-width-1-1">
+                        <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-country">Country</label>
                             <div class="uk-form-controls">
                                 <input id="form-stacked-country"
@@ -37,6 +37,22 @@
                                 v-model="brandDto.country"
                                 >
                                 <span v-show="brandValidators.country.validate" class="uk-text-danger">{{ brandValidators.country.errorMessage }}</span>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-1-1" uk-margin>
+                            <label class="uk-form-label" for="form-stacked-image-path">Image</label>
+                            <div class="uk-form-controls">
+                                <div uk-form-custom="target: true" class="js-upload uk-width-1-1">
+                                    <input type="file" accept="image/*" @change="imageChange">
+                                    <input class="uk-input uk-width-1-2@s"
+                                    type="text"
+                                    :placeholder="brandDto.image.name ? brandDto.image.name : 'Select file'"
+                                    disabled
+                                    tabindex="-1"
+                                    >
+                                    <button class="uk-button uk-button-default uk-custome-button-color-green" type="button" tabindex="-1">Select</button>
+                                </div>
                             </div>
                         </div>
 
@@ -64,6 +80,8 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import * as Filebase from 'firebase/app';
+import 'firebase/storage';
 
 import BrandDto from '@/type/brand/dto/BrandDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
@@ -96,7 +114,7 @@ export default class BrandEditModalForm extends Vue {
         },
     };
 
-    public inputAllCheck(): void {
+    private inputAllCheck(): void {
         this.onBrandNameChange(this.brandDto.name, '');
     }
 
@@ -114,12 +132,38 @@ export default class BrandEditModalForm extends Vue {
         this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.COUNTRY);
     }
 
+    private imageChange(ev: any): void {
+        const file: File = ev.target.files[0];
+
+        if (file === undefined) {
+            this.brandDto.image = {
+                name: '',
+                path: '',
+                file: null,
+            };
+            return ;
+        }
+
+        this.brandDto.image.name = file.name;
+        this.brandDto.image.file = file;
+    }
+
     private registration(): void {
         console.log(this.brandDto);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
+
+            const storageRef: Filebase.storage.Reference = Filebase.storage().ref();
+
+            const imageRef: Filebase.storage.Reference = storageRef.child('images/' + this.brandDto.image.name);
+            imageRef.put(this.brandDto.image.file).then((snapshot) => {
+                snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    this.brandDto.image.path = downloadURL;
+                    console.log(this.brandDto.image.path);
+                });
+            });
         }, () => {
             UIkit.modal('#brand_edit_modal').show();
         });
