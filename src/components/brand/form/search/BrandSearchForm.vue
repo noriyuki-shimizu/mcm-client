@@ -66,7 +66,10 @@ export default class BrandSearchForm extends Vue {
         id: -1,
         name: '',
         link: '',
-        imagePath: '',
+        image: {
+            name: '',
+            path: '',
+        },
         country: '',
         deleteFlag: false,
     };

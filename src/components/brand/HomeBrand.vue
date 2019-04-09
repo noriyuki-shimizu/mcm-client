@@ -8,7 +8,7 @@
             <div v-bind:key="brand.id" v-for="brand in brandList">
                 <div id="custom_card" class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-small-top">
                     <a :href="brand.link" target="_blank">
-                        <img class="uk-align-center" :src="brand.imagePath" width="170px" height="100px">
+                        <img class="uk-align-center" :src="brand.image.path" width="170px" height="100px">
                     </a>
                 </div>
             </div>
@@ -30,7 +30,10 @@ export default class HomeBrand extends Vue {
       id: 1,
       name: '',
       link: 'http://bukht.com/',
-      imagePath: require('@/images/brand/icon/bukht_icon.jpg'),
+      image: {
+        name: 'bukht_icon.jpg',
+        path: require('@/images/brand/icon/bukht_icon.jpg'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -38,7 +41,10 @@ export default class HomeBrand extends Vue {
       id: 2,
       name: '',
       link: 'http://ne-on-sign.com/',
-      imagePath: require('@/images/brand/icon/neon-sign_icon.jpg'),
+      image: {
+        name: 'neon-sign_icon.jpg',
+        path: require('@/images/brand/icon/neon-sign_icon.jpg'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -46,7 +52,10 @@ export default class HomeBrand extends Vue {
       id: 3,
       name: '',
       link: 'https://www.fashion-press.net/brands/3332',
-      imagePath: require('@/images/brand/icon/min_icon.png'),
+      image: {
+        name: 'min_icon.png',
+        path: require('@/images/brand/icon/min_icon.png'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -54,7 +63,10 @@ export default class HomeBrand extends Vue {
       id: 4,
       name: '',
       link: 'https://auralee.jp/',
-      imagePath: require('@/images/brand/icon/auralee_icon.png'),
+      image: {
+        name: 'auralee_icon.png',
+        path: require('@/images/brand/icon/auralee_icon.png'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -62,7 +74,10 @@ export default class HomeBrand extends Vue {
       id: 5,
       name: '',
       link: 'https://sixty-nine.us/',
-      imagePath: require('@/images/brand/icon/69_icon.jpg'),
+      image: {
+        name: '69_icon.jpg',
+        path: require('@/images/brand/icon/69_icon.jpg'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -70,7 +85,10 @@ export default class HomeBrand extends Vue {
       id: 6,
       name: '',
       link: 'http://henderscheme.com/',
-      imagePath: require('@/images/brand/icon/hender-scheme_icon.jpg'),
+      image: {
+        name: 'hender-scheme_icon.jpg',
+        path: require('@/images/brand/icon/hender-scheme_icon.jpg'),
+      },
       country: '',
       deleteFlag: false,
     },
@@ -78,7 +96,10 @@ export default class HomeBrand extends Vue {
       id: 7,
       name: '',
       link: 'http://www.yohjiyamamoto.co.jp/',
-      imagePath: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
+      image: {
+        name: 'yohjiyamamoto_icon.png',
+        path: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
+      },
       country: '',
       deleteFlag: false,
     },

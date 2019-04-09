@@ -8,7 +8,7 @@
                 <article class="uk-comment">
                     <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
                         <div class="uk-width-auto">
-                            <img class="uk-comment-avatar" :src="shop.imagePath" width="250" height="250" alt="">
+                            <img class="uk-comment-avatar" :src="shop.image.path" width="250" height="250" alt="">
                         </div>
                         <div class="uk-width-expand">
                             <a class="uk-link-heading" :href="shop.link" target="_blank">
@@ -38,7 +38,10 @@ export default class HomeShop extends Vue {
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
             stationName: '代官山',
-            imagePath: require('@/images/shop/icon/o_icon.jpg'),
+            image: {
+                name: 'o_icon.jpg',
+                path: require('@/images/shop/icon/o_icon.jpg'),
+            },
             address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
             businessHours: '12:00 - 20:00 定休日 無し',
             tel: '03-6416-1187',
@@ -49,7 +52,10 @@ export default class HomeShop extends Vue {
             name: '吾亦紅',
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             stationName: '渋谷',
-            imagePath: require('@/images/shop/icon/waremokou_icon.jpeg'),
+            image: {
+                name: 'waremokou_icon.jpeg',
+                path: require('@/images/shop/icon/waremokou_icon.jpeg'),
+            },
             address: '東京都渋谷区神南1-18-2ﾌﾚｰﾑ神南坂1F',
             businessHours: '11：30～21：00',
             tel: '03-6452-5530',

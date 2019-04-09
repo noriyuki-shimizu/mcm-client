@@ -1,9 +1,11 @@
+import Image from '@/type/image/Image';
+
 export default interface BrandDto {
-    [key: string]: number | string | boolean;
+    [key: string]: number | string | boolean | Image;
     id: number;
     name: string;
     link: string;
-    imagePath: string;
+    image: Image;
     country: string;
     deleteFlag: boolean;
 }

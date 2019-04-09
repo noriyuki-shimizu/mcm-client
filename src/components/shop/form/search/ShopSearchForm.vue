@@ -60,7 +60,7 @@
 
                     <div class="uk-width-1-1">
                         <p class="uk-align-right">
-                            <button class="uk-button uk-button-primary" type="submit">Search</button>
+                            <button class="uk-button uk-custome-button-color-green" type="submit">Search</button>
                         </p>
                     </div>
 
@@ -86,7 +86,10 @@ export default class ShopSearchForm extends Vue {
         name: '',
         link: '',
         stationName: '',
-        imagePath: '',
+        image: {
+            name: '',
+            path: '',
+        },
         address: '',
         businessHours: '',
         tel: '',

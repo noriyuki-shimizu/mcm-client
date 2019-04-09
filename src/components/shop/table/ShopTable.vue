@@ -17,7 +17,7 @@
                 </thead>
                 <tbody v-for="shop in shopList" :key="shop.id">
                     <tr @dblclick="edit(shop)">
-                        <td><img class="uk-preserve-width" :src="shop.imagePath" height="200" width="200"></td>
+                        <td><img class="uk-preserve-width" :src="shop.image.path" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ shop.name }}</td>
                         <td class="uk-text-nowrap">{{ shop.stationName }}</td>
                         <td class="uk-text-truncate">{{ shop.link }}</td>
@@ -71,7 +71,10 @@ export default class ShopTable extends Vue {
         name: '',
         link: '',
         stationName: '',
-        imagePath: '',
+        image: {
+            name: '',
+            path: '',
+        },
         address: '',
         businessHours: '',
         tel: '',
@@ -92,7 +95,10 @@ export default class ShopTable extends Vue {
             name: '',
             link: '',
             stationName: '',
-            imagePath: '',
+            image: {
+                name: '',
+                path: '',
+            },
             address: '',
             businessHours: '',
             tel: '',

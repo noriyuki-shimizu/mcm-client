@@ -1,10 +1,12 @@
+import Image from '@/type/image/Image';
+
 export default interface ShopDto {
-    [key: string]: number | string | boolean;
+    [key: string]: number | string | boolean | Image;
     id: number;
     name: string;
     link: string;
     stationName: string;
-    imagePath: string;
+    image: Image;
     address: string;
     businessHours: string;
     tel: string;

@@ -14,7 +14,7 @@
                 </thead>
                 <tbody v-for="brand in brandList" :key="brand.id">
                     <tr @dblclick="edit(brand)">
-                        <td><img v-fallback-image class="uk-preserve-width" :src="brand.imagePath" height="200" width="200"></td>
+                        <td><img v-fallback-image class="uk-preserve-width" :src="brand.image.path" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ brand.name }}</td>
                         <td class="uk-text-truncate">{{ brand.link }}</td>
                         <td class="uk-text--nowrap">{{ brand.country }}</td>
@@ -68,7 +68,10 @@ export default class BrandTable extends Vue {
         id: -1,
         name: '',
         link: '',
-        imagePath: '',
+        image: {
+            name: '',
+            path: '',
+        },
         country: '',
         deleteFlag: false,
     };
@@ -86,7 +89,10 @@ export default class BrandTable extends Vue {
             id: -1,
             name: '',
             link: '',
-            imagePath: '',
+            image: {
+                name: '',
+                path: '',
+            },
             country: '',
             deleteFlag: false,
         };
