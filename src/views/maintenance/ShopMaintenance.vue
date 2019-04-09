@@ -43,6 +43,7 @@ export default class ShopMaintenance extends Vue {
             image: {
                 name: 'o_icon.jpg',
                 path: require('@/images/shop/icon/o_icon.jpg'),
+                file: null,
             },
             address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
             businessHours: '12:00 - 20:00 定休日 無し',
@@ -57,6 +58,7 @@ export default class ShopMaintenance extends Vue {
             image: {
                 name: 'waremokou_icon.jpeg',
                 path: require('@/images/shop/icon/waremokou_icon.jpeg'),
+                file: null,
             },
             address: '東京都渋谷区神南1-18-2ﾌﾚｰﾑ神南坂1F',
             businessHours: '11：30～21：00',

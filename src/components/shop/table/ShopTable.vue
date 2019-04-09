@@ -74,6 +74,7 @@ export default class ShopTable extends Vue {
         image: {
             name: '',
             path: '',
+            file: null,
         },
         address: '',
         businessHours: '',
@@ -98,6 +99,7 @@ export default class ShopTable extends Vue {
             image: {
                 name: '',
                 path: '',
+                file: null,
             },
             address: '',
             businessHours: '',

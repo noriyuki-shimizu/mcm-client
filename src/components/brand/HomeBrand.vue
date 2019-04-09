@@ -33,6 +33,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'bukht_icon.jpg',
         path: require('@/images/brand/icon/bukht_icon.jpg'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -44,6 +45,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'neon-sign_icon.jpg',
         path: require('@/images/brand/icon/neon-sign_icon.jpg'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -55,6 +57,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'min_icon.png',
         path: require('@/images/brand/icon/min_icon.png'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -66,6 +69,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'auralee_icon.png',
         path: require('@/images/brand/icon/auralee_icon.png'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -77,6 +81,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: '69_icon.jpg',
         path: require('@/images/brand/icon/69_icon.jpg'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -88,6 +93,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'hender-scheme_icon.jpg',
         path: require('@/images/brand/icon/hender-scheme_icon.jpg'),
+        file: null,
       },
       country: '',
       deleteFlag: false,
@@ -99,6 +105,7 @@ export default class HomeBrand extends Vue {
       image: {
         name: 'yohjiyamamoto_icon.png',
         path: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
+        file: null,
       },
       country: '',
       deleteFlag: false,

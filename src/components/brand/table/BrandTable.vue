@@ -71,6 +71,7 @@ export default class BrandTable extends Vue {
         image: {
             name: '',
             path: '',
+            file: null,
         },
         country: '',
         deleteFlag: false,
@@ -92,6 +93,7 @@ export default class BrandTable extends Vue {
             image: {
                 name: '',
                 path: '',
+                file: null,
             },
             country: '',
             deleteFlag: false,

@@ -89,6 +89,7 @@ export default class ShopSearchForm extends Vue {
         image: {
             name: '',
             path: '',
+            file: null,
         },
         address: '',
         businessHours: '',

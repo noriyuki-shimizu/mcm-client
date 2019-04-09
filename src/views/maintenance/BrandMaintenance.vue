@@ -42,6 +42,7 @@ export default class BrandMaintenance extends Vue {
             image: {
                 name: 'bukht_icon.jpg',
                 path: require('@/images/brand/icon/bukht_icon.jpg'),
+                file: null,
             },
             country: '日本',
             deleteFlag: false,
@@ -53,6 +54,7 @@ export default class BrandMaintenance extends Vue {
             image: {
                 name: 'neon-sign_icon.jpg',
                 path: require('@/images/brand/icon/neon-sign_icon.jpg'),
+                file: null,
             },
             country: '日本',
             deleteFlag: false,
@@ -64,6 +66,7 @@ export default class BrandMaintenance extends Vue {
             image: {
                 name: 'min_icon.png',
                 path: require('@/images/brand/icon/min_icon.png'),
+                file: null,
             },
             country: '日本',
             deleteFlag: false,
@@ -75,6 +78,7 @@ export default class BrandMaintenance extends Vue {
             image: {
                 name: 'auralee_icon.png',
                 path: require('@/images/brand/icon/auralee_icon.png'),
+                file: null,
             },
             country: '日本',
             deleteFlag: false,
