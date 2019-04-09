@@ -15,10 +15,10 @@
             </thead>
             <tbody v-for="clothes in clothesList" :key="clothes.id">
                 <tr>
-                    <td><img v-fallback-image :src="clothes.imagePath" width="200px" height="200px"></td>
+                    <td><img v-fallback-image :src="clothes.image.path" width="200px" height="200px"></td>
                     <td>{{ clothes.genre }}</td>
-                    <td>{{ clothes.brand }}</td>
-                    <td>{{ clothes.shop }}</td>
+                    <td>{{ clothes.brand.name }}</td>
+                    <td>{{ clothes.shop.name }}</td>
                     <td>{{ clothes.price | formatByPrice }}</td>
                     <td>{{ clothes.buyDate }}</td>
                     <td>{{ clothes.deleteFlg | formatByDeleteFlag }}</td>
@@ -32,7 +32,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
-import ClothesDto from '@/type/ClothesDto';
+import ClothesDto from '@/type/clothes/dto/ClothesDto';
 
 type CustomProp<T> = () => T;
 

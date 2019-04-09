@@ -34,7 +34,7 @@ import GenreTab from '@/components/genre/GenreTab.vue';
 import ClothesListForm from '@/components/clothes/form/search/ClothesListForm.vue';
 import ClothesTable from '@/components/clothes/table/ClothesTable.vue';
 
-import ClothesDto from '@/type/ClothesDto';
+import ClothesDto from '@/type/clothes/dto/ClothesDto';
 
 @Component({
     components: {
@@ -66,43 +66,111 @@ export default class ClothesList extends Vue {
     private clothesList: ClothesDto[] = [
         {
             id: 1,
-            imagePath: '',
+            image: {
+                name: '',
+                path: '',
+            },
             genre: 'Table Data',
-            brand: 'Table Data',
-            shop: 'Table Data',
+            brand: {
+                id: 1,
+                name: 'bukht',
+                link: 'http://bukht.com/',
+                image: {
+                    name: 'bukht_icon.jpg',
+                    path: require('@/images/brand/icon/bukht_icon.jpg'),
+                },
+                country: '日本',
+                deleteFlag: false,
+            },
+            shop: {
+                id: 1,
+                name: 'O代官山 本店',
+                link: 'http://store.moc-o.com/',
+                stationName: '代官山',
+                image: {
+                    name: 'o_icon.jpg',
+                    path: require('@/images/shop/icon/o_icon.jpg'),
+                },
+                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
+                businessHours: '12:00 - 20:00 定休日 無し',
+                tel: '03-6416-1187',
+                deleteFlag: false,
+            },
             price: 10000,
             buyDate: '2019/04/12',
-            deleteFlg: false,
+            deleteFlag: false,
         },
         {
             id: 2,
-            imagePath: '',
+            image: {
+                name: '',
+                path: '',
+            },
             genre: 'Table Data',
-            brand: 'Table Data',
-            shop: 'Table Data',
+            brand: {
+                id: 1,
+                name: 'bukht',
+                link: 'http://bukht.com/',
+                image: {
+                    name: 'bukht_icon.jpg',
+                    path: require('@/images/brand/icon/bukht_icon.jpg'),
+                },
+                country: '日本',
+                deleteFlag: false,
+            },
+            shop: {
+                id: 1,
+                name: 'O代官山 本店',
+                link: 'http://store.moc-o.com/',
+                stationName: '代官山',
+                image: {
+                    name: 'o_icon.jpg',
+                    path: require('@/images/shop/icon/o_icon.jpg'),
+                },
+                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
+                businessHours: '12:00 - 20:00 定休日 無し',
+                tel: '03-6416-1187',
+                deleteFlag: false,
+            },
             price: 20000,
             buyDate: 'Table Data',
-            deleteFlg: false,
+            deleteFlag: false,
         },
         {
             id: 3,
-            imagePath: '',
+            image: {
+                name: '',
+                path: '',
+            },
             genre: 'Table Data',
-            brand: 'Table Data',
-            shop: 'Table Data',
+            brand: {
+                id: 1,
+                name: 'bukht',
+                link: 'http://bukht.com/',
+                image: {
+                    name: 'bukht_icon.jpg',
+                    path: require('@/images/brand/icon/bukht_icon.jpg'),
+                },
+                country: '日本',
+                deleteFlag: false,
+            },
+            shop: {
+                id: 1,
+                name: 'O代官山 本店',
+                link: 'http://store.moc-o.com/',
+                stationName: '代官山',
+                image: {
+                    name: 'o_icon.jpg',
+                    path: require('@/images/shop/icon/o_icon.jpg'),
+                },
+                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
+                businessHours: '12:00 - 20:00 定休日 無し',
+                tel: '03-6416-1187',
+                deleteFlag: false,
+            },
             price: 30000,
             buyDate: 'Table Data',
-            deleteFlg: false,
-        },
-        {
-            id: 4,
-            imagePath: '',
-            genre: 'Table Data',
-            brand: 'Table Data',
-            shop: 'Table Data',
-            price: 40000,
-            buyDate: 'Table Data',
-            deleteFlg: false,
+            deleteFlag: false,
         },
     ];
 }
