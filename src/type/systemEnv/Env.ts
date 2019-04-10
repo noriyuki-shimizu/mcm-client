@@ -14,31 +14,34 @@ interface ServerApp {
  */
 export class Env {
 
-	private yamlPropertys: ServerApp;
+  private yamlPropertys: ServerApp;
 
-	constructor() {
-		const appYml: string = fs.readFileSync('@/config/application.yaml', 'utf8');
+  constructor() {
+    const appYml: string = fs.readFileSync('@/config/application.yaml', 'utf8');
 
-        this.yamlPropertys = yaml.parse(appYml);	
-	}
-	protected load(key: string): any {
-		const filler:string = '.';
-		
-		if(key.indexOf(filler) >= 0) {
-            var keyList:string[]  = key.split(filler);
+    this.yamlPropertys = yaml.parse(appYml);
+  }
 
-            return this.scan(this.yamlPropertys, keyList.values());
-        }
+  protected load(key: string): any {
+    const filler: string = '.';
 
-        return this.yamlPropertys[key];
-	}
-	private scan(yamlProperty: any, keyIterator: any): any {
-		var next: {value: number; done: boolean} = keyIterator.next();
+    if (key.indexOf(filler) >= 0) {
+      const keyList: string[]  = key.split(filler);
 
-		if(next.done) {
-			return yamlProperty;
-		}
+      return this.scan(this.yamlPropertys, keyList.values());
+    }
 
-		return this.scan(yamlProperty[next.value], keyIterator);	
-	}
+    return this.yamlPropertys[key];
+  }
+
+  private scan(yamlProperty: any, keyIterator: any): any {
+    const next: {value: number; done: boolean} = keyIterator.next();
+
+    if (next.done) {
+      return yamlProperty;
+    }
+
+    return this.scan(yamlProperty[next.value], keyIterator);
+  }
+
 }
