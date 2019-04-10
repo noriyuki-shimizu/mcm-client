@@ -32,7 +32,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
-import ClothesDto from '@/type/clothes/dto/ClothesDto';
+import ClothesDto from '@/type/dto/ClothesDto';
 
 type CustomProp<T> = () => T;
 

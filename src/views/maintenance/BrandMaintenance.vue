@@ -15,10 +15,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import BrandSearchForm from '@/components/brand/form/search/BrandSearchForm.vue';
-import BrandTable from '@/components/brand/table/BrandTable.vue';
+import BrandSearchForm from '@/components/form/search/BrandSearchForm.vue';
+import BrandTable from '@/components/table/BrandTable.vue';
 
-import BrandDto from '@/type/brand/dto/BrandDto';
+import BrandDto from '@/type/dto/BrandDto';
 
 @Component({
     components: {

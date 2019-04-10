@@ -22,8 +22,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import HomeTop from '@/components/home/HomeTop.vue';
-import HomeBrand from '@/components/brand/HomeBrand.vue';
-import HomeShop from '@/components/shop/HomeShop.vue';
+import HomeBrand from '@/components/home/HomeBrand.vue';
+import HomeShop from '@/components/home/HomeShop.vue';
 
 @Component({
   components: {

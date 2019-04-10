@@ -42,9 +42,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import ShopEditModalForm from '@/components/shop/form/edit/ShopEditModalForm.vue';
+import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
 
-import ShopDto from '@/type/shop/dto/ShopDto';
+import ShopDto from '@/type/dto/ShopDto';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

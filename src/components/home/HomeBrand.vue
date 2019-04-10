@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/brand/dto/BrandDto';
+import BrandDto from '@/type/dto/BrandDto';
 
 @Component
 export default class HomeBrand extends Vue {

@@ -1,6 +1,6 @@
 import Validator from '@/type/validator/Validator';
-import ShopValidators from '@/type/shop/validator/ShopValidators';
-import BrandValidators from '@/type/brand/validator/BrandValidators';
+import ShopValidators from '@/type/validator/shop/ShopValidators';
+import BrandValidators from '@/type/validator/brand/BrandValidators';
 
 export default class ValidateCheck {
 

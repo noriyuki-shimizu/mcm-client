@@ -126,10 +126,10 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import ShopDto from '@/type/shop/dto/ShopDto';
+import ShopDto from '@/type/dto/ShopDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
-import ShopValidators from '@/type/shop/validator/ShopValidators';
-import MaxChars from '@/type/shop/validator/MaxChars';
+import ShopValidators from '@/type/validator/shop/ShopValidators';
+import MaxChars from '@/type/validator/shop/MaxChars';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

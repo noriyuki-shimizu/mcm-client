@@ -37,9 +37,9 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
-import BrandEditModalForm from '@/components/brand/form/edit/BrandEditModalForm.vue';
+import BrandEditModalForm from '@/components/form/edit/BrandEditModalForm.vue';
 
-import BrandDto from '@/type/brand/dto/BrandDto';
+import BrandDto from '@/type/dto/BrandDto';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

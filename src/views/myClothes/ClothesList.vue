@@ -30,11 +30,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import GenreTab from '@/components/genre/GenreTab.vue';
-import ClothesListForm from '@/components/clothes/form/search/ClothesListForm.vue';
-import ClothesTable from '@/components/clothes/table/ClothesTable.vue';
+import GenreTab from '@/components/tab/GenreTab.vue';
+import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
+import ClothesTable from '@/components/table/ClothesTable.vue';
 
-import ClothesDto from '@/type/clothes/dto/ClothesDto';
+import ClothesDto from '@/type/dto/ClothesDto';
 
 @Component({
     components: {

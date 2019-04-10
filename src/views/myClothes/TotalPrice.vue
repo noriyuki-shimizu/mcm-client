@@ -19,7 +19,7 @@ import { Component, Vue} from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import PieChart from '@/components/chart/pie/PieChart';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import TotalPricePerGenreList from '@/components/genre/TotalPricePerGenreList.vue';
+import TotalPricePerGenreList from '@/components/list/TotalPricePerGenreList.vue';
 import Chart from 'chart.js';
 
 @Component({

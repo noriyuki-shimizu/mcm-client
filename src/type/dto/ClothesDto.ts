@@ -1,6 +1,6 @@
 import Image from '@/type/image/Image';
-import BrandDto from '@/type/brand/dto/BrandDto';
-import ShopDto from '@/type/shop/dto/ShopDto';
+import BrandDto from '@/type/dto/BrandDto';
+import ShopDto from '@/type/dto/ShopDto';
 
 export default interface ClothesDto {
     id: number;

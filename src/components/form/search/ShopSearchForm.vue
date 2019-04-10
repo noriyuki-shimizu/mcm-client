@@ -73,10 +73,10 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import ShopDto from '@/type/shop/dto/ShopDto';
+import ShopDto from '@/type/dto/ShopDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
-import ShopValidators from '@/type/shop/validator/ShopValidators';
-import MaxCharts from '@/type/shop/validator/MaxChars';
+import ShopValidators from '@/type/validator/shop/ShopValidators';
+import MaxCharts from '@/type/validator/shop/MaxChars';
 
 @Component
 export default class ShopSearchForm extends Vue {

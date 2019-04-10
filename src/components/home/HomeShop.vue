@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import ShopDto from '@/type/shop/dto/ShopDto';
+import ShopDto from '@/type/dto/ShopDto';
 
 @Component
 export default class HomeShop extends Vue {
