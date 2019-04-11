@@ -1,26 +1,26 @@
 <template>
     <div class="clothes-table">
-        <table class="uk-table uk-table-small uk-table-middle uk-table-divider uk-overflow-auto">
+        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
             <caption>Clothes list</caption>
             <thead>
                 <tr>
-                    <th>image</th>
-                    <th>genre</th>
-                    <th>brand</th>
-                    <th>shop</th>
-                    <th>price</th>
-                    <th>buy date</th>
-                    <th>delete flg</th>
+                    <th class="uk-table-shrink">image</th>
+                    <th class="uk-table-shrink uk-text-nowrap">genre</th>
+                    <th class="uk-table-shrink uk-text-nowrap">brand</th>
+                    <th class="uk-table-shrink uk-text-nowrap">shop</th>
+                    <th class="uk-table-shrink uk-text-nowrap">price</th>
+                    <th class="uk-table-shrink uk-text-nowrap">buy date</th>
+                    <th class="uk-table-small">delete flg</th>
                 </tr>
             </thead>
             <tbody v-for="clothes in clothesList" :key="clothes.id">
-                <tr>
-                    <td><img v-fallback-image :src="clothes.image.path" width="200px" height="200px"></td>
-                    <td>{{ clothes.genre }}</td>
-                    <td>{{ clothes.brand.name }}</td>
-                    <td>{{ clothes.shop.name }}</td>
-                    <td>{{ clothes.price | formatByPrice }}</td>
-                    <td>{{ clothes.buyDate }}</td>
+                <tr v-on:dblclick="$emit('openModal', clothes)">
+                    <td><img class="uk-preserve-width" v-fallback-image :src="clothes.image.path" width="200px" height="200px"></td>
+                    <td class="uk-text-nowrap">{{ clothes.genre }}</td>
+                    <td class="uk-text-nowrap">{{ clothes.brand.name }}</td>
+                    <td class="uk-text-nowrap">{{ clothes.shop.name }}</td>
+                    <td class="uk-text-nowrap">{{ clothes.price | formatByPrice }}</td>
+                    <td class="uk-text-nowrap">{{ clothes.buyDate }}</td>
                     <td>{{ clothes.deleteFlg | formatByDeleteFlag }}</td>
                 </tr>
             </tbody>
