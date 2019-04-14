@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.8.0",
     "firebase": "^5.9.3",
+    "pikaday": "^1.8.0",
     "uikit": "^3.0.3",
     "vue": "^2.6.6",
     "vue-chartjs": "^3.4.0",
@@ -22,7 +23,8 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "^11.13.2",
+    "@types/node": "^11.13.4",
+    "@types/pikaday": "^1.7.4",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-typescript": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
