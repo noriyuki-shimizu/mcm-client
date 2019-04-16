@@ -6,18 +6,11 @@ export default {
             },
         },
     },
-    eegeo: {
-        app: {
-            api: {
-                key: '77e3276f9f177cd537b673c909f10b45',
-            },
-        },
-    },
     ipinfo: {
         request: {
             url: 'https://ipinfo.io',
             get: {
-                token: '74c9d03c1c819b',
+                token: '74c9d03c1c819q',
             },
         },
     },
