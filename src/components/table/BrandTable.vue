@@ -63,7 +63,7 @@ export default class BrandTable extends Vue {
     @Prop({type: Array as CustomProp<BrandDto[]>})
     private brandList!: BrandDto[];
 
-    private addFlag: boolean = false;
+    private addFlag: boolean | null = false;
     private brandDto: BrandDto = {
         id: -1,
         name: '',
@@ -76,6 +76,10 @@ export default class BrandTable extends Vue {
         country: '',
         deleteFlag: false,
     };
+
+    private beforeDestroy(): void {
+        this.addFlag = null;
+    }
 
     private edit(brandDto: BrandDto): void {
         this.addFlag = false;

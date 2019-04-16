@@ -93,6 +93,7 @@ import Storage from '@/type/firebase/Storage';
 const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
+type CallbackType = () => void;
 
 @Component
 export default class BrandEditModalForm extends Vue {
@@ -102,7 +103,7 @@ export default class BrandEditModalForm extends Vue {
     @Prop({type: Boolean})
     private addFlag!: boolean;
 
-    private validateCheck: ValidateCheck = new ValidateCheck();
+    private validateCheck: ValidateCheck | null = new ValidateCheck();
 
     private brandValidators: BrandValidators = {
         name: {
@@ -115,22 +116,30 @@ export default class BrandEditModalForm extends Vue {
         },
     };
 
+    private beforeDestroy(): void {
+        this.validateCheck = null;
+    }
+
     private inputAllCheck(): void {
         this.onBrandNameChange(this.brandDto.name, '');
     }
 
     @Watch('brandDto.name')
     private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
-        this.brandValidators.name = this.validateCheck.required(newBrandName);
+        if (this.validateCheck !== null) {
+            this.brandValidators.name = this.validateCheck.required(newBrandName);
 
-        if (!this.brandValidators.name.validate) {
-            this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxChars.NAME);
+            if (!this.brandValidators.name.validate) {
+                this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxChars.NAME);
+            }
         }
     }
 
     @Watch('brandDto.country')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.COUNTRY);
+        if (this.validateCheck !== null) {
+            this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.COUNTRY);
+        }
     }
 
     private imageChange(ev: any): void {
@@ -157,10 +166,10 @@ export default class BrandEditModalForm extends Vue {
             console.log('Confirmed.');
 
             const storage: Storage = new Storage(this.brandDto.image);
-            storage.imageUpload(function(this: BrandEditModalForm, downloadURL: string) {
-                this.brandDto.image.path = downloadURL;
-                console.log(this.brandDto.image.path);
-            }.bind(this));
+            storage.imageUpload(function(this: BrandDto, downloadURL: string) {
+                this.image.path = downloadURL;
+                console.log(this.image.path);
+            }.bind(this.brandDto));
         }, () => {
             UIkit.modal('#brand_edit_modal').show();
         });
