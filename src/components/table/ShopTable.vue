@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody v-for="shop in shopList" :key="shop.id">
-                    <tr @dblclick="edit(shop)">
+                    <tr v-on:dblclick="$emit('openModal', shop)">
                         <td><img class="uk-preserve-width" :src="shop.image.path" height="200" width="200"></td>
                         <td class="uk-text-nowrap">{{ shop.name }}</td>
                         <td class="uk-text-nowrap">{{ shop.stationName }}</td>
@@ -32,17 +32,11 @@
 
         <hr>
 
-        <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
-            <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Shop</button>
-        </p>
-
-        <shop-edit-modal-form ref="shopEditModalForm" :addFlag="addFlag" :shopDto="shopDto" />
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
 
 import ShopDto from '@/type/dto/ShopDto';
 
@@ -52,9 +46,6 @@ const UIkit = require('uikit');
 type CustomProp<T> = () => T;
 
 @Component({
-    components: {
-        ShopEditModalForm,
-    },
     filters: {
         formatByDeleteFlag(deleteFlag: boolean): string {
             return deleteFlag ? 'Deleted' : 'Not deleted';
@@ -64,58 +55,5 @@ type CustomProp<T> = () => T;
 export default class ShopTable extends Vue {
     @Prop({type: Array as CustomProp<ShopDto[]>})
     private shopList!: ShopDto[];
-
-    private addFlag: boolean = false;
-    private shopDto: ShopDto = {
-        id: -1,
-        name: '',
-        link: '',
-        stationName: '',
-        image: {
-            name: '',
-            path: '',
-            file: null,
-        },
-        address: '',
-        businessHours: '',
-        tel: '',
-        deleteFlag: false,
-    };
-
-    private edit(shopDto: ShopDto): void {
-        this.addFlag = false;
-        this.shopDto = {...shopDto};
-
-        this.modalShow();
-    }
-
-    private add(): void {
-        this.addFlag = true;
-        this.shopDto = {
-            id: -1,
-            name: '',
-            link: '',
-            stationName: '',
-            image: {
-                name: '',
-                path: '',
-                file: null,
-            },
-            address: '',
-            businessHours: '',
-            tel: '',
-            deleteFlag: false,
-        };
-
-        this.modalShow();
-    }
-
-    private modalShow(): void {
-        // 子コンポーネントのイベント呼び出し
-        (this.$refs.shopEditModalForm as any).inputAllCheck();
-
-        UIkit.modal('#shop_edit_modal').show();
-    }
-
 }
 </script>

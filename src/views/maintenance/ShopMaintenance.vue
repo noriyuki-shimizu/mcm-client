@@ -6,19 +6,29 @@
 
         <shop-search-form />
 
-        <shop-table :shopList="shopList" />
+        <shop-table v-on:openModal="edit" :shopList="shopList" />
+
+        <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
+            <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Shop</button>
+        </p>
+
+        <shop-edit-modal-form ref="shopEditModalForm" :addFlag="addFlag" :shopDto="shopDto" />
         
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Emit, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import ShopSearchForm from '@/components/form/search/ShopSearchForm.vue';
 import ShopTable from '@/components/table/ShopTable.vue';
+import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
 
 import ShopDto from '@/type/dto/ShopDto';
+
+// tslint:disable-next-line:no-var-requires
+const UIkit = require('uikit');
 
 @Component({
     components: {
@@ -26,6 +36,7 @@ import ShopDto from '@/type/dto/ShopDto';
         Breadcrumb,
         ShopSearchForm,
         ShopTable,
+        ShopEditModalForm,
     },
 })
 export default class ShopMaintenance extends Vue {
@@ -33,6 +44,24 @@ export default class ShopMaintenance extends Vue {
         'Maintenance',
         'Shop',
     ];
+
+    private addFlag: boolean = false;
+
+    private shopDto: ShopDto = {
+        id: -1,
+        name: '',
+        link: '',
+        stationName: '',
+        image: {
+            name: '',
+            path: '',
+            file: null,
+        },
+        address: '',
+        businessHours: '',
+        tel: '',
+        deleteFlag: false,
+    };
 
     private shopList: ShopDto[] = [
         {
@@ -66,5 +95,41 @@ export default class ShopMaintenance extends Vue {
             deleteFlag: false,
         },
     ];
+
+    @Emit('edit')
+    private edit(shopDto: ShopDto): void {
+        this.addFlag = false;
+        this.shopDto = {...shopDto};
+
+        this.modalShow();
+    }
+
+    private add(): void {
+        this.addFlag = true;
+        this.shopDto = {
+            id: -1,
+            name: '',
+            link: '',
+            stationName: '',
+            image: {
+                name: '',
+                path: '',
+                file: null,
+            },
+            address: '',
+            businessHours: '',
+            tel: '',
+            deleteFlag: false,
+        };
+
+        this.modalShow();
+    }
+
+    private modalShow(): void {
+        // 子コンポーネントのイベント呼び出し
+        (this.$refs.shopEditModalForm as any).inputAllCheck();
+
+        UIkit.modal('#shop_edit_modal').show();
+    }
 }
 </script>

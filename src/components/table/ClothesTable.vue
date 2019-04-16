@@ -25,6 +25,9 @@
                 </tr>
             </tbody>
         </table>
+
+        <hr>
+        
     </div>
 </template>
 

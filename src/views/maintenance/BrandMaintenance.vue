@@ -6,19 +6,29 @@
 
         <brand-search-form />
 
-        <brand-table :brandList="brandList" />
+        <brand-table v-on:openModal="edit" :brandList="brandList" />
+
+        <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
+            <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Brand</button>
+        </p>
+
+        <brand-edit-modal-form ref="brandEditModalForm" :addFlag="addFlag" :brandDto="brandDto" />
         
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Emit, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import BrandSearchForm from '@/components/form/search/BrandSearchForm.vue';
 import BrandTable from '@/components/table/BrandTable.vue';
+import BrandEditModalForm from '@/components/form/edit/BrandEditModalForm.vue';
 
 import BrandDto from '@/type/dto/BrandDto';
+
+// tslint:disable-next-line:no-var-requires
+const UIkit = require('uikit');
 
 @Component({
     components: {
@@ -26,6 +36,7 @@ import BrandDto from '@/type/dto/BrandDto';
         Breadcrumb,
         BrandSearchForm,
         BrandTable,
+        BrandEditModalForm,
     },
 })
 export default class BrandMaintenance extends Vue {
@@ -33,6 +44,21 @@ export default class BrandMaintenance extends Vue {
         'Maintenance',
         'Brand',
     ];
+
+    private addFlag: boolean = false;
+
+    private brandDto: BrandDto = {
+        id: -1,
+        name: '',
+        link: '',
+        image: {
+            name: '',
+            path: '',
+            file: null,
+        },
+        country: '',
+        deleteFlag: false,
+    };
 
     private brandList: BrandDto[] = [
         {
@@ -84,5 +110,37 @@ export default class BrandMaintenance extends Vue {
             deleteFlag: false,
         },
     ];
+
+    @Emit('edit')
+    private edit(brandDto: BrandDto): void {
+        this.addFlag = false;
+        this.brandDto = {...brandDto};
+
+        this.modalShow();
+    }
+
+    private add(): void {
+        this.addFlag = true;
+        this.brandDto = {
+            id: -1,
+            name: '',
+            link: '',
+            image: {
+                name: '',
+                path: '',
+                file: null,
+            },
+            country: '',
+            deleteFlag: false,
+        };
+
+        this.modalShow();
+    }
+
+    private modalShow(): void {
+        (this.$refs.brandEditModalForm as any).inputAllCheck();
+
+        UIkit.modal('#brand_edit_modal').show();
+    }
 }
 </script>
