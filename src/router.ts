@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import Home from './views/Home.vue';
+import LeafletMap from './views/LeafletMap.vue';
 import ClothesList from './views/myClothes/ClothesList.vue';
 import TotalPrice from './views/myClothes/TotalPrice.vue';
 import ShopMaintenance from './views/maintenance/ShopMaintenance.vue';
@@ -18,6 +19,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/map',
+      name: 'leaflet-map',
+      component: LeafletMap,
     },
     {
       path: '/clothesList',
