@@ -25,12 +25,6 @@ export default class LeafletMap extends Base {
         });
     }
 
-    private test(): void {
-        navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position);
-        });
-    }
-
     private mountLeaflet(lat: number, lon: number): void {
         const map: any = leaflet.map('map');
         map.setView([lat, lon], this.leafletProp.initZoom);
