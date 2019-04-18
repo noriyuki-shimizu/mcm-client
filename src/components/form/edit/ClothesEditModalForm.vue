@@ -102,7 +102,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import Pikaday from 'pikaday';
 
 import ClothesDto from '@/type/dto/ClothesDto';
@@ -158,6 +158,25 @@ export default class ClothesEditModalForm extends Vue {
 
     private inputAllCheck(): void {
         console.log('input check all');
+    }
+
+    @Watch('clothesDto.price')
+    private onPriceChange(newPrice: string, oldPrice: string): void {
+        if (this.validateCheck !== null) {
+            this.clothesValidators.price = this.validateCheck.required(newPrice);
+
+            if (this.clothesValidators.price.validate) {
+                return ;
+            }
+
+            this.clothesValidators.price = this.validateCheck.numberGreaterThanZero(newPrice);
+
+            if (this.clothesValidators.price.validate) {
+                return ;
+            }
+
+            this.clothesValidators.price = this.validateCheck.lessEqualNumber(Number(newPrice), MaxChars.PRICE);
+        }
     }
 
     private imageChange(ev: any): void {
