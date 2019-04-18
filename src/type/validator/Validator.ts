@@ -1,4 +1,4 @@
-export default interface BrandValidator {
+export default interface Validator {
     validate: boolean;
     errorMessage: string;
 }
