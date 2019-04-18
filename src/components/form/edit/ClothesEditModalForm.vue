@@ -12,7 +12,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-genre">Genre</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-genre">
+                                <select class="uk-select" id="form-stacked-genre" v-model="clothesDto.genre">
                                     <option>Option 01</option>
                                     <option>Option 02</option>
                                 </select>
@@ -22,7 +22,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-brand">Brand</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-brand">
+                                <select class="uk-select" id="form-stacked-brand" v-model="clothesDto.brand">
                                     <option>Option 01</option>
                                     <option>Option 02</option>
                                 </select>
@@ -32,7 +32,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-shop">Shop</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-shop">
+                                <select class="uk-select" id="form-stacked-shop" v-model="clothesDto.shop">
                                     <option>Option 01</option>
                                     <option>Option 02</option>
                                 </select>
@@ -157,19 +157,19 @@ export default class ClothesEditModalForm extends Vue {
     }
 
     private inputAllCheck(): void {
-        console.log('input check all');
+        this.onPriceChange(this.clothesDto.price, 0);
     }
 
     @Watch('clothesDto.price')
-    private onPriceChange(newPrice: string, oldPrice: string): void {
+    private onPriceChange(newPrice: number, oldPrice: number): void {
         if (this.validateCheck !== null) {
-            this.clothesValidators.price = this.validateCheck.required(newPrice);
+            this.clothesValidators.price = this.validateCheck.required(String(newPrice));
 
             if (this.clothesValidators.price.validate) {
                 return ;
             }
 
-            this.clothesValidators.price = this.validateCheck.numberGreaterThanZero(newPrice);
+            this.clothesValidators.price = this.validateCheck.numberGreaterThanZero(String(newPrice));
 
             if (this.clothesValidators.price.validate) {
                 return ;
