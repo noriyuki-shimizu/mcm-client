@@ -183,7 +183,7 @@ export default class ShopEditModalForm extends Vue {
         this.shopValidators.name = this.validateCheck.required(newShopName);
 
         if (!this.shopValidators.name.validate) {
-            this.shopValidators.name = this.validateCheck.lessEqual(newShopName, MaxChars.NAME);
+            this.shopValidators.name = this.validateCheck.lessEqualText(newShopName, MaxChars.NAME);
         }
     }
 
@@ -192,7 +192,7 @@ export default class ShopEditModalForm extends Vue {
         this.shopValidators.stationName = this.validateCheck.required(newStationName);
 
         if (!this.shopValidators.stationName.validate) {
-            this.shopValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.STATION_NAME);
+            this.shopValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxChars.STATION_NAME);
         }
     }
 
@@ -201,7 +201,7 @@ export default class ShopEditModalForm extends Vue {
         this.shopValidators.address = this.validateCheck.required(newAddress);
 
         if (!this.shopValidators.address.validate) {
-            this.shopValidators.address = this.validateCheck.lessEqual(newAddress, MaxChars.ADDRESS);
+            this.shopValidators.address = this.validateCheck.lessEqualText(newAddress, MaxChars.ADDRESS);
         }
     }
 
@@ -210,7 +210,7 @@ export default class ShopEditModalForm extends Vue {
         this.shopValidators.businessHours = this.validateCheck.required(newBusinessHours);
 
         if (!this.shopValidators.businessHours.validate) {
-            this.shopValidators.businessHours = this.validateCheck.lessEqual(
+            this.shopValidators.businessHours = this.validateCheck.lessEqualText(
                 newBusinessHours,
                 MaxChars.BUSINESS_HOURS,
             );

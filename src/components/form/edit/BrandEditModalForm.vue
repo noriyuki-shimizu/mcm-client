@@ -130,7 +130,7 @@ export default class BrandEditModalForm extends Vue {
             this.brandValidators.name = this.validateCheck.required(newBrandName);
 
             if (!this.brandValidators.name.validate) {
-                this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxChars.NAME);
+                this.brandValidators.name = this.validateCheck.lessEqualText(newBrandName, MaxChars.NAME);
             }
         }
     }
@@ -138,7 +138,7 @@ export default class BrandEditModalForm extends Vue {
     @Watch('brandDto.country')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
         if (this.validateCheck !== null) {
-            this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxChars.COUNTRY);
+            this.brandValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxChars.COUNTRY);
         }
     }
 

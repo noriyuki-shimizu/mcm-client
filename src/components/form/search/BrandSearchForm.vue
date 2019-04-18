@@ -90,12 +90,12 @@ export default class BrandSearchForm extends Vue {
 
     @Watch('brandDto.name')
     private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
-        this.brandValidators.name = this.validateCheck.lessEqual(newBrandName, MaxCharts.NAME);
+        this.brandValidators.name = this.validateCheck.lessEqualText(newBrandName, MaxCharts.NAME);
     }
 
     @Watch('brandDto.country')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.brandValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxCharts.COUNTRY);
+        this.brandValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxCharts.COUNTRY);
     }
 
     private search(): void {

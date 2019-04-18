@@ -124,17 +124,17 @@ export default class ShopSearchForm extends Vue {
 
     @Watch('shopDto.name')
     private onBrandNameChange(newShopName: string, oldShopName: string): void {
-        this.shopValidators.name = this.validateCheck.lessEqual(newShopName, MaxCharts.NAME);
+        this.shopValidators.name = this.validateCheck.lessEqualText(newShopName, MaxCharts.NAME);
     }
 
     @Watch('shopDto.stationName')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
-        this.shopValidators.stationName = this.validateCheck.lessEqual(newStationName, MaxCharts.STATION_NAME);
+        this.shopValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxCharts.STATION_NAME);
     }
 
     @Watch('shopDto.address')
     private onAddressChange(newAddress: string, oldAddress: string): void {
-        this.shopValidators.address = this.validateCheck.lessEqual(newAddress, MaxCharts.ADDRESS);
+        this.shopValidators.address = this.validateCheck.lessEqualText(newAddress, MaxCharts.ADDRESS);
     }
 
     private search(): void {
