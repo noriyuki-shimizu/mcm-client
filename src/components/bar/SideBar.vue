@@ -12,24 +12,29 @@
                   <span uk-icon="icon: home"></span> Home
                 </router-link>
               </li>
-              <li class="uk-parent">
-                  <a href="#"><span uk-icon="icon: user"></span> My Clothes</a>
-                  <ul class="uk-nav-sub">
-                      <li>
-                        <router-link to="/clothesList"> Clothes list</router-link>
-                      </li>
-                      <li>
-                        <router-link to="/totalPrice"> Total price</router-link>
-                      </li>
-                  </ul>
+              <li>
+                <router-link to="/map">
+                  <span uk-icon="icon: location"></span> Map
+                </router-link>
               </li>
               <li class="uk-parent">
-                  <a href="#"><span uk-icon="icon: cog"></span> Maintenance</a>
-                  <ul class="uk-nav-sub">
-                    <li><router-link to="/clothesMaintenance"> Clothes</router-link></li>
-                    <li><router-link to="/brandMaintenance"> Brand</router-link></li>
-                    <li><router-link to="/shopMaintenance"> Shop</router-link></li>
-                  </ul>
+                <a href="#"><span uk-icon="icon: user"></span> My Clothes</a>
+                <ul class="uk-nav-sub">
+                    <li>
+                      <router-link to="/clothesList"> Clothes list</router-link>
+                    </li>
+                    <li>
+                      <router-link to="/totalPrice"> Total price</router-link>
+                    </li>
+                </ul>
+              </li>
+              <li class="uk-parent">
+                <a href="#"><span uk-icon="icon: cog"></span> Maintenance</a>
+                <ul class="uk-nav-sub">
+                  <li><router-link to="/clothesMaintenance"> Clothes</router-link></li>
+                  <li><router-link to="/brandMaintenance"> Brand</router-link></li>
+                  <li><router-link to="/shopMaintenance"> Shop</router-link></li>
+                </ul>
               </li>
               <li class="uk-nav-divider"></li>
               <li>
