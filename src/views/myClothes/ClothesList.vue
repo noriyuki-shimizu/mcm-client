@@ -6,7 +6,7 @@
         
         <genre-tab :genreList="genreList" />
 
-        <clothes-list-form />
+        <clothes-search-form />
 
         <div class="uk-section uk-section-default">
             <clothes-table :clothesList="clothesList" />
@@ -31,7 +31,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import GenreTab from '@/components/tab/GenreTab.vue';
-import ClothesListForm from '@/components/form/search/ClothesListForm.vue';
+import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
 import ClothesTable from '@/components/table/ClothesTable.vue';
 
 import ClothesDto from '@/type/dto/ClothesDto';
@@ -41,7 +41,7 @@ import ClothesDto from '@/type/dto/ClothesDto';
         HeadTitle,
         Breadcrumb,
         GenreTab,
-        ClothesListForm,
+        ClothesSearchForm,
         ClothesTable,
     },
 })
