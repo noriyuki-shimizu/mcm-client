@@ -3,16 +3,9 @@ import firebase from 'firebase/app';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import config from 'config';
 
-const config = {
-  apiKey: 'AIzaSyCSAxcqVOgM_XdTIJTOv4mckREJEcnivsc',
-  authDomain: 'mcm-client.firebaseapp.com',
-  databaseURL: 'https://mcm-client.firebaseio.com',
-  projectId: 'mcm-client',
-  storageBucket: 'mcm-client.appspot.com',
-  messagingSenderId: '1013848755479',
-};
-firebase.initializeApp(config);
+firebase.initializeApp(config.firebase);
 
 Vue.config.productionTip = false;
 
