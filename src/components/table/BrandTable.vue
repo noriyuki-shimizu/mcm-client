@@ -33,7 +33,7 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
-import BrandDto from '@/type/dto/BrandDto';
+import BrandDto from '@/type/domain/dto/BrandDto';
 
 type CustomProp<T> = () => T;
 

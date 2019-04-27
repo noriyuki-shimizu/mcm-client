@@ -38,7 +38,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
-import ShopDto from '@/type/dto/ShopDto';
+import ShopDto from '@/type/domain/dto/ShopDto';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

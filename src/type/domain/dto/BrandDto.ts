@@ -1,11 +1,11 @@
-import Image from '@/type/image/Image';
+import ImageDto from '@/type/domain/dto/ImageDto';
 
 export default interface BrandDto {
-    [key: string]: number | string | boolean | Image;
+    [key: string]: number | string | boolean | ImageDto;
     id: number;
     name: string;
     link: string;
-    image: Image;
+    image: ImageDto;
     country: string;
     deleteFlag: boolean;
 }

@@ -1,7 +1,7 @@
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import Image from '@/type/image/Image';
+import Image from '@/type/domain/dto/ImageDto';
 
 type CallbackType = (arg: string) => void;
 

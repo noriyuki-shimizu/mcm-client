@@ -1,10 +1,10 @@
-import Image from '@/type/image/Image';
-import BrandDto from '@/type/dto/BrandDto';
-import ShopDto from '@/type/dto/ShopDto';
+import ImageDto from '@/type/domain/dto/ImageDto';
+import BrandDto from '@/type/domain/dto/BrandDto';
+import ShopDto from '@/type/domain/dto/ShopDto';
 
 export default interface ClothesDto {
     id: number;
-    image: Image;
+    image: ImageDto;
     genre: string;
     brand: BrandDto | null;
     shop: ShopDto | null;
