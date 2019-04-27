@@ -34,7 +34,8 @@ import GenreTab from '@/components/tab/GenreTab.vue';
 import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
 import ClothesTable from '@/components/table/ClothesTable.vue';
 
-import ClothesDto from '@/type/dto/ClothesDto';
+import ClothesDto from '@/type/domain/dto/ClothesDto';
+import fallbackImage from '../../directives/fallback-image';
 
 @Component({
     components: {
@@ -70,6 +71,7 @@ export default class ClothesList extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             },
             genre: 'Table Data',
             brand: {
@@ -80,6 +82,7 @@ export default class ClothesList extends Vue {
                     name: 'bukht_icon.jpg',
                     path: require('@/images/brand/icon/bukht_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 country: '日本',
                 deleteFlag: false,
@@ -93,6 +96,7 @@ export default class ClothesList extends Vue {
                     name: 'o_icon.jpg',
                     path: require('@/images/shop/icon/o_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
                 businessHours: '12:00 - 20:00 定休日 無し',
@@ -109,6 +113,7 @@ export default class ClothesList extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             },
             genre: 'Table Data',
             brand: {
@@ -119,6 +124,7 @@ export default class ClothesList extends Vue {
                     name: 'bukht_icon.jpg',
                     path: require('@/images/brand/icon/bukht_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 country: '日本',
                 deleteFlag: false,
@@ -132,6 +138,7 @@ export default class ClothesList extends Vue {
                     name: 'o_icon.jpg',
                     path: require('@/images/shop/icon/o_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
                 businessHours: '12:00 - 20:00 定休日 無し',
@@ -148,6 +155,7 @@ export default class ClothesList extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             },
             genre: 'Table Data',
             brand: {
@@ -158,6 +166,7 @@ export default class ClothesList extends Vue {
                     name: 'bukht_icon.jpg',
                     path: require('@/images/brand/icon/bukht_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 country: '日本',
                 deleteFlag: false,
@@ -171,6 +180,7 @@ export default class ClothesList extends Vue {
                     name: 'o_icon.jpg',
                     path: require('@/images/shop/icon/o_icon.jpg'),
                     file: null,
+                    deleteFlag: false,
                 },
                 address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
                 businessHours: '12:00 - 20:00 定休日 無し',

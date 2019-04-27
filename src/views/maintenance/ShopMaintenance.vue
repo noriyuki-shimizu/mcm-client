@@ -25,7 +25,7 @@ import ShopSearchForm from '@/components/form/search/ShopSearchForm.vue';
 import ShopTable from '@/components/table/ShopTable.vue';
 import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
 
-import ShopDto from '@/type/dto/ShopDto';
+import ShopDto from '@/type/domain/dto/ShopDto';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -56,6 +56,7 @@ export default class ShopMaintenance extends Vue {
             name: '',
             path: '',
             file: null,
+            deleteFlag: false,
         },
         address: '',
         businessHours: '',
@@ -73,6 +74,7 @@ export default class ShopMaintenance extends Vue {
                 name: 'o_icon.jpg',
                 path: require('@/images/shop/icon/o_icon.jpg'),
                 file: null,
+                deleteFlag: false,
             },
             address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
             businessHours: '12:00 - 20:00 定休日 無し',
@@ -88,6 +90,7 @@ export default class ShopMaintenance extends Vue {
                 name: 'waremokou_icon.jpeg',
                 path: require('@/images/shop/icon/waremokou_icon.jpeg'),
                 file: null,
+                deleteFlag: false,
             },
             address: '東京都渋谷区神南1-18-2ﾌﾚｰﾑ神南坂1F',
             businessHours: '11：30～21：00',
@@ -115,6 +118,7 @@ export default class ShopMaintenance extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             },
             address: '',
             businessHours: '',
