@@ -105,7 +105,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import Pikaday from 'pikaday';
 
-import ClothesDto from '@/type/dto/ClothesDto';
+import ClothesDto from '@/type/domain/dto/ClothesDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
 import MaxChars from '@/type/validator/clothes/MaxChars';
@@ -187,6 +187,7 @@ export default class ClothesEditModalForm extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             };
             return ;
         }

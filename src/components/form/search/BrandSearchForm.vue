@@ -54,7 +54,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/dto/BrandDto';
+import BrandDto from '@/type/domain/dto/BrandDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxCharts from '@/type/validator/brand/MaxChars';
@@ -70,6 +70,7 @@ export default class BrandSearchForm extends Vue {
             name: '',
             path: '',
             file: null,
+            deleteFlag: false,
         },
         country: '',
         deleteFlag: false,

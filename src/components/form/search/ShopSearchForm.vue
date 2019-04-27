@@ -73,7 +73,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import ShopDto from '@/type/dto/ShopDto';
+import ShopDto from '@/type/domain/dto/ShopDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/validator/shop/ShopValidators';
 import MaxCharts from '@/type/validator/shop/MaxChars';
@@ -90,6 +90,7 @@ export default class ShopSearchForm extends Vue {
             name: '',
             path: '',
             file: null,
+            deleteFlag: false,
         },
         address: '',
         businessHours: '',

@@ -83,7 +83,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import BrandDto from '@/type/dto/BrandDto';
+import BrandDto from '@/type/domain/dto/BrandDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxChars from '@/type/validator/brand/MaxChars';
@@ -150,6 +150,7 @@ export default class BrandEditModalForm extends Vue {
                 name: '',
                 path: '',
                 file: null,
+                deleteFlag: false,
             };
             return ;
         }
