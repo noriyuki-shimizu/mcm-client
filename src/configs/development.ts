@@ -1,10 +1,6 @@
 export default {
     server: {
-        app: {
-            url: {
-                local: 'http://localhost:8080',
-            },
-        },
+        protocolHost: 'http://localhost:8080/mcm',
     },
     firebase: {
         apiKey: 'AIzaSyCSAxcqVOgM_XdTIJTOv4mckREJEcnivsc',
