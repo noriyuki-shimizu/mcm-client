@@ -7,9 +7,8 @@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-brand">Brand</label>
                         <div class="uk-form-controls">
-                            <select class="uk-select" id="form-stacked-brand">
-                                <option>Option 01</option>
-                                <option>Option 02</option>
+                            <select class="uk-select" id="form-stacked-brand" v-model="inputData.brandId">
+                                <option v-for="assistBrand in assistBrandList" :key="assistBrand.id" :value="assistBrand.id">{{ assistBrand.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -17,9 +16,8 @@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-shop">Shop</label>
                         <div class="uk-form-controls">
-                            <select class="uk-select" id="form-stacked-shop">
-                                <option>Option 01</option>
-                                <option>Option 02</option>
+                            <select class="uk-select" id="form-stacked-shop" v-model="inputData.shopId">
+                                <option v-for="assistShop in assistShopList" :key="assistShop.id" :value="assistShop.id">{{ assistShop.name }</option>
                             </select>
                         </div>
                     </div>
@@ -30,6 +28,9 @@
                             <select class="uk-select" id="form-stacked-price">
                                 <option>10,000 ~ 20,000</option>
                                 <option>20,000 ~ 100,000</option>
+                            </select>
+                            <select class="uk-select" id="form-stacked-price">
+                                <option></option>
                             </select>
                         </div>
                     </div>
@@ -64,27 +65,27 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Base from '@/components/Base';
 import Pikaday from 'pikaday';
+import axios from 'axios';
 
-import ClothesDto from '@/type/dto/ClothesDto';
+import APIRequest from '@/type/domain/mcmApi/APIRequest';
+import ClothesSearchInputData from '@/type/domain/dto/myClothes/ClothesSearchInputData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
+import AssistBrandData from '@/type/domain/dto/myClothes/assist/AssistBrandData';
+import AssistShopData from '@/type/domain/dto/myClothes/assist/AssistShopData';
 
 @Component
-export default class ClothesSearchForm extends Vue {
+export default class ClothesSearchForm extends Base {
 
-    private clothesDto: ClothesDto = {
-        id: -1,
-        image: {
-            name: '',
-            path: '',
-            file: null,
-        },
-        genre: '',
-        brand: null,
-        shop: null,
-        price: 0,
-        buyDate: '',
+    private inputData: ClothesSearchInputData = {
+        brandId: null,
+        genreId: null,
+        shopId: null,
+        morePrice: null,
+        lessPrice: null,
+        buyDate: null,
         deleteFlag: false,
     };
 
@@ -97,9 +98,39 @@ export default class ClothesSearchForm extends Vue {
         },
     };
 
+    private assistBrandList: AssistBrandData[] = [];
+
+    private assistShopList: AssistShopData[] = [];
+
+    private assistPriceList: any[] = [
+        {
+            morePrice: 0,
+            lessPrice: 10000,
+            text: '0 ~ 10000',
+        },
+        {
+            morePrice: 10001,
+            lessPrice: 20000,
+            text: '10001 ~ 20000',
+        },
+        {
+            morePrice: 20001,
+            lessPrice: 30000,
+            text: '20001 ~ 30000',
+        },
+    ];
+
     private picker?: Pikaday;
 
     private mounted(): void {
+        this.mountedPikaday();
+
+        this.setAssistBrandList();
+
+        this.setAssistShopList();
+    }
+
+    private mountedPikaday(): void {
         this.picker = new Pikaday(
             {
                 field: document.getElementById('form-stacked-search-date'),
@@ -108,11 +139,29 @@ export default class ClothesSearchForm extends Vue {
                     const buyDateElem: HTMLInputElement | null
                         = document.getElementById('form-stacked-search-date') as HTMLInputElement;
                     if (buyDateElem !== null) {
-                        this.clothesDto.buyDate = buyDateElem.value;
+                        this.inputData.buyDate = new Date(buyDateElem.value);
                     }
                 },
             },
         );
+    }
+
+    private setAssistBrandList(): void {
+        const apiRequest: APIRequest = new APIRequest('/assist/brand/keyValueList', {});
+
+        apiRequest.get((response) => {
+            console.log(response);
+            this.assistBrandList = response.data;
+        });
+    }
+
+    private setAssistShopList(): void {
+        const apiRequest: APIRequest = new APIRequest('/assist/shop/keyValueList', {});
+
+        apiRequest.get((response) => {
+            console.log(response);
+            this.assistShopList = response.data;
+        });
     }
 
     private beforeDestroy(): void {
@@ -121,6 +170,17 @@ export default class ClothesSearchForm extends Vue {
 
     private search(): void {
         console.log('search event.');
+
+        console.log(this.inputData);
+
+        const apiRequest: APIRequest = new APIRequest('/clothesList/search', {
+            inputDataJson: JSON.stringify(this.inputData),
+        });
+
+        apiRequest.get((response) => {
+            console.log(response);
+        });
+
     }
 
 }
