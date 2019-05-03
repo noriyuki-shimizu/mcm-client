@@ -41,11 +41,6 @@ type CustomProp<T> = () => T;
     directives: {
         FallbackImage,
     },
-    filters: {
-        formatByDeleteFlag(deleteFlag: boolean): string {
-            return deleteFlag ? 'Deleted' : 'Not deleted';
-        },
-    },
 })
 export default class BrandTable extends Vue {
     @Prop({type: Array as CustomProp<BrandDto[]>})

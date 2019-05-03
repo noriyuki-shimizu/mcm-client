@@ -43,17 +43,6 @@ type CustomProp<T> = () => T;
     directives: {
         FallbackImage,
     },
-    filters: {
-        formatByPrice(price: number): string | null {
-            if (!price === null) {
-                return null;
-            }
-            return '¥ ' + price.toLocaleString();
-        },
-        formatByDeleteFlag(deleteFlag: boolean): string {
-            return deleteFlag ? 'Deleted' : 'Not deleted';
-        },
-    },
 })
 export default class ClothesTable extends Vue {
     @Prop({type: Array as CustomProp<ClothesDto[]>})

@@ -5,13 +5,13 @@
                 <h3>Total price</h3>
                 <div v-for="(totalPricePerGenre, index) in list" :key="(totalPricePerGenre, index)" class="uk-grid-small" uk-grid>
                     <div class="uk-width-expand" uk-leader>{{ totalPricePerGenre.genre }}</div>
-                    <div>{{ totalPricePerGenre.totalPrice | priceFormat }}</div>
+                    <div>{{ totalPricePerGenre.totalPrice | formatByPrice }}</div>
                 </div>
                 <hr>
                 <b>
                     <div class="uk-grid-small" uk-grid>
                         <div class="uk-width-expand" uk-leader>Total</div>
-                        <div>{{ getTotalPrice() | priceFormat }}</div>
+                        <div>{{ getTotalPrice() | formatByPrice }}</div>
                     </div>
                 </b>
             </div>
@@ -24,13 +24,7 @@ import { Component, Prop, Vue} from 'vue-property-decorator';
 
 type CustomProp<T> = () => T;
 
-@Component({
-    filters: {
-        priceFormat(price: number): string {
-            return '¥ ' + price.toLocaleString();
-        },
-    },
-})
+@Component
 export default class TotalPricePerGenreList extends Vue {
     @Prop({type: Array as CustomProp<any[]>})
     private list!: any[];

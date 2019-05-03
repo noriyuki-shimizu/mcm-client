@@ -9,6 +9,21 @@ firebase.initializeApp(config.firebase);
 
 Vue.config.productionTip = false;
 
+// TODO: グルーバルミックスインからミックスインへ変更する
+Vue.mixin({
+  filters: {
+    formatByPrice(price: number): string | null {
+        if (!price === null) {
+            return null;
+        }
+        return '¥ ' + price.toLocaleString();
+    },
+    formatByDeleteFlag(deleteFlag: boolean): string {
+        return deleteFlag ? 'Deleted' : 'Not deleted';
+    },
+  },
+});
+
 new Vue({
   router,
   store,

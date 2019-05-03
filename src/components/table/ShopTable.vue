@@ -45,13 +45,7 @@ const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
 
-@Component({
-    filters: {
-        formatByDeleteFlag(deleteFlag: boolean): string {
-            return deleteFlag ? 'Deleted' : 'Not deleted';
-        },
-    },
-})
+@Component
 export default class ShopTable extends Vue {
     @Prop({type: Array as CustomProp<ShopDto[]>})
     private shopList!: ShopDto[];
