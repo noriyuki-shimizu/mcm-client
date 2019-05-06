@@ -38,6 +38,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
+import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 import ShopDto from '@/type/domain/dto/ShopDto';
 
 // tslint:disable-next-line:no-var-requires
@@ -45,7 +46,11 @@ const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
 
-@Component
+@Component({
+    mixins: [
+        CustomFormatMixin,
+    ],
+})
 export default class ShopTable extends Vue {
     @Prop({type: Array as CustomProp<ShopDto[]>})
     private shopList!: ShopDto[];

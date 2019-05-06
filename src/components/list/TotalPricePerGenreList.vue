@@ -21,10 +21,15 @@
 
 <script lang="ts">
 import { Component, Prop, Vue} from 'vue-property-decorator';
+import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 
 type CustomProp<T> = () => T;
 
-@Component
+@Component({
+    mixins: [
+        CustomFormatMixin,
+    ],
+})
 export default class TotalPricePerGenreList extends Vue {
     @Prop({type: Array as CustomProp<any[]>})
     private list!: any[];

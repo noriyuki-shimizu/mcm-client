@@ -33,11 +33,15 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
+import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 import BrandDto from '@/type/domain/dto/BrandDto';
 
 type CustomProp<T> = () => T;
 
 @Component({
+    mixins: [
+        CustomFormatMixin,
+    ],
     directives: {
         FallbackImage,
     },
