@@ -4,9 +4,9 @@
 
         <head-title titleName="Clothes" />
 
-        <clothes-search-form />
+        <clothes-search-form v-on:searchResultData="gridReflect" />
 
-        <clothes-table v-on:openModal="edit" :clothesList="clothesList" />
+        <clothes-table v-on:openModal="edit" :clothesTableDataList="clothesTableDataList" />
 
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Clothes</button>
@@ -26,6 +26,7 @@ import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
 import ClothesEditModalForm from '@/components/form/edit/ClothesEditModalForm.vue';
 
 import ClothesDto from '@/type/domain/dto/ClothesDto';
+import ClothesTableData from '@/type/domain/dto/myClothes/ClothesTableData';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -63,47 +64,15 @@ export default class ClothesMaintenance extends Vue {
         deleteFlag: false,
     };
 
-    private clothesList: ClothesDto[] = [
+    private clothesTableDataList: ClothesTableData[] = [
         {
             id: 1,
-            image: {
-                name: '',
-                path: '',
-                file: null,
-                deleteFlag: false,
-            },
-            genre: 'Table Data',
-            brand: {
-                id: 1,
-                name: 'bukht',
-                link: 'http://bukht.com/',
-                image: {
-                    name: 'bukht_icon.jpg',
-                    path: require('@/images/brand/icon/bukht_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                country: '日本',
-                deleteFlag: false,
-            },
-            shop: {
-                id: 1,
-                name: 'O代官山 本店',
-                link: 'http://store.moc-o.com/',
-                stationName: '代官山',
-                image: {
-                    name: 'o_icon.jpg',
-                    path: require('@/images/shop/icon/o_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
-                businessHours: '12:00 - 20:00 定休日 無し',
-                tel: '03-6416-1187',
-                deleteFlag: false,
-            },
+            imagePath: require('@/images/brand/icon/bukht_icon.jpg'),
+            genreName: 'Table Data',
+            brandName: 'bukht',
+            shopName: 'O代官山 本店',
             price: 10000,
-            buyDate: '2019/04/12',
+            buyDate: new Date('2019-04-12'),
             deleteFlag: false,
         },
     ];
@@ -114,6 +83,11 @@ export default class ClothesMaintenance extends Vue {
         this.clothesDto = {...clothesDto};
 
         this.modalShow();
+    }
+
+    @Emit('gridReflect')
+    private gridReflect(searchResultDataList: ClothesTableData[]): void {
+        console.log(searchResultDataList);
     }
 
     private add(): void {
