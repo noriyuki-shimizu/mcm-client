@@ -26,12 +26,17 @@
                         <label class="uk-form-label" for="form-stacked-price">Price</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-stacked-price">
-                                <option>10,000 ~ 20,000</option>
-                                <option>20,000 ~ 100,000</option>
+                                <option v-for="assistPrice in assistPriceList" :key="assistPrice.id">{{ assistPrice.value }}</option>
                             </select>
-                            <select class="uk-select" id="form-stacked-price">
-                                <option></option>
-                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-4@s">
+                        <label class="uk-form-label"> Price option</label>
+                        <div class="uk-margin-small-top uk-grid-small uk-child-width-auto uk-grid">
+                            <label><input class="uk-radio" type="radio" name="radio1" checked> level</label>
+                            <label><input class="uk-radio" type="radio" name="radio1"> more</label>
+                            <label><input class="uk-radio" type="radio" name="radio1"> less</label>
                         </div>
                     </div>
 
@@ -75,6 +80,7 @@ import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
 import AssistBrandData from '@/type/domain/dto/myClothes/assist/AssistBrandData';
 import AssistShopData from '@/type/domain/dto/myClothes/assist/AssistShopData';
+import ClothesTableData from '@/type/domain/dto/myClothes/ClothesTableData';
 
 @Component
 export default class ClothesSearchForm extends Base {
@@ -104,19 +110,16 @@ export default class ClothesSearchForm extends Base {
 
     private assistPriceList: any[] = [
         {
-            morePrice: 0,
-            lessPrice: 10000,
-            text: '0 ~ 10000',
+            id: 0,
+            value: 10000,
         },
         {
-            morePrice: 10001,
-            lessPrice: 20000,
-            text: '10001 ~ 20000',
+            id: 1,
+            value: 20000,
         },
         {
-            morePrice: 20001,
-            lessPrice: 30000,
-            text: '20001 ~ 30000',
+            id: 2,
+            value: 30000,
         },
     ];
 
@@ -177,8 +180,9 @@ export default class ClothesSearchForm extends Base {
             inputDataJson: JSON.stringify(this.inputData),
         });
 
-        apiRequest.get((response) => {
+        apiRequest.get((response: ClothesTableData) => {
             console.log(response);
+            this.$emit('searchResultData', 'response');
         });
 
     }
