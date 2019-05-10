@@ -109,7 +109,8 @@ import ClothesDto from '@/type/domain/dto/ClothesDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
 import MaxChars from '@/type/validator/clothes/MaxChars';
-import Storage from '@/type/firebase/Storage';
+import Storage from '@/type/domain/repository/firebase/Storage';
+import ImageStorage from '@/type/domain/repository/firebase/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -203,8 +204,8 @@ export default class ClothesEditModalForm extends Vue {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new Storage(this.clothesDto.image);
-            storage.imageUpload(function(this: ClothesEditModalForm, downloadURL: string) {
+            const storage: Storage = new ImageStorage(this.clothesDto.image);
+            storage.upload(function(this: ClothesEditModalForm, downloadURL: string) {
                 this.clothesDto.image.path = downloadURL;
                 console.log(this.clothesDto.image.path);
             }.bind(this));

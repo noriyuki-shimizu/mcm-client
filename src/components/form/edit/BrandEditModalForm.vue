@@ -87,7 +87,8 @@ import BrandDto from '@/type/domain/dto/BrandDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxChars from '@/type/validator/brand/MaxChars';
-import Storage from '@/type/firebase/Storage';
+import Storage from '@/type/domain/repository/firebase/Storage';
+import ImageStorage from '@/type/domain/repository/firebase/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -166,8 +167,8 @@ export default class BrandEditModalForm extends Vue {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new Storage(this.brandDto.image);
-            storage.imageUpload(function(this: BrandDto, downloadURL: string) {
+            const storage: Storage = new ImageStorage(this.brandDto.image);
+            storage.upload(function(this: BrandDto, downloadURL: string) {
                 this.image.path = downloadURL;
                 console.log(this.image.path);
             }.bind(this.brandDto));

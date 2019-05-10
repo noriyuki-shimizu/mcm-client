@@ -130,7 +130,8 @@ import ShopDto from '@/type/domain/dto/ShopDto';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/validator/shop/ShopValidators';
 import MaxChars from '@/type/validator/shop/MaxChars';
-import Storage from '@/type/firebase/Storage';
+import Storage from '@/type/domain/repository/firebase/Storage';
+import ImageStorage from '@/type/domain/repository/firebase/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -246,8 +247,8 @@ export default class ShopEditModalForm extends Vue {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new Storage(this.shopDto.image);
-            storage.imageUpload(function(this: ShopEditModalForm, downloadURL: string) {
+            const storage: Storage = new ImageStorage(this.shopDto.image);
+            storage.upload(function(this: ShopEditModalForm, downloadURL: string) {
                 this.shopDto.image.path = downloadURL;
                 console.log(this.shopDto.image.path);
             }.bind(this));
