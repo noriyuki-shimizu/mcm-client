@@ -1,12 +1,12 @@
-import ImageDto from '@/type/domain/dto/ImageDto';
+import ImageData from '@/type/domain/dto/ImageData';
 
 export default interface ShopDto {
-    [key: string]: number | string | boolean | ImageDto;
-    id: number;
+    [key: string]: null | number | string | boolean | ImageData;
+    id: number | null;
     name: string;
     link: string;
     stationName: string;
-    image: ImageDto;
+    image: ImageData;
     address: string;
     businessHours: string;
     tel: string;
