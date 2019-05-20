@@ -12,7 +12,7 @@
             <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Brand</button>
         </p>
 
-        <brand-edit-modal-form ref="brandEditModalForm" :addFlag="addFlag" :brandDto="brandDto" />
+        <brand-edit-modal-form ref="brandEditModalForm" :addFlag="addFlag" :brandData="brandData" />
         
     </div>
 </template>
@@ -25,7 +25,7 @@ import BrandSearchForm from '@/components/form/search/BrandSearchForm.vue';
 import BrandTable from '@/components/table/BrandTable.vue';
 import BrandEditModalForm from '@/components/form/edit/BrandEditModalForm.vue';
 
-import BrandDto from '@/type/domain/dto/BrandDto';
+import BrandData from '@/type/domain/dto/BrandData';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -47,29 +47,29 @@ export default class BrandMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private brandDto: BrandDto = {
+    private brandData: BrandData = {
         id: -1,
         name: '',
         link: '',
         image: {
+            id: null,
             name: '',
             path: '',
-            file: null,
             deleteFlag: false,
         },
         country: '',
         deleteFlag: false,
     };
 
-    private brandList: BrandDto[] = [
+    private brandList: BrandData[] = [
         {
             id: 1,
             name: 'bukht',
             link: 'http://bukht.com/',
             image: {
+                id: null,
                 name: 'bukht_icon.jpg',
                 path: require('@/images/brand/icon/bukht_icon.jpg'),
-                file: null,
                 deleteFlag: false,
             },
             country: '日本',
@@ -80,9 +80,9 @@ export default class BrandMaintenance extends Vue {
             name: 'NEON SIGN',
             link: 'http://ne-on-sign.com/',
             image: {
+                id: null,
                 name: 'neon-sign_icon.jpg',
                 path: require('@/images/brand/icon/neon-sign_icon.jpg'),
-                file: null,
                 deleteFlag: false,
             },
             country: '日本',
@@ -93,9 +93,9 @@ export default class BrandMaintenance extends Vue {
             name: 'MIN',
             link: 'https://www.fashion-press.net/brands/3332',
             image: {
+                id: null,
                 name: 'min_icon.png',
                 path: require('@/images/brand/icon/min_icon.png'),
-                file: null,
                 deleteFlag: false,
             },
             country: '日本',
@@ -106,9 +106,9 @@ export default class BrandMaintenance extends Vue {
             name: 'AURALEE',
             link: 'https://auralee.jp/',
             image: {
+                id: null,
                 name: 'auralee_icon.png',
                 path: require('@/images/brand/icon/auralee_icon.png'),
-                file: null,
                 deleteFlag: false,
             },
             country: '日本',
@@ -117,23 +117,23 @@ export default class BrandMaintenance extends Vue {
     ];
 
     @Emit('edit')
-    private edit(brandDto: BrandDto): void {
+    private edit(brandData: BrandData): void {
         this.addFlag = false;
-        this.brandDto = {...brandDto};
+        this.brandData = {...brandData};
 
         this.modalShow();
     }
 
     private add(): void {
         this.addFlag = true;
-        this.brandDto = {
+        this.brandData = {
             id: -1,
             name: '',
             link: '',
             image: {
+                id: null,
                 name: '',
                 path: '',
-                file: null,
                 deleteFlag: false,
             },
             country: '',

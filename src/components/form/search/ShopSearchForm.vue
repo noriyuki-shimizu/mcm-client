@@ -73,7 +73,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import ShopDto from '@/type/domain/dto/ShopDto';
+import ShopData from '@/type/domain/dto/ShopData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/validator/shop/ShopValidators';
 import MaxCharts from '@/type/validator/shop/MaxChars';
@@ -81,15 +81,15 @@ import MaxCharts from '@/type/validator/shop/MaxChars';
 @Component
 export default class ShopSearchForm extends Vue {
 
-    private shopDto: ShopDto = {
+    private shopDto: ShopData = {
         id: -1,
         name: '',
         link: '',
         stationName: '',
         image: {
+            id: null,
             name: '',
             path: '',
-            file: null,
             deleteFlag: false,
         },
         address: '',

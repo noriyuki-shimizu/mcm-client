@@ -6,10 +6,10 @@
         
         <genre-tab :genreList="genreList" />
 
-        <clothes-search-form />
+        <clothes-search-form v-on:searchResultData="gridReflect" />
 
         <div class="uk-section uk-section-default">
-            <clothes-table :clothesList="clothesList" />
+            <clothes-table :clothesTableDataList="clothesList" />
         </div>
 
         <!-- TODO: ページングの仕様が決定したら、コンポーネントに分けること -->
@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Emit, Vue } from 'vue-property-decorator';
 import HeadTitle from '@/components/title/HeadTitle.vue';
 import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
 import GenreTab from '@/components/tab/GenreTab.vue';
 import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
 import ClothesTable from '@/components/table/ClothesTable.vue';
 
-import ClothesDto from '@/type/domain/dto/ClothesDto';
+import ClothesData from '@/type/domain/dto/ClothesData';
 import fallbackImage from '../../directives/fallback-image';
 
 @Component({
@@ -64,133 +64,12 @@ export default class ClothesList extends Vue {
         'All Items',
     ];
 
-    private clothesList: ClothesDto[] = [
-        {
-            id: 1,
-            image: {
-                name: '',
-                path: '',
-                file: null,
-                deleteFlag: false,
-            },
-            genre: 'Table Data',
-            brand: {
-                id: 1,
-                name: 'bukht',
-                link: 'http://bukht.com/',
-                image: {
-                    name: 'bukht_icon.jpg',
-                    path: require('@/images/brand/icon/bukht_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                country: '日本',
-                deleteFlag: false,
-            },
-            shop: {
-                id: 1,
-                name: 'O代官山 本店',
-                link: 'http://store.moc-o.com/',
-                stationName: '代官山',
-                image: {
-                    name: 'o_icon.jpg',
-                    path: require('@/images/shop/icon/o_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
-                businessHours: '12:00 - 20:00 定休日 無し',
-                tel: '03-6416-1187',
-                deleteFlag: false,
-            },
-            price: 10000,
-            buyDate: '2019/04/12',
-            deleteFlag: false,
-        },
-        {
-            id: 2,
-            image: {
-                name: '',
-                path: '',
-                file: null,
-                deleteFlag: false,
-            },
-            genre: 'Table Data',
-            brand: {
-                id: 1,
-                name: 'bukht',
-                link: 'http://bukht.com/',
-                image: {
-                    name: 'bukht_icon.jpg',
-                    path: require('@/images/brand/icon/bukht_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                country: '日本',
-                deleteFlag: false,
-            },
-            shop: {
-                id: 1,
-                name: 'O代官山 本店',
-                link: 'http://store.moc-o.com/',
-                stationName: '代官山',
-                image: {
-                    name: 'o_icon.jpg',
-                    path: require('@/images/shop/icon/o_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
-                businessHours: '12:00 - 20:00 定休日 無し',
-                tel: '03-6416-1187',
-                deleteFlag: false,
-            },
-            price: 20000,
-            buyDate: 'Table Data',
-            deleteFlag: false,
-        },
-        {
-            id: 3,
-            image: {
-                name: '',
-                path: '',
-                file: null,
-                deleteFlag: false,
-            },
-            genre: 'Table Data',
-            brand: {
-                id: 1,
-                name: 'bukht',
-                link: 'http://bukht.com/',
-                image: {
-                    name: 'bukht_icon.jpg',
-                    path: require('@/images/brand/icon/bukht_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                country: '日本',
-                deleteFlag: false,
-            },
-            shop: {
-                id: 1,
-                name: 'O代官山 本店',
-                link: 'http://store.moc-o.com/',
-                stationName: '代官山',
-                image: {
-                    name: 'o_icon.jpg',
-                    path: require('@/images/shop/icon/o_icon.jpg'),
-                    file: null,
-                    deleteFlag: false,
-                },
-                address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
-                businessHours: '12:00 - 20:00 定休日 無し',
-                tel: '03-6416-1187',
-                deleteFlag: false,
-            },
-            price: 30000,
-            buyDate: 'Table Data',
-            deleteFlag: false,
-        },
-    ];
+    private clothesList: ClothesData[] = [];
+
+    @Emit('gridReflect')
+    private gridReflect(searchResultDataList: ClothesData[]): void {
+        console.log(searchResultDataList);
+        this.clothesList = searchResultDataList;
+    }
 }
 </script>

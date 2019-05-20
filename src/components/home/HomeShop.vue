@@ -28,20 +28,20 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import ShopDto from '@/type/domain/dto/ShopDto';
+import ShopData from '@/type/domain/dto/ShopData';
 
 @Component
 export default class HomeShop extends Vue {
-    private shopList: ShopDto[] = [
+    private shopList: ShopData[] = [
         {
             id: 1,
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
             stationName: '代官山',
             image: {
+                id: null,
                 name: 'o_icon.jpg',
                 path: require('@/images/shop/icon/o_icon.jpg'),
-                file: null,
                 deleteFlag: false,
             },
             address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
@@ -55,9 +55,9 @@ export default class HomeShop extends Vue {
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             stationName: '渋谷',
             image: {
+                id: null,
                 name: 'waremokou_icon.jpeg',
                 path: require('@/images/shop/icon/waremokou_icon.jpeg'),
-                file: null,
                 deleteFlag: false,
             },
             address: '東京都渋谷区神南1-18-2ﾌﾚｰﾑ神南坂1F',

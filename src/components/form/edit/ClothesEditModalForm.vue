@@ -12,7 +12,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-genre">Genre</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-genre" v-model="clothesDto.genre">
+                                <select class="uk-select" id="form-stacked-genre" v-model="clothesData.genre.id">
                                     <option>Option 01</option>
                                     <option>Option 02</option>
                                 </select>
@@ -20,21 +20,19 @@
                         </div>
 
                         <div class="uk-width-1-2@s">
-                            <label class="uk-form-label" for="form-stacked-brand">Brand</label>
+                            <label class="uk-form-label" for="form-stacked-brand"> Brand</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-brand" v-model="clothesDto.brand">
-                                    <option>Option 01</option>
-                                    <option>Option 02</option>
+                                <select class="uk-select" id="form-stacked-brand" v-model="clothesData.brandId">
+                                    <option v-for="assistBrand in assistBrandList" :key="assistBrand.id" :value="assistBrand.id">{{ assistBrand.name }}</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="uk-width-1-2@s">
-                            <label class="uk-form-label" for="form-stacked-shop">Shop</label>
+                            <label class="uk-form-label" for="form-stacked-shop"> Shop</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-shop" v-model="clothesDto.shop">
-                                    <option>Option 01</option>
-                                    <option>Option 02</option>
+                                <select class="uk-select" id="form-stacked-shop" v-model="clothesData.shopId">
+                                    <option v-for="assistShop in assistShopList" :key="assistShop.id" :value="assistShop.id">{{ assistShop.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -45,7 +43,7 @@
                                 <input id="form-stacked-price"
                                 :class="{'uk-input': true, 'uk-form-danger': clothesValidators.price.validate}"
                                 type="text"
-                                v-model="clothesDto.price"
+                                v-model="clothesData.price"
                                 >
                                 <span v-show="clothesValidators.price.validate" class="uk-text-danger">{{ clothesValidators.price.errorMessage }}</span>
                             </div>
@@ -58,7 +56,6 @@
                                 class="uk-input"
                                 type="text"
                                 placeholder="YYYY/MM/DD"
-                                v-model="clothesDto.buyDate"
                                 >
                             </div>
                         </div>
@@ -70,7 +67,7 @@
                                     <input type="file" accept="image/*" @change="imageChange">
                                     <input class="uk-input uk-width-1-2@s"
                                     type="text"
-                                    :placeholder="clothesDto.image.name ? clothesDto.image.name : 'Select file'"
+                                    :placeholder="clothesData.image.name ? clothesData.image.name : 'Select file'"
                                     disabled
                                     tabindex="-1"
                                     >
@@ -82,7 +79,7 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label" for="form-stacked-delete-flag">Delete flag</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-delete-flag" v-model="clothesDto.deleteFlag" :disabled="addFlag">
+                                <select class="uk-select" id="form-stacked-delete-flag" v-model="clothesData.deleteFlag" :disabled="addFlag">
                                     <option value="true">Deleted</option>
                                     <option value="false">Not deleted</option>
                                 </select>
@@ -105,12 +102,16 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import Pikaday from 'pikaday';
 
-import ClothesDto from '@/type/domain/dto/ClothesDto';
+import APIRequest from '@/type/domain/mcmApi/APIRequest';
+import ClothesData from '@/type/domain/dto/ClothesData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
 import MaxChars from '@/type/validator/clothes/MaxChars';
 import Storage from '@/type/domain/repository/firebase/Storage';
 import ImageStorage from '@/type/domain/repository/firebase/ImageStorage';
+import AssistBrandData from '@/type/domain/dto/myClothes/assist/AssistBrandData';
+import AssistShopData from '@/type/domain/dto/myClothes/assist/AssistShopData';
+import AssistEnv from '@/type/AssistEnv';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -119,11 +120,13 @@ type CustomProp<T> = () => T;
 
 @Component
 export default class ClothesEditModalForm extends Vue {
-    @Prop({type: Object as CustomProp<ClothesDto>})
-    private clothesDto!: ClothesDto;
+    @Prop({type: Object as CustomProp<ClothesData>})
+    private clothesData!: ClothesData;
 
     @Prop({type: Boolean})
     private addFlag!: boolean;
+
+    private file?: File;
 
     private validateCheck: ValidateCheck | null = new ValidateCheck();
 
@@ -136,7 +139,18 @@ export default class ClothesEditModalForm extends Vue {
 
     private picker?: Pikaday;
 
-    private mounted(): void {
+    private assistBrandList: AssistBrandData[] = [];
+    private assistShopList: AssistShopData[] = [];
+
+    public inputAllCheck(): void {
+        this.onPriceChange(this.clothesData.price, 0);
+    }
+
+    public modalFormShow(): void {
+        UIkit.modal('#clothes-edit-modal-form').show();
+    }
+
+    private async mounted(): Promise<any> {
         this.picker = new Pikaday(
             {
                 field: document.getElementById('form-stacked-edit-date'),
@@ -145,11 +159,14 @@ export default class ClothesEditModalForm extends Vue {
                     const buyDateElem: HTMLInputElement | null
                         = document.getElementById('form-stacked-edit-date') as HTMLInputElement;
                     if (buyDateElem !== null) {
-                        this.clothesDto.buyDate = buyDateElem.value;
+                        this.clothesData.buyDate = new Date(buyDateElem.value);
                     }
                 },
             },
         );
+
+        this.assistBrandList = await AssistEnv.getAssistBrandList();
+        this.assistShopList = await AssistEnv.getAssistShopList();
     }
 
     private beforeDestroy(): void {
@@ -157,11 +174,7 @@ export default class ClothesEditModalForm extends Vue {
         // TODO: datepickerの破棄
     }
 
-    private inputAllCheck(): void {
-        this.onPriceChange(this.clothesDto.price, 0);
-    }
-
-    @Watch('clothesDto.price')
+    @Watch('clothesData.price')
     private onPriceChange(newPrice: number, oldPrice: number): void {
         if (this.validateCheck !== null) {
             this.clothesValidators.price = this.validateCheck.required(String(newPrice));
@@ -181,36 +194,36 @@ export default class ClothesEditModalForm extends Vue {
     }
 
     private imageChange(ev: any): void {
-        const file: File = ev.target.files[0];
+        this.file = ev.target.files[0];
 
-        if (file === undefined) {
-            this.clothesDto.image = {
+        if (this.file === undefined) {
+            this.clothesData.image = {
+                id: null,
                 name: '',
                 path: '',
-                file: null,
                 deleteFlag: false,
             };
+
             return ;
         }
 
-        this.clothesDto.image.name = file.name;
-        this.clothesDto.image.file = file;
+        this.clothesData.image.name = this.file.name;
     }
 
     private registration(): void {
-        console.log(this.clothesDto);
+        console.log(this.clothesData);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new ImageStorage(this.clothesDto.image);
+            const storage: Storage = new ImageStorage(this.clothesData.image.name, this.file);
             storage.upload(function(this: ClothesEditModalForm, downloadURL: string) {
-                this.clothesDto.image.path = downloadURL;
-                console.log(this.clothesDto.image.path);
+                this.clothesData.image.path = downloadURL;
+                console.log(this.clothesData.image.path);
             }.bind(this));
         }, () => {
-            UIkit.modal('#brand_edit_modal').show();
+            this.modalFormShow();
         });
     }
 }

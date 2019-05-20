@@ -34,7 +34,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
 import CustomFormatMixin from '@/mixins/CustomFormatMixin';
-import BrandDto from '@/type/domain/dto/BrandDto';
+import BrandData from '@/type/domain/dto/BrandData';
 
 type CustomProp<T> = () => T;
 
@@ -47,7 +47,7 @@ type CustomProp<T> = () => T;
     },
 })
 export default class BrandTable extends Vue {
-    @Prop({type: Array as CustomProp<BrandDto[]>})
-    private brandList!: BrandDto[];
+    @Prop({type: Array as CustomProp<BrandData[]>})
+    private brandList!: BrandData[];
 }
 </script>

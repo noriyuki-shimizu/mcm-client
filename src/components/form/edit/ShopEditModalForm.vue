@@ -15,7 +15,7 @@
                                 <input id="form-stacked-shop-name"
                                 :class="{'uk-input': true, 'uk-form-danger': shopValidators.name.validate}"
                                 type="text"
-                                v-model="shopDto.name"
+                                v-model="shopData.name"
                                 >
                                 <span v-show="shopValidators.name.validate" class="uk-text-danger">{{ shopValidators.name.errorMessage }}</span>
                             </div>
@@ -24,7 +24,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-link">Site link</label>
                             <div class="uk-form-controls">
-                                <input id="form-stacked-link" class="uk-input" type="text" v-model="shopDto.link">
+                                <input id="form-stacked-link" class="uk-input" type="text" v-model="shopData.link">
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
                                 type="text"
                                 autocomplete="on"
                                 list="auto_station"
-                                v-model="shopDto.stationName"
+                                v-model="shopData.stationName"
                                 >
                                 <span v-show="shopValidators.stationName.validate" class="uk-text-danger">{{ shopValidators.stationName.errorMessage }}</span>
                                 <datalist id="auto_station">
@@ -53,7 +53,7 @@
                                 <input id="form-stacked-address"
                                 :class="{'uk-input': true, 'uk-form-danger': shopValidators.address.validate}"
                                 type="text"
-                                v-model="shopDto.address"
+                                v-model="shopData.address"
                                 >
                                 <span v-show="shopValidators.address.validate" class="uk-text-danger">{{ shopValidators.address.errorMessage }}</span>
                             </div>
@@ -65,7 +65,7 @@
                                 <input id="form-stacked-business-hours"
                                 :class="{'uk-input': true, 'uk-form-danger': shopValidators.businessHours.validate}"
                                 type="text"
-                                v-model="shopDto.businessHours"
+                                v-model="shopData.businessHours"
                                 >
                                 <span v-show="shopValidators.businessHours.validate" class="uk-text-danger">{{ shopValidators.businessHours.errorMessage }}</span>
                             </div>
@@ -77,7 +77,7 @@
                                 <input id="form-stacked-tel"
                                 :class="{'uk-input': true, 'uk-form-danger': shopValidators.tel.validate}"
                                 type="text"
-                                v-model="shopDto.tel"
+                                v-model="shopData.tel"
                                 >
                                 <span v-show="shopValidators.tel.validate" class="uk-text-danger">{{ shopValidators.tel.errorMessage }}</span>
                             </div>
@@ -90,7 +90,7 @@
                                     <input type="file" accept="image/*" @change="imageChange">
                                     <input class="uk-input uk-width-1-2@s"
                                     type="text"
-                                    :placeholder="shopDto.image.name ? shopDto.image.name : 'Select file'"
+                                    :placeholder="shopData.image.name ? shopData.image.name : 'Select file'"
                                     disabled
                                     tabindex="-1"
                                     >
@@ -102,7 +102,7 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-delete-flg" v-model="shopDto.deleteFlag" :disabled="addFlag">
+                                <select class="uk-select" id="form-stacked-delete-flg" v-model="shopData.deleteFlag" :disabled="addFlag">
                                     <option value="true">Deleted</option>
                                     <option value="false">Not deleted</option>
                                 </select>
@@ -126,7 +126,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import ShopDto from '@/type/domain/dto/ShopDto';
+import ShopData from '@/type/domain/dto/ShopData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/validator/shop/ShopValidators';
 import MaxChars from '@/type/validator/shop/MaxChars';
@@ -140,11 +140,13 @@ type CustomProp<T> = () => T;
 
 @Component
 export default class ShopEditModalForm extends Vue {
-    @Prop({type: Object as CustomProp<ShopDto>})
-    private shopDto!: ShopDto;
+    @Prop({type: Object as CustomProp<ShopData>})
+    private shopData!: ShopData;
 
     @Prop({type: Boolean})
     private addFlag!: boolean;
+
+    private file?: File;
 
     private validateCheck: ValidateCheck = new ValidateCheck();
 
@@ -172,14 +174,14 @@ export default class ShopEditModalForm extends Vue {
     };
 
     public inputAllCheck(): void {
-        this.onShopNameChange(this.shopDto.name, '');
-        this.onStationNameChange(this.shopDto.stationName, '');
-        this.onAddressChange(this.shopDto.address, '');
-        this.onBusinessHours(this.shopDto.businessHours, '');
-        this.onTelChange(this.shopDto.tel, '');
+        this.onShopNameChange(this.shopData.name, '');
+        this.onStationNameChange(this.shopData.stationName, '');
+        this.onAddressChange(this.shopData.address, '');
+        this.onBusinessHours(this.shopData.businessHours, '');
+        this.onTelChange(this.shopData.tel, '');
     }
 
-    @Watch('shopDto.name')
+    @Watch('shopData.name')
     private onShopNameChange(newShopName: string, oldShopName: string): void {
         this.shopValidators.name = this.validateCheck.required(newShopName);
 
@@ -188,7 +190,7 @@ export default class ShopEditModalForm extends Vue {
         }
     }
 
-    @Watch('shopDto.stationName')
+    @Watch('shopData.stationName')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
         this.shopValidators.stationName = this.validateCheck.required(newStationName);
 
@@ -197,7 +199,7 @@ export default class ShopEditModalForm extends Vue {
         }
     }
 
-    @Watch('shopDto.address')
+    @Watch('shopData.address')
     private onAddressChange(newAddress: string, oldAddress: string): void {
         this.shopValidators.address = this.validateCheck.required(newAddress);
 
@@ -206,7 +208,7 @@ export default class ShopEditModalForm extends Vue {
         }
     }
 
-    @Watch('shopDto.businessHours')
+    @Watch('shopData.businessHours')
     private onBusinessHours(newBusinessHours: string, oldBusinessHours: string): void {
         this.shopValidators.businessHours = this.validateCheck.required(newBusinessHours);
 
@@ -218,39 +220,38 @@ export default class ShopEditModalForm extends Vue {
         }
     }
 
-    @Watch('shopDto.tel')
+    @Watch('shopData.tel')
     private onTelChange(newTel: string, oldTel: string): void {
         this.shopValidators.tel = this.validateCheck.formatTelephone(newTel);
     }
 
     private imageChange(ev: any): void {
-        const file: File = ev.target.files[0];
+        this.file = ev.target.files[0];
 
-        if (file === undefined) {
-            this.shopDto.image = {
+        if (this.file === undefined) {
+            this.shopData.image = {
+                id: null,
                 name: '',
                 path: '',
-                file: null,
                 deleteFlag: false,
             };
             return ;
         }
 
-        this.shopDto.image.name = file.name;
-        this.shopDto.image.file = file;
+        this.shopData.image.name = this.file.name;
     }
 
     private registration(): void {
-        console.log(this.shopDto);
+        console.log(this.shopData);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new ImageStorage(this.shopDto.image);
+            const storage: Storage = new ImageStorage(this.shopData.image.name, this.file);
             storage.upload(function(this: ShopEditModalForm, downloadURL: string) {
-                this.shopDto.image.path = downloadURL;
-                console.log(this.shopDto.image.path);
+                this.shopData.image.path = downloadURL;
+                console.log(this.shopData.image.path);
             }.bind(this));
         }, () => {
             UIkit.modal('#shop_edit_modal').show();

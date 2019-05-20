@@ -5,7 +5,7 @@
                 <h3>Search form</h3>
                 <form class="uk-grid-small" uk-grid　v-on:submit.prevent="search">
                     <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-brand">Brand</label>
+                        <label class="uk-form-label" for="form-stacked-brand"> Brand</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-stacked-brand" v-model="inputData.brandId">
                                 <option v-for="assistBrand in assistBrandList" :key="assistBrand.id" :value="assistBrand.id">{{ assistBrand.name }}</option>
@@ -14,16 +14,16 @@
                     </div>
 
                     <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-shop">Shop</label>
+                        <label class="uk-form-label" for="form-stacked-shop"> Shop</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-stacked-shop" v-model="inputData.shopId">
-                                <option v-for="assistShop in assistShopList" :key="assistShop.id" :value="assistShop.id">{{ assistShop.name }</option>
+                                <option v-for="assistShop in assistShopList" :key="assistShop.id" :value="assistShop.id">{{ assistShop.name }}</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="uk-width-1-4@s">
-                        <label class="uk-form-label" for="form-stacked-price">Price</label>
+                        <label class="uk-form-label" for="form-stacked-price"> Price</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-stacked-price">
                                 <option v-for="assistPrice in assistPriceList" :key="assistPrice.id">{{ assistPrice.value }}</option>
@@ -41,18 +41,18 @@
                     </div>
 
                     <div class="uk-width-1-4@s">
-                        <label class="uk-form-label" for="form-stacked-search-date">Buy date</label>
+                        <label class="uk-form-label" for="form-stacked-search-date"> Buy date</label>
                         <div class="uk-form-controls">
                             <input class="uk-input" type="text" id="form-stacked-search-date" placeholder="YYYY/MM/DD">
                         </div>
                     </div>
 
                     <div class="uk-width-1-4@s">
-                        <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
+                        <label class="uk-form-label" for="form-stacked-delete-flg"> Delete flg</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-stacked-delete-flg">
-                                <option>Deleted</option>
-                                <option>Not deleted</option>
+                                <option> Deleted</option>
+                                <option> Not deleted</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +80,9 @@ import ValidateCheck from '@/type/validator/ValidateCheck';
 import ClothesValidators from '@/type/validator/clothes/ClothesValidators';
 import AssistBrandData from '@/type/domain/dto/myClothes/assist/AssistBrandData';
 import AssistShopData from '@/type/domain/dto/myClothes/assist/AssistShopData';
-import ClothesTableData from '@/type/domain/dto/myClothes/ClothesTableData';
+import ClothesData from '@/type/domain/dto/ClothesData';
+
+import AssistEnv from '@/type/AssistEnv';
 
 @Component
 export default class ClothesSearchForm extends Base {
@@ -105,9 +107,7 @@ export default class ClothesSearchForm extends Base {
     };
 
     private assistBrandList: AssistBrandData[] = [];
-
     private assistShopList: AssistShopData[] = [];
-
     private assistPriceList: any[] = [
         {
             id: 0,
@@ -125,12 +125,10 @@ export default class ClothesSearchForm extends Base {
 
     private picker?: Pikaday;
 
-    private mounted(): void {
+    private async mounted(): Promise<any> {
         this.mountedPikaday();
-
-        this.setAssistBrandList();
-
-        this.setAssistShopList();
+        this.assistBrandList = await AssistEnv.getAssistBrandList();
+        this.assistShopList = await AssistEnv.getAssistShopList();
     }
 
     private mountedPikaday(): void {
@@ -149,24 +147,6 @@ export default class ClothesSearchForm extends Base {
         );
     }
 
-    private setAssistBrandList(): void {
-        const apiRequest: APIRequest = new APIRequest('/assist/brand/keyValueList', {});
-
-        apiRequest.get((response) => {
-            console.log(response);
-            this.assistBrandList = response.data;
-        });
-    }
-
-    private setAssistShopList(): void {
-        const apiRequest: APIRequest = new APIRequest('/assist/shop/keyValueList', {});
-
-        apiRequest.get((response) => {
-            console.log(response);
-            this.assistShopList = response.data;
-        });
-    }
-
     private beforeDestroy(): void {
         // TODO: datepickerの破棄
     }
@@ -176,13 +156,16 @@ export default class ClothesSearchForm extends Base {
 
         console.log(this.inputData);
 
-        const apiRequest: APIRequest = new APIRequest('/clothesList/search', {
+        const apiRequest: APIRequest = new APIRequest('GET', '/clothesList/search', {
             inputDataJson: JSON.stringify(this.inputData),
         });
 
-        apiRequest.get((response: ClothesTableData) => {
+        apiRequest.execute((response: ClothesData[]) => {
             console.log(response);
-            this.$emit('searchResultData', 'response');
+
+            // TODO: firebaseのstorageからurlをもってくるサンプル
+
+            this.$emit('searchResultData', response);
         });
 
     }

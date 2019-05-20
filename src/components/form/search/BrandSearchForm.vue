@@ -11,7 +11,7 @@
                             <input id="form-stacked-brand-name"
                             :class="{'uk-input': true, 'uk-form-danger': brandValidators.name.validate}"
                             type="text"
-                            v-model="brandDto.name"
+                            v-model="brandData.name"
                             >
                             <span v-show="brandValidators.name.validate" class="uk-text-danger">{{ brandValidators.name.errorMessage }}</span>
                         </div>
@@ -23,7 +23,7 @@
                             <input id="form-stacked-country"
                             :class="{'uk-input': true, 'uk-form-danger': brandValidators.country.validate}"
                             type="text"
-                            v-model="brandDto.country"
+                            v-model="brandData.country"
                             >
                             <span v-show="brandValidators.country.validate" class="uk-text-danger">{{ brandValidators.country.errorMessage }}</span>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="uk-width-1-4@s">
                         <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                         <div class="uk-form-controls">
-                            <select class="uk-select" id="form-stacked-delete-flg" v-model="brandDto.deleteFlag">
+                            <select class="uk-select" id="form-stacked-delete-flg" v-model="brandData.deleteFlag">
                                 <option value="true">Deleted</option>
                                 <option value="false">Not deleted</option>
                             </select>
@@ -54,7 +54,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/domain/dto/BrandDto';
+import BrandData from '@/type/domain/dto/BrandData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxCharts from '@/type/validator/brand/MaxChars';
@@ -62,14 +62,14 @@ import MaxCharts from '@/type/validator/brand/MaxChars';
 @Component
 export default class BrandSearchForm extends Vue {
 
-    private brandDto: BrandDto = {
+    private brandData: BrandData = {
         id: -1,
         name: '',
         link: '',
         image: {
+            id: null,
             name: '',
             path: '',
-            file: null,
             deleteFlag: false,
         },
         country: '',
@@ -89,12 +89,12 @@ export default class BrandSearchForm extends Vue {
         },
     };
 
-    @Watch('brandDto.name')
+    @Watch('brandData.name')
     private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
         this.brandValidators.name = this.validateCheck.lessEqualText(newBrandName, MaxCharts.NAME);
     }
 
-    @Watch('brandDto.country')
+    @Watch('brandData.country')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
         this.brandValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxCharts.COUNTRY);
     }

@@ -20,20 +20,20 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import BrandDto from '@/type/domain/dto/BrandDto';
+import BrandData from '@/type/domain/dto/BrandData';
 
 @Component
 export default class HomeBrand extends Vue {
     // TODO: axiosを用いて以下のリストデータを取得する
-    private brandList: BrandDto[] = [
+    private brandList: BrandData[] = [
     {
       id: 1,
       name: '',
       link: 'http://bukht.com/',
       image: {
+        id: null,
         name: 'bukht_icon.jpg',
         path: require('@/images/brand/icon/bukht_icon.jpg'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -44,9 +44,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'http://ne-on-sign.com/',
       image: {
+        id: null,
         name: 'neon-sign_icon.jpg',
         path: require('@/images/brand/icon/neon-sign_icon.jpg'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -57,9 +57,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'https://www.fashion-press.net/brands/3332',
       image: {
+        id: null,
         name: 'min_icon.png',
         path: require('@/images/brand/icon/min_icon.png'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -70,9 +70,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'https://auralee.jp/',
       image: {
+        id: null,
         name: 'auralee_icon.png',
         path: require('@/images/brand/icon/auralee_icon.png'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -83,9 +83,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'https://sixty-nine.us/',
       image: {
+        id: null,
         name: '69_icon.jpg',
         path: require('@/images/brand/icon/69_icon.jpg'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -96,9 +96,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'http://henderscheme.com/',
       image: {
+        id: null,
         name: 'hender-scheme_icon.jpg',
         path: require('@/images/brand/icon/hender-scheme_icon.jpg'),
-        file: null,
         deleteFlag: false,
       },
       country: '',
@@ -109,9 +109,9 @@ export default class HomeBrand extends Vue {
       name: '',
       link: 'http://www.yohjiyamamoto.co.jp/',
       image: {
+        id: null,
         name: 'yohjiyamamoto_icon.png',
         path: require('@/images/brand/icon/yohjiyamamoto_icon.png'),
-        file: null,
         deleteFlag: false,
       },
       country: '',

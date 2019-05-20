@@ -12,7 +12,7 @@
             <button class="uk-button uk-button-primary uk-button-large" @click="add()">New Clothes</button>
         </p>
 
-        <clothes-edit-modal-form ref="clothesEditModalForm" :addFlag="addFlag" :clothesDto="clothesDto" />
+        <clothes-edit-modal-form ref="clothesEditModalForm" :addFlag="addFlag" :clothesData="clothesData" />
 
     </div>
 </template>
@@ -25,8 +25,7 @@ import ClothesTable from '@/components/table/ClothesTable.vue';
 import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
 import ClothesEditModalForm from '@/components/form/edit/ClothesEditModalForm.vue';
 
-import ClothesDto from '@/type/domain/dto/ClothesDto';
-import ClothesTableData from '@/type/domain/dto/myClothes/ClothesTableData';
+import ClothesData from '@/type/domain/dto/ClothesData';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -48,65 +47,74 @@ export default class ClothesMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private clothesDto: ClothesDto = {
-        id: -1,
+    private initClothesData: ClothesData = {
+        id: null,
         image: {
+            id: null,
             name: '',
             path: '',
-            file: null,
             deleteFlag: false,
         },
-        genre: '',
-        brand: null,
-        shop: null,
+        genre: {
+            id: null,
+            name: '',
+            deleteFlag: false,
+        },
+        brand: {
+            id: null,
+            name: '',
+            link: '',
+            image: {
+                id: null,
+                name: '',
+                path: '',
+                deleteFlag: false,
+            },
+            country: '',
+            deleteFlag: false,
+        },
+        shop: {
+            id: null,
+            name: '',
+            link: '',
+            stationName: '',
+            image: {
+                id: null,
+                name: '',
+                path: '',
+                deleteFlag: false,
+            },
+            address: '',
+            businessHours: '',
+            tel: '',
+            deleteFlag: false,
+        },
         price: 0,
-        buyDate: '',
+        buyDate: null,
         deleteFlag: false,
     };
 
-    private clothesTableDataList: ClothesTableData[] = [
-        {
-            id: 1,
-            imagePath: require('@/images/brand/icon/bukht_icon.jpg'),
-            genreName: 'Table Data',
-            brandName: 'bukht',
-            shopName: 'O代官山 本店',
-            price: 10000,
-            buyDate: new Date('2019-04-12'),
-            deleteFlag: false,
-        },
-    ];
+    private clothesData: ClothesData = {...this.initClothesData};
+
+    private clothesTableDataList: ClothesData[] = [];
 
     @Emit('edit')
-    private edit(clothesDto: ClothesDto): void {
+    private edit(clothesData: ClothesData): void {
         this.addFlag = false;
-        this.clothesDto = {...clothesDto};
+        this.clothesData = {...clothesData};
 
         this.modalShow();
     }
 
     @Emit('gridReflect')
-    private gridReflect(searchResultDataList: ClothesTableData[]): void {
+    private gridReflect(searchResultDataList: ClothesData[]): void {
         console.log(searchResultDataList);
+        this.clothesTableDataList = searchResultDataList;
     }
 
     private add(): void {
         this.addFlag = true;
-        this.clothesDto = {
-            id: -1,
-            image: {
-                name: '',
-                path: '',
-                file: null,
-                deleteFlag: false,
-            },
-            genre: '',
-            brand: null,
-            shop: null,
-            price: 0,
-            buyDate: '',
-            deleteFlag: false,
-        };
+        this.clothesData = {...this.initClothesData};
 
         this.modalShow();
     }
@@ -114,7 +122,7 @@ export default class ClothesMaintenance extends Vue {
     private modalShow(): void {
         (this.$refs.clothesEditModalForm as any).inputAllCheck();
 
-        UIkit.modal('#clothes-edit-modal-form').show();
+        (this.$refs.clothesEditModalForm as any).modalFormShow();
     }
 }
 </script>

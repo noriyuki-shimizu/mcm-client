@@ -25,7 +25,7 @@ import ShopSearchForm from '@/components/form/search/ShopSearchForm.vue';
 import ShopTable from '@/components/table/ShopTable.vue';
 import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
 
-import ShopDto from '@/type/domain/dto/ShopDto';
+import ShopData from '@/type/domain/dto/ShopData';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -47,15 +47,15 @@ export default class ShopMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private shopDto: ShopDto = {
+    private shopDto: ShopData = {
         id: -1,
         name: '',
         link: '',
         stationName: '',
         image: {
+            id: null,
             name: '',
             path: '',
-            file: null,
             deleteFlag: false,
         },
         address: '',
@@ -64,16 +64,16 @@ export default class ShopMaintenance extends Vue {
         deleteFlag: false,
     };
 
-    private shopList: ShopDto[] = [
+    private shopList: ShopData[] = [
         {
             id: 1,
             name: 'O代官山 本店',
             link: 'http://store.moc-o.com/',
             stationName: '代官山',
             image: {
+                id: null,
                 name: 'o_icon.jpg',
                 path: require('@/images/shop/icon/o_icon.jpg'),
-                file: null,
                 deleteFlag: false,
             },
             address: '東京都渋谷区猿楽町26-13 グレイス代官山 #202 ',
@@ -87,9 +87,9 @@ export default class ShopMaintenance extends Vue {
             link: 'https://blog.us-onlinestore.com/brand/garden/shop/garden-waremokou',
             stationName: '渋谷',
             image: {
+                id: null,
                 name: 'waremokou_icon.jpeg',
                 path: require('@/images/shop/icon/waremokou_icon.jpeg'),
-                file: null,
                 deleteFlag: false,
             },
             address: '東京都渋谷区神南1-18-2ﾌﾚｰﾑ神南坂1F',
@@ -100,7 +100,7 @@ export default class ShopMaintenance extends Vue {
     ];
 
     @Emit('edit')
-    private edit(shopDto: ShopDto): void {
+    private edit(shopDto: ShopData): void {
         this.addFlag = false;
         this.shopDto = {...shopDto};
 
@@ -115,9 +115,9 @@ export default class ShopMaintenance extends Vue {
             link: '',
             stationName: '',
             image: {
+                id: null,
                 name: '',
                 path: '',
-                file: null,
                 deleteFlag: false,
             },
             address: '',

@@ -13,15 +13,15 @@
                     <th class="uk-table-small">delete flg</th>
                 </tr>
             </thead>
-            <tbody v-for="clothesTableData in clothesTableDataList" :key="clothesTableData.id">
-                <tr v-on:dblclick="$emit('openModal', clothesTableData)">
-                    <td><img class="uk-preserve-width" v-fallback-image :src="clothesTableData.imagePath" width="200px" height="200px"></td>
-                    <td class="uk-text-nowrap">{{ clothesTableData.genreName }}</td>
-                    <td class="uk-text-nowrap">{{ clothesTableData.brandName }}</td>
-                    <td class="uk-text-nowrap">{{ clothesTableData.shopName }}</td>
-                    <td class="uk-text-nowrap">{{ clothesTableData.price | formatByPrice }}</td>
-                    <td class="uk-text-nowrap">{{ clothesTableData.buyDate | formatByDate }}</td>
-                    <td>{{ clothesTableData.deleteFlag | formatByDeleteFlag }}</td>
+            <tbody v-for="clothesData in clothesTableDataList" :key="clothesData.id">
+                <tr v-on:dblclick="$emit('openModal', clothesData)">
+                    <td><img class="uk-preserve-width" v-fallback-image :src="clothesData.image.name" width="200px" height="200px"></td>
+                    <td class="uk-text-nowrap">{{ clothesData.genre.name }}</td>
+                    <td class="uk-text-nowrap">{{ clothesData.brand.name }}</td>
+                    <td class="uk-text-nowrap">{{ clothesData.shop.name }}</td>
+                    <td class="uk-text-nowrap">{{ clothesData.price | formatByPrice }}</td>
+                    <td class="uk-text-nowrap">{{ clothesData.buyDate | formatByDate }}</td>
+                    <td>{{ clothesData.deleteFlag | formatByDeleteFlag }}</td>
                 </tr>
             </tbody>
         </table>
@@ -36,7 +36,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
 import CustomFormatMixin from '@/mixins/CustomFormatMixin';
-import ClothesTableData from '@/type/domain/dto/myClothes/ClothesTableData';
+import ClothesData from '@/type/domain/dto/ClothesData';
 
 type CustomProp<T> = () => T;
 
@@ -49,7 +49,7 @@ type CustomProp<T> = () => T;
     },
 })
 export default class ClothesTable extends Vue {
-    @Prop({type: Array as CustomProp<ClothesTableData[]>})
-    private clothesTableDataList!: ClothesTableData[];
+    @Prop({type: Array as CustomProp<ClothesData[]>})
+    private clothesTableDataList!: ClothesData[];
 }
 </script>

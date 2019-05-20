@@ -8,10 +8,11 @@ import { Component, Vue } from 'vue-property-decorator';
     formatByDeleteFlag(deleteFlag: boolean): string {
       return deleteFlag ? 'Deleted' : 'Not deleted';
     },
-    formatByDate(date: Date): string | null {
-      if (date === null || date === undefined) {
+    formatByDate(dateStr: string): string | null {
+      if (!dateStr) {
         return null;
       }
+      const date: Date = new Date(dateStr);
       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     },
   },

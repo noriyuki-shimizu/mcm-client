@@ -15,7 +15,7 @@
                                 <input id="form-stacked-brand-name"
                                 :class="{'uk-input': true, 'uk-form-danger': brandValidators.name.validate}"
                                 type="text"
-                                v-model="brandDto.name"
+                                v-model="brandData.name"
                                 >
                                 <span v-show="brandValidators.name.validate" class="uk-text-danger">{{ brandValidators.name.errorMessage }}</span>
                             </div>
@@ -24,7 +24,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label" for="form-stacked-link">Site link</label>
                             <div class="uk-form-controls">
-                                <input id="form-stacked-link" class="uk-input" type="text" v-model="brandDto.link">
+                                <input id="form-stacked-link" class="uk-input" type="text" v-model="brandData.link">
                             </div>
                         </div>
 
@@ -34,7 +34,7 @@
                                 <input id="form-stacked-country"
                                 :class="{'uk-input': true, 'uk-form-danger': brandValidators.country.validate}"
                                 type="text"
-                                v-model="brandDto.country"
+                                v-model="brandData.country"
                                 >
                                 <span v-show="brandValidators.country.validate" class="uk-text-danger">{{ brandValidators.country.errorMessage }}</span>
                             </div>
@@ -47,7 +47,7 @@
                                     <input type="file" accept="image/*" @change="imageChange">
                                     <input class="uk-input uk-width-1-2@s"
                                     type="text"
-                                    :placeholder="brandDto.image.name ? brandDto.image.name : 'Select file'"
+                                    :placeholder="brandData.image.name ? brandData.image.name : 'Select file'"
                                     disabled
                                     tabindex="-1"
                                     >
@@ -59,7 +59,7 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label" for="form-stacked-delete-flg">Delete flg</label>
                             <div class="uk-form-controls">
-                                <select class="uk-select" id="form-stacked-delete-flg" v-model="brandDto.deleteFlag" :disabled="addFlag">
+                                <select class="uk-select" id="form-stacked-delete-flg" v-model="brandData.deleteFlag" :disabled="addFlag">
                                     <option value="true">Deleted</option>
                                     <option value="false">Not deleted</option>
                                 </select>
@@ -83,7 +83,7 @@ import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import BrandDto from '@/type/domain/dto/BrandDto';
+import BrandData from '@/type/domain/dto/BrandData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxChars from '@/type/validator/brand/MaxChars';
@@ -98,11 +98,13 @@ type CallbackType = () => void;
 
 @Component
 export default class BrandEditModalForm extends Vue {
-    @Prop({type: Object as CustomProp<BrandDto>})
-    private brandDto!: BrandDto;
+    @Prop({type: Object as CustomProp<BrandData>})
+    private brandData!: BrandData;
 
     @Prop({type: Boolean})
     private addFlag!: boolean;
+
+    private file?: File;
 
     private validateCheck: ValidateCheck | null = new ValidateCheck();
 
@@ -122,10 +124,10 @@ export default class BrandEditModalForm extends Vue {
     }
 
     private inputAllCheck(): void {
-        this.onBrandNameChange(this.brandDto.name, '');
+        this.onBrandNameChange(this.brandData.name, '');
     }
 
-    @Watch('brandDto.name')
+    @Watch('brandData.name')
     private onBrandNameChange(newBrandName: string, oldBrandName: string): void {
         if (this.validateCheck !== null) {
             this.brandValidators.name = this.validateCheck.required(newBrandName);
@@ -136,7 +138,7 @@ export default class BrandEditModalForm extends Vue {
         }
     }
 
-    @Watch('brandDto.country')
+    @Watch('brandData.country')
     private onStationNameChange(newStationName: string, oldStationName: string): void {
         if (this.validateCheck !== null) {
             this.brandValidators.stationName = this.validateCheck.lessEqualText(newStationName, MaxChars.COUNTRY);
@@ -144,34 +146,33 @@ export default class BrandEditModalForm extends Vue {
     }
 
     private imageChange(ev: any): void {
-        const file: File = ev.target.files[0];
+        this.file = ev.target.files[0];
 
-        if (file === undefined) {
-            this.brandDto.image = {
+        if (this.file === undefined) {
+            this.brandData.image = {
+                id: null,
                 name: '',
                 path: '',
-                file: null,
                 deleteFlag: false,
             };
             return ;
         }
 
-        this.brandDto.image.name = file.name;
-        this.brandDto.image.file = file;
+        this.brandData.image.name = this.file.name;
     }
 
     private registration(): void {
-        console.log(this.brandDto);
+        console.log(this.brandData);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(() => {
             // TODO: 登録処理
             console.log('Confirmed.');
 
-            const storage: Storage = new ImageStorage(this.brandDto.image);
-            storage.upload(function(this: BrandDto, downloadURL: string) {
+            const storage: Storage = new ImageStorage(this.brandData.image.name, this.file);
+            storage.upload(function(this: BrandData, downloadURL: string) {
                 this.image.path = downloadURL;
                 console.log(this.image.path);
-            }.bind(this.brandDto));
+            }.bind(this.brandData));
         }, () => {
             UIkit.modal('#brand_edit_modal').show();
         });
