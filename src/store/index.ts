@@ -1,12 +1,17 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
-
-import ClothesModule from '@/store/modules/clothesModule';
+import Vuex, { StoreOptions } from 'vuex';
+import { RootState } from '@/store/types';
+import auths from '@/store/auth';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  modules: {
-    ClothesModule,
+const store: StoreOptions<RootState> = {
+  state: {
+    version: '1.0.0',
   },
-});
+  modules: {
+    auths,
+  },
+};
+
+export default new Vuex.Store<RootState>(store);
