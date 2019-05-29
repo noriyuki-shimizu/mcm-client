@@ -1,11 +1,11 @@
 import { MutationTree } from 'vuex';
-import { AuthsState, Auth } from '@/store/types';
+import { AuthsState } from '@/store/auths/types';
 
 const mutations: MutationTree<AuthsState> = {
-    onAuthStateChanged(state: any, user: any) {
+    onAuthStateChanged(state: AuthsState, user: any) {
         state.user = user;
     },
-    onUserStatusChanged(state: any, status: any) {
+    onUserStatusChanged(state: AuthsState, status: any) {
         state.status = status;
     },
 };

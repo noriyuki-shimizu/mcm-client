@@ -1,11 +1,12 @@
 import { GetterTree } from 'vuex';
-import { AuthsState, RootState } from '@/store/types';
+import { RootState } from '@/store/types';
+import { AuthsState } from '@/store/auths/types';
 
 const getters: GetterTree<AuthsState, RootState> = {
-    user: (state: any) => {
+    user: (state: AuthsState) => {
         return state.user;
     },
-    isSignedIn: (state: any) => {
+    isSignedIn: (state: AuthsState): boolean => {
         return state.status;
     },
 };
