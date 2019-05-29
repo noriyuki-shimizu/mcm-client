@@ -8,7 +8,7 @@
           <div class="uk-width-1-1@s uk-width-2-4@m">
             <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
               <li>
-                <router-link to="/">
+                <router-link to="/home">
                   <span uk-icon="icon: home"></span> Home
                 </router-link>
               </li>

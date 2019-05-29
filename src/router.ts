@@ -9,7 +9,7 @@ import TotalPrice from './views/myClothes/TotalPrice.vue';
 import ShopMaintenance from './views/maintenance/ShopMaintenance.vue';
 import BrandMaintenance from './views/maintenance/BrandMaintenance.vue';
 import ClothesMaintenance from './views/maintenance/ClothesMaintenance.vue';
-import firebase from '@/firebase';
+import firebase from '@/type/domain/repository/firebase/auth';
 import store from '@/store';
 
 Vue.use(Router);

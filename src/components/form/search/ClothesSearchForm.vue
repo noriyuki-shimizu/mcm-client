@@ -163,8 +163,6 @@ export default class ClothesSearchForm extends Base {
         apiRequest.execute((response: ClothesData[]) => {
             console.log(response);
 
-            // TODO: firebaseのstorageからurlをもってくるサンプル
-
             this.$emit('searchResultData', response);
         });
 

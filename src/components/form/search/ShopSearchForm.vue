@@ -3,7 +3,7 @@
         <div class="uk-section uk-section-muted">
             <div class="uk-container">
                 <h3>Search form</h3>
-                <form class="uk-grid-small" uk-grid　v-on:submit.prevent="search">
+                <form class="uk-grid-small" uk-grid v-on:submit.prevent="search">
 
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-shop-name">Shop name</label>

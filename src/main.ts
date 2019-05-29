@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import firebase from 'firebase/app';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import config from 'config';
+import firebase from './type/domain/repository/firebase/auth';
+import Vuex from 'vuex';
 
-firebase.initializeApp(config.firebase);
+firebase.init();
 
 Vue.config.productionTip = false;
 

@@ -56,18 +56,18 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import firebase from '@/firebase';
+import auth from '@/type/domain/repository/firebase/auth';
 
 @Component
 export default class Login extends Vue {
     private authGoogle(): void {
-      firebase.loginWithGoogle();
-      firebase.onAuth();
+      auth.loginWithGoogle();
+      auth.onAuth();
     }
 
     private authGithub(): void {
-      firebase.loginWithGithub();
-      firebase.onAuth();
+      auth.loginWithGithub();
+      auth.onAuth();
     }
 
     private login(): void {
