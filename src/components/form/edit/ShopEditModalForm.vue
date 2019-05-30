@@ -130,8 +130,8 @@ import ShopData from '@/type/domain/dto/ShopData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import ShopValidators from '@/type/validator/shop/ShopValidators';
 import MaxChars from '@/type/validator/shop/MaxChars';
-import Storage from '@/type/domain/repository/firebase/storage/Storage';
-import ImageStorage from '@/type/domain/repository/firebase/storage/ImageStorage';
+import Storage from '@/firebase/storage/Storage';
+import ImageStorage from '@/firebase/storage/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import firebase from './type/domain/repository/firebase/auth';
+import firebase from './firebase/auth';
 import Vuex from 'vuex';
 
 firebase.init();

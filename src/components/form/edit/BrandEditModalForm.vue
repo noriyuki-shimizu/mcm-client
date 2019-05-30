@@ -87,8 +87,8 @@ import BrandData from '@/type/domain/dto/BrandData';
 import ValidateCheck from '@/type/validator/ValidateCheck';
 import BrandValidators from '@/type/validator/brand/BrandValidators';
 import MaxChars from '@/type/validator/brand/MaxChars';
-import Storage from '@/type/domain/repository/firebase/storage/Storage';
-import ImageStorage from '@/type/domain/repository/firebase/storage/ImageStorage';
+import Storage from '@/firebase/storage/Storage';
+import ImageStorage from '@/firebase/storage/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
