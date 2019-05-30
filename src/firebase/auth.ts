@@ -26,15 +26,23 @@ export default {
     },
 
     onAuth(): void {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
+
+            const { authState, userStatus, token } = user ? ({
+                authState: user,
+                userStatus: user.uid ? true : false,
+                token: await user.getIdToken(true),
+            }) : ({
+                authState: {},
+                userStatus: false,
+                token: '',
+            });
+
             console.log(user);
-            if (!user) {
-                store.commit(`${namespace}/onAuthStateChanged`, {});
-                store.commit(`${namespace}/onUserStatusChanged`, false);
-            } else {
-                store.commit(`${namespace}/onAuthStateChanged`, user);
-                store.commit(`${namespace}/onUserStatusChanged`, user.uid ? true : false);
-            }
+
+            store.commit(`${namespace}/onAuthStateChanged`, authState);
+            store.commit(`${namespace}/onUserStatusChanged`, userStatus);
+            store.commit(`${namespace}/onTokenStateChanged`, token);
         });
     },
 };
