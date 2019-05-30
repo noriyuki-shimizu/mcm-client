@@ -4,74 +4,38 @@
 
     <div class="uk-column-1-2 uk-column-divider uk-margin-xlarge-top">
 
-      <div class="uk-margin-xlarge-left uk-margin-xlarge-bottom uk-margin-medium-top">
+      <external-api-login-input />
 
-        <button @click="authGoogle" class="uk-button uk-button-danger uk-width-1-1 uk-margin-medium-bottom">
-          <span uk-icon="icon: google"></span> Sign in with Google
-        </button>
-
-        <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-medium-bottom">
-          <span uk-icon="icon: twitter"></span> Sign in with Twitter
-        </button>
-
-        <button @click="authGithub" class="uk-button uk-button-secondary uk-width-1-1 uk-margin-medium-bottom">
-          <span uk-icon="icon: github"></span> Sign in with Github
-        </button>
-
-      </div>
-
-      <div class="uk-margin-xlarge-right">
-
-        <form class="uk-form-stacked" v-on:submit.prevent="login">
-
-          <div class="uk-margin">
-            <label class="uk-form-label" for="user-name">User Name</label>
-            <div class="uk-form-controls">
-                <input class="uk-input" id="user-name" type="text" placeholder="Input user name here...">
-            </div>
-          </div>
-
-          <div class="uk-margin">
-            <label class="uk-form-label" for="password">Password</label>
-            <div class="uk-form-controls">
-                <input class="uk-input" id="password" type="password" placeholder="Input password here...">
-            </div>
-          </div>
-
-          <!-- <p class="uk-align-right">
-            <button class="uk-button uk-custome-button-color-green" type="submit">Login</button>
-          </p> -->
-          <div class="uk-margin-medium-top">
-            <button class="uk-button uk-custome-button-color-green uk-width-1-1" type="submit">Login</button>
-          </div>
-
-        </form>
-
-      </div>
+      <login-input-form />
 
     </div>
+
+    <create-account-modal-form />
+
+    <button @click="modalShow" class="uk-align-center uk-button uk-button-link">Create new account.</button>
 
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import auth from '@/type/domain/repository/firebase/auth';
+import LoginInputForm from '@/components/form/input/LoginInputForm.vue';
+import ExternalApiLoginInput from '@/components/form/input/ExternalApiLoginInput.vue';
+import CreateAccountModalForm from '@/components/form/edit/CreateAccountModalForm.vue';
 
-@Component
+// tslint:disable-next-line:no-var-requires
+const UIkit = require('uikit');
+
+@Component({
+  components: {
+    LoginInputForm,
+    ExternalApiLoginInput,
+    CreateAccountModalForm,
+  },
+})
 export default class Login extends Vue {
-    private authGoogle(): void {
-      auth.loginWithGoogle();
-      auth.onAuth();
-    }
-
-    private authGithub(): void {
-      auth.loginWithGithub();
-      auth.onAuth();
-    }
-
-    private login(): void {
-      console.log('login!!');
-    }
+  private modalShow(): void {
+    UIkit.modal('.create-account-modal-form').show();
+  }
 }
 </script>
