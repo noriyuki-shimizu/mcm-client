@@ -9,6 +9,7 @@ const namespaced: boolean = true;
 
 const state: AuthsState = {
     user: {},
+    token: '',
     status: false,
 };
 
