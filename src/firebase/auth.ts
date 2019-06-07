@@ -5,10 +5,24 @@ import store from '@/store';
 
 const namespace: string = 'auths';
 
+type CallbackType = () => void;
+
 export default {
     init(): void {
         firebase.initializeApp(config.firebase);
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    },
+
+    async createUserWithEmailAndPassword(username: string, password: string): Promise<any> {
+        return await firebase.auth().createUserWithEmailAndPassword(username, password)
+            .then(() => [null, arguments])
+            .catch((error) => [error, null]);
+    },
+
+    async signInWithEmailAndPassword(username: string, password: string): Promise<any> {
+        return await firebase.auth().signInWithEmailAndPassword(username, password)
+            .then(() => [null, arguments])
+            .catch((error) => [error, null]);
     },
 
     loginWithGoogle(): void {
@@ -21,11 +35,11 @@ export default {
         firebase.auth().signInWithPopup(provider);
     },
 
-    logout(): void {
-        firebase.auth().signOut();
+    async logout(): Promise<any> {
+        return await firebase.auth().signOut();
     },
 
-    onAuth(): void {
+    onAuth(callback: CallbackType): void {
         firebase.auth().onAuthStateChanged(async (user) => {
 
             const { authState, userStatus, token } = user ? ({
@@ -38,11 +52,14 @@ export default {
                 token: '',
             });
 
-            console.log(user);
+            // console.log(user);
+            // console.log(token);
 
             store.commit(`${namespace}/onAuthStateChanged`, authState);
             store.commit(`${namespace}/onUserStatusChanged`, userStatus);
             store.commit(`${namespace}/onTokenStateChanged`, token);
+
+            callback();
         });
     },
 };
