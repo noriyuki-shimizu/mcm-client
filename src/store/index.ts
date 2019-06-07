@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import { RootState } from '@/store/types';
 import auths from '@/store/auths';
 
@@ -12,6 +13,9 @@ const store: StoreOptions<RootState> = {
   modules: {
     auths,
   },
+  plugins: [createPersistedState({
+    key: 'mcmApp',
+  })],
 };
 
 export default new Vuex.Store<RootState>(store);
