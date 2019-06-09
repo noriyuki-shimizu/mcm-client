@@ -1,32 +1,13 @@
 <template>
   <div id="app">
-    <div class="links">
-      <side-bar/>
-      <router-view/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script lang="ts">
-
-import SideBar from '@/components/bar/SideBar.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
-// tslint:disable-next-line:no-var-requires
-const UIkit = require('uikit');
-// tslint:disable-next-line:no-var-requires
-const Icons = require('uikit/dist/js/uikit-icons');
-
-UIkit.use(Icons);
-
-@Component({
-  components: {
-      SideBar,
-  },
-})
-export default class App extends Vue {
-}
-
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
