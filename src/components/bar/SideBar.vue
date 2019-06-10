@@ -42,6 +42,12 @@
                   <span class="uk-margin-small-right" uk-icon="icon: github"></span>Git
                 </a>
               </li>
+              <li class="uk-nav-divider"></li>
+              <li>
+                <a href="#" @click="signout">
+                  <span class="uk-margin-small-right" uk-icon="icon:  sign-out"></span>Signout
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -53,10 +59,18 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import auth from '@/firebase/auth';
 
 @Component
 export default class SideBar extends Vue {
+  private async signout(): Promise<any> {
+    await auth.logout();
 
+    auth.onAuth(() => {
+      this.$router.push('/signin');
+      location.reload();
+    });
+  }
 }
 
 </script>
