@@ -2,6 +2,11 @@ export default {
     server: {
         protocolHost: 'http://localhost:8080/mcm',
     },
+    vuex: {
+        namespace: {
+            auths: 'auths',
+        },
+    },
     firebase: {
         apiKey: 'AIzaSyCSAxcqVOgM_XdTIJTOv4mckREJEcnivsc',
         authDomain: 'mcm-client.firebaseapp.com',

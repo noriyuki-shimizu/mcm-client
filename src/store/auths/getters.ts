@@ -6,11 +6,14 @@ const getters: GetterTree<AuthsState, RootState> = {
     user: (state: AuthsState) => {
         return state.user;
     },
-    token: (state: AuthsState) => {
+    token: (state: AuthsState): string => {
         return state.token;
     },
     isSignedIn: (state: AuthsState): boolean => {
         return state.status;
+    },
+    allItem: (state: AuthsState): AuthsState => {
+        return state;
     },
 };
 

@@ -3,10 +3,6 @@ import 'firebase/auth';
 import config from 'config';
 import store from '@/store';
 
-const namespace: string = 'auths';
-
-type CallbackType = () => void;
-
 export default {
     init(): void {
         firebase.initializeApp(config.firebase);
@@ -25,41 +21,38 @@ export default {
             .catch((error) => [error, null]);
     },
 
-    loginWithGoogle(): void {
+    async loginWithGoogle(): Promise<any> {
         const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider);
+        await firebase.auth().signInWithPopup(provider);
     },
 
-    loginWithGithub(): void {
+    async loginWithGithub(): Promise<any> {
         const provider = new firebase.auth.GithubAuthProvider();
-        firebase.auth().signInWithPopup(provider);
+        await firebase.auth().signInWithPopup(provider);
     },
 
     async logout(): Promise<any> {
         return await firebase.auth().signOut();
     },
 
-    onAuth(callback: CallbackType): void {
-        firebase.auth().onAuthStateChanged(async (user) => {
+    async onAuth(): Promise<any> {
+        const user = firebase.auth().currentUser;
 
-            const { authState, userStatus, token } = user ? ({
-                authState: user,
-                userStatus: user.uid ? true : false,
-                token: await user.getIdToken(true),
-            }) : ({
-                authState: {},
-                userStatus: false,
-                token: '',
-            });
-
-            // console.log(user);
-            // console.log(token);
-
-            store.commit(`${namespace}/onAuthStateChanged`, authState);
-            store.commit(`${namespace}/onUserStatusChanged`, userStatus);
-            store.commit(`${namespace}/onTokenStateChanged`, token);
-
-            callback();
+        const { authState, userStatus, token } = user ? ({
+            authState: user,
+            userStatus: user.uid ? true : false,
+            token: await user.getIdToken(true),
+        }) : ({
+            authState: {},
+            userStatus: false,
+            token: '',
         });
+
+        console.log(user);
+        console.log(token);
+
+        store.commit(`${config.vuex.namespace.auths}/onAuthStateChanged`, authState);
+        store.commit(`${config.vuex.namespace.auths}/onUserStatusChanged`, userStatus);
+        store.commit(`${config.vuex.namespace.auths}/onTokenStateChanged`, token);
     },
 };

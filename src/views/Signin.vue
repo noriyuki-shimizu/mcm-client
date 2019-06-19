@@ -26,7 +26,7 @@
 
                                     <div class="uk-inline uk-width-1-1">
                                         <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                                        <input :class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger': isAction && !validation().username.required || !validation().username.format}"
+                                        <input :class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger': isAction && (!validation().username.required || !validation().username.format)}"
                                             type="text" placeholder="Mail Address" v-model="username">
                                     </div>
                                     <div v-if="!validation().username.required && isAction" class="uk-text-danger">Email address is required</div>
@@ -37,17 +37,26 @@
 
                                     <div class="uk-inline uk-width-1-1">
                                         <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                        <input :class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger': isAction && !validation().password.required}"
+                                        <input :class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger': isAction && (!validation().password.required || !validation().password.weakPassword)}"
                                             type="password" placeholder="Password" v-model="password">
                                     </div>
-                                    <span v-if="!validation().password.required && isAction" class="uk-text-danger">Password is required</span>
+                                    <div v-if="!validation().password.required && isAction" class="uk-text-danger">Password is required</div>
+                                    <div v-if="!validation().password.weakPassword && isAction" class="uk-text-danger">Password should be at least 6 characters</div>
 
                                 </div>
+
                                 <div class="uk-margin">
                                     <button class="uk-button uk-custome-button-color-green uk-button-large uk-width-1-1" type="submit">Signin</button>
                                 </div>
                                 <div class="uk-text-small uk-text-center">
                                     Not registered? <router-link to="/signup">Create an account</router-link>
+                                </div>
+
+                                <div v-show="isLoading">
+                                    <div class="uk-overlay-default uk-position-cover"></div>
+                                    <div class="ui-margin uk-overlay uk-position-center uk-dark">
+                                        <span uk-spinner="ratio: 4.5"></span>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -59,8 +68,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator';
 import auth from '@/firebase/auth';
+import store from '@/store';
+import { AuthsState } from '@/store/auths/types';
+import VueRouter from 'vue-router';
+import Base from '@/components/Base';
+import fallbackImage from '../directives/fallback-image';
+
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
 
@@ -74,6 +89,7 @@ interface UsernameValidation {
 interface PasswordValidation {
     [key: string]: boolean;
     required: boolean;
+    weakPassword: boolean;
 }
 
 interface Validation {
@@ -81,15 +97,22 @@ interface Validation {
     password: PasswordValidation;
 }
 
-const REGEX_EMAIL = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const regexs = [
+    '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)',
+    '|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])',
+    '|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$',
+];
+const REGEX_EMAIL = new RegExp(regexs.join(''));
 const required = (val: string) => !!val.trim();
 const format = (val: string) => !val || REGEX_EMAIL.test(val);
+const weakPassword = (val: string) => val.length >= 6;
 
 @Component
-export default class Signin extends Vue {
+export default class Signin extends Base {
     private username: string = '';
     private password: string = '';
     private isAction: boolean = false;
+    private isLoading: boolean = false;
 
     private validation(): Validation {
         return {
@@ -99,6 +122,7 @@ export default class Signin extends Vue {
             },
             password: {
                 required: required(this.password),
+                weakPassword: weakPassword(this.password),
             },
         };
     }
@@ -127,30 +151,51 @@ export default class Signin extends Vue {
             return ;
         }
 
+        this.isLoading = true;
+
         const [authErr, result] = await auth.signInWithEmailAndPassword(this.username, this.password);
         if (authErr) {
             UIkit.notification({message: authErr, status: 'danger'});
+            this.isLoading = false;
             return ;
         }
 
-        auth.onAuth(() => {
-            UIkit.notification({message: 'Welcome!', status: 'success'});
-            this.$router.push({name: 'home'});
-        });
+        await auth.onAuth();
+        this.isLoading = false;
+        this.$router.push({name: 'home'});
     }
 
-    private authGoogle(): void {
-      auth.loginWithGoogle();
-      auth.onAuth(() => {
-        this.$router.push({ name: 'home' });
-      });
+    private async authGoogle(): Promise<any> {
+        this.isLoading = true;
+
+        try {
+            await auth.loginWithGoogle();
+            await auth.onAuth();
+            this.saveToken();
+            this.$router.push({ name: 'home' });
+        } catch (error) {
+            UIkit.notification({...error, status: 'danger'});
+        } finally {
+            this.isLoading = false;
+        }
     }
 
-    private authGithub(): void {
-      auth.loginWithGithub();
-      auth.onAuth(() => {
-        this.$router.push({ name: 'home' });
-      });
+    private async authGithub(): Promise<any> {
+        this.isLoading = true;
+
+        try {
+            await auth.loginWithGithub();
+            await auth.onAuth();
+            this.$router.push({ name: 'home' });
+        } catch (error) {
+            UIkit.notification({...error, status: 'danger'});
+        } finally {
+            this.isLoading = false;
+        }
+    }
+
+    private saveToken(): void {
+        store.dispatch(`${this.config.vuex.namespace.auths}/saveToken`);
     }
 }
 </script>

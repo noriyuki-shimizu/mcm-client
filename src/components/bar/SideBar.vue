@@ -65,11 +65,9 @@ import auth from '@/firebase/auth';
 export default class SideBar extends Vue {
   private async signout(): Promise<any> {
     await auth.logout();
-
-    auth.onAuth(() => {
-      this.$router.push('/signin');
-      location.reload();
-    });
+    await auth.onAuth();
+    this.$router.push('/signin');
+    location.reload();
   }
 }
 

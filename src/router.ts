@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
+import config from 'config';
 
 Vue.use(Router);
-
-const namespace: string = 'auths';
 
 const router: Router =  new Router({
   mode: 'history',
@@ -77,7 +76,7 @@ const router: Router =  new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // Already authenticated.
-    const signedIn = store.getters[`${namespace}/isSignedIn`];
+    const signedIn = store.getters[`${config.vuex.namespace.auths}/isSignedIn`];
 
     signedIn ? next() : next({ name: 'signin' });
 
