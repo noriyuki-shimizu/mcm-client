@@ -1,19 +1,17 @@
 import { ActionTree } from 'vuex';
 import { RootState } from '@/store/types';
 import { AuthsState } from '@/store/auths/types';
-import config from 'config';
-import axios from '@/api';
+import api from '@/api';
 
 const actions: ActionTree<AuthsState, RootState> = {
-    saveToken: async ({ commit, getters }): Promise<any> => {
-        console.log(111);
-        console.log(commit);
-        console.log(getters.token);
-
-        const hoge = await axios({
+    saveToken: async ({ commit }): Promise<any> => {
+        const [error, response] = await api({
             method: 'POST',
             url: '/preLogin',
         });
+
+        console.log('preLogin result: %o, error: %o', response, error);
+        commit(`onUserIdStateChanged`, response.data);
     },
 };
 

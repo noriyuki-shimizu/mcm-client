@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import SideBar from '@/components/bar/SideBar.vue';
+import SideBar from '@/components/common/SideBar.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({

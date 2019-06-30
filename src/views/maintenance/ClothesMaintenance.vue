@@ -19,13 +19,11 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/title/HeadTitle.vue';
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import ClothesTable from '@/components/table/ClothesTable.vue';
-import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
-import ClothesEditModalForm from '@/components/form/edit/ClothesEditModalForm.vue';
-
-import ClothesData from '@/type/domain/dto/ClothesData';
+import HeadTitle from '@/components/common/HeadTitle.vue';
+import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import ClothesTable from '@/components/clothes/Table.vue';
+import ClothesSearchForm from '@/components/clothes/SearchForm.vue';
+import ClothesEditModalForm from '@/components/clothes/EditModalForm.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -47,7 +45,7 @@ export default class ClothesMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private initClothesData: ClothesData = {
+    private initClothesData: any = {
         id: null,
         image: {
             id: null,
@@ -94,12 +92,12 @@ export default class ClothesMaintenance extends Vue {
         deleteFlag: false,
     };
 
-    private clothesData: ClothesData = {...this.initClothesData};
+    private clothesData: any = {...this.initClothesData};
 
-    private clothesTableDataList: ClothesData[] = [];
+    private clothesTableDataList: any[] = [];
 
     @Emit('edit')
-    private edit(clothesData: ClothesData): void {
+    private edit(clothesData: any): void {
         this.addFlag = false;
         this.clothesData = {...clothesData};
 
@@ -107,7 +105,7 @@ export default class ClothesMaintenance extends Vue {
     }
 
     @Emit('gridReflect')
-    private gridReflect(searchResultDataList: ClothesData[]): void {
+    private gridReflect(searchResultDataList: any[]): void {
         console.log(searchResultDataList);
         this.clothesTableDataList = searchResultDataList;
     }

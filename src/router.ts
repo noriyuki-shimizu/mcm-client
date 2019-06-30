@@ -12,13 +12,13 @@ const router: Router =  new Router({
     {
       path: '/signin',
       name: 'signin',
-      component: () => import('./views/Signin.vue'),
+      component: () => import('./views/auth/Signin.vue'),
       meta: { requiresAuth: false },
     },
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('./views/Signup.vue'),
+      component: () => import('./views/auth/Signup.vue'),
       meta: { requiresAuth: false },
     },
     {
@@ -73,8 +73,10 @@ const router: Router =  new Router({
   ],
 });
 
+const isRequiresAuth = (record: any): boolean => record.meta.requiresAuth;
+
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
+  if (to.matched.some(isRequiresAuth)) {
     // Already authenticated.
     const signedIn = store.getters[`${config.vuex.namespace.auths}/isSignedIn`];
 

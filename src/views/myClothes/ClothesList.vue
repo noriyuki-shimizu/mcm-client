@@ -3,7 +3,7 @@
         <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
 
         <head-title titleName="Clothes List" />
-        
+
         <genre-tab :genreList="genreList" />
 
         <clothes-search-form v-on:searchResultData="gridReflect" />
@@ -28,13 +28,12 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/title/HeadTitle.vue';
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import GenreTab from '@/components/tab/GenreTab.vue';
-import ClothesSearchForm from '@/components/form/search/ClothesSearchForm.vue';
-import ClothesTable from '@/components/table/ClothesTable.vue';
+import HeadTitle from '@/components/common/HeadTitle.vue';
+import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import GenreTab from '@/components/genre/Tab.vue';
+import ClothesSearchForm from '@/components/clothes/SearchForm.vue';
+import ClothesTable from '@/components/clothes/Table.vue';
 
-import ClothesData from '@/type/domain/dto/ClothesData';
 import fallbackImage from '../../directives/fallback-image';
 
 @Component({
@@ -64,10 +63,10 @@ export default class ClothesList extends Vue {
         'All Items',
     ];
 
-    private clothesList: ClothesData[] = [];
+    private clothesList: any[] = [];
 
     @Emit('gridReflect')
-    private gridReflect(searchResultDataList: ClothesData[]): void {
+    private gridReflect(searchResultDataList: any[]): void {
         console.log(searchResultDataList);
         this.clothesList = searchResultDataList;
     }

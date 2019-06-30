@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import store from '@/store';
 import config from 'config';
 
@@ -18,4 +18,8 @@ http.interceptors.request.use((requestConfig) => {
     },
 );
 
-export default http;
+export default async (option: any) => {
+    return await http(option)
+        .then((response: AxiosResponse) => [null, response])
+        .catch((error: any) => [error, null]);
+};

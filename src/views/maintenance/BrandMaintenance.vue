@@ -13,19 +13,17 @@
         </p>
 
         <brand-edit-modal-form ref="brandEditModalForm" :addFlag="addFlag" :brandData="brandData" />
-        
+
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/title/HeadTitle.vue';
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import BrandSearchForm from '@/components/form/search/BrandSearchForm.vue';
-import BrandTable from '@/components/table/BrandTable.vue';
-import BrandEditModalForm from '@/components/form/edit/BrandEditModalForm.vue';
-
-import BrandData from '@/type/domain/dto/BrandData';
+import HeadTitle from '@/components/common/HeadTitle.vue';
+import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import BrandSearchForm from '@/components/brand/SearchForm.vue';
+import BrandTable from '@/components/brand/Table.vue';
+import BrandEditModalForm from '@/components/brand/EditModalForm.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -47,7 +45,7 @@ export default class BrandMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private brandData: BrandData = {
+    private brandData: any = {
         id: -1,
         name: '',
         link: '',
@@ -61,7 +59,7 @@ export default class BrandMaintenance extends Vue {
         deleteFlag: false,
     };
 
-    private brandList: BrandData[] = [
+    private brandList: any[] = [
         {
             id: 1,
             name: 'bukht',
@@ -117,7 +115,7 @@ export default class BrandMaintenance extends Vue {
     ];
 
     @Emit('edit')
-    private edit(brandData: BrandData): void {
+    private edit(brandData: any): void {
         this.addFlag = false;
         this.brandData = {...brandData};
 

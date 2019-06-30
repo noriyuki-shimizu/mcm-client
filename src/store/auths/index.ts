@@ -8,6 +8,7 @@ import mutations from '@/store/auths/mutations';
 const namespaced: boolean = true;
 
 const state: AuthsState = {
+    userId: 0,
     user: {},
     token: '',
     status: false,

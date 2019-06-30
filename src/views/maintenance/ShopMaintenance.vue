@@ -13,19 +13,17 @@
         </p>
 
         <shop-edit-modal-form ref="shopEditModalForm" :addFlag="addFlag" :shopDto="shopDto" />
-        
+
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/title/HeadTitle.vue';
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import ShopSearchForm from '@/components/form/search/ShopSearchForm.vue';
-import ShopTable from '@/components/table/ShopTable.vue';
-import ShopEditModalForm from '@/components/form/edit/ShopEditModalForm.vue';
-
-import ShopData from '@/type/domain/dto/ShopData';
+import HeadTitle from '@/components/common/HeadTitle.vue';
+import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import ShopSearchForm from '@/components/shop/SearchForm.vue';
+import ShopTable from '@/components/shop/Table.vue';
+import ShopEditModalForm from '@/components/shop/EditModalForm.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -47,7 +45,7 @@ export default class ShopMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private shopDto: ShopData = {
+    private shopDto: any = {
         id: -1,
         name: '',
         link: '',
@@ -64,7 +62,7 @@ export default class ShopMaintenance extends Vue {
         deleteFlag: false,
     };
 
-    private shopList: ShopData[] = [
+    private shopList: any[] = [
         {
             id: 1,
             name: 'O代官山 本店',
@@ -100,7 +98,7 @@ export default class ShopMaintenance extends Vue {
     ];
 
     @Emit('edit')
-    private edit(shopDto: ShopData): void {
+    private edit(shopDto: any): void {
         this.addFlag = false;
         this.shopDto = {...shopDto};
 

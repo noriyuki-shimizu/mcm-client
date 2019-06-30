@@ -11,13 +11,13 @@ export default {
 
     async createUserWithEmailAndPassword(username: string, password: string): Promise<any> {
         return await firebase.auth().createUserWithEmailAndPassword(username, password)
-            .then(() => [null, arguments])
+            .then((result) => [null, result])
             .catch((error) => [error, null]);
     },
 
     async signInWithEmailAndPassword(username: string, password: string): Promise<any> {
         return await firebase.auth().signInWithEmailAndPassword(username, password)
-            .then(() => [null, arguments])
+            .then((response) => [null, response])
             .catch((error) => [error, null]);
     },
 
@@ -48,8 +48,7 @@ export default {
             token: '',
         });
 
-        console.log(user);
-        console.log(token);
+        console.info('login user : ', user);
 
         store.commit(`${config.vuex.namespace.auths}/onAuthStateChanged`, authState);
         store.commit(`${config.vuex.namespace.auths}/onUserStatusChanged`, userStatus);

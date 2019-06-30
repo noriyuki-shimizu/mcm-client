@@ -3,7 +3,7 @@
     <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
 
     <head-title titleName="Home" />
-    
+
     <home-top />
 
     <hr class="uk-divider-icon">
@@ -11,7 +11,7 @@
     <home-brand />
 
     <hr class="uk-divider-icon">
-    
+
     <home-shop />
 
   </div>
@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/title/HeadTitle.vue';
-import Breadcrumb from '@/components/breadcrumb/Breadcrumb.vue';
-import HomeTop from '@/components/home/HomeTop.vue';
-import HomeBrand from '@/components/home/HomeBrand.vue';
-import HomeShop from '@/components/home/HomeShop.vue';
+import HeadTitle from '@/components/common/HeadTitle.vue';
+import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import HomeTop from '@/components/home/Top.vue';
+import HomeBrand from '@/components/brand/Panel.vue';
+import HomeShop from '@/components/shop/Article.vue';
 
 @Component({
   components: {
