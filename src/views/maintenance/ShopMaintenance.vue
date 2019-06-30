@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/common/HeadTitle.vue';
-import Breadcrumb from '@/components/common/Breadcrumb.vue';
-import ShopSearchForm from '@/components/shop/SearchForm.vue';
-import ShopTable from '@/components/shop/Table.vue';
-import ShopEditModalForm from '@/components/shop/EditModalForm.vue';
+import HeadTitle from '@/components/commons/HeadTitle.vue';
+import Breadcrumb from '@/components/commons/Breadcrumb.vue';
+import ShopSearchForm from '@/components/shops/SearchForm.vue';
+import ShopTable from '@/components/shops/Table.vue';
+import ShopEditModalForm from '@/components/shops/EditModalForm.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

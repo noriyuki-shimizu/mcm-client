@@ -16,9 +16,9 @@
 
 <script lang='ts'>
 import { Component, Vue} from 'vue-property-decorator';
-import HeadTitle from '@/components/common/HeadTitle.vue';
-import PieChart from '@/components/map/PieChart';
-import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import HeadTitle from '@/components/commons/HeadTitle.vue';
+import PieChart from '@/components/maps/PieChart';
+import Breadcrumb from '@/components/commons/Breadcrumb.vue';
 import TotalPricePerGenreList from '@/components/clothes/TotalPricePerGenreList.vue';
 import Chart from 'chart.js';
 

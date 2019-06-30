@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import HeadTitle from '@/components/common/HeadTitle.vue';
-import Breadcrumb from '@/components/common/Breadcrumb.vue';
+import HeadTitle from '@/components/commons/HeadTitle.vue';
+import Breadcrumb from '@/components/commons/Breadcrumb.vue';
 import ClothesTable from '@/components/clothes/Table.vue';
 import ClothesSearchForm from '@/components/clothes/SearchForm.vue';
 import ClothesEditModalForm from '@/components/clothes/EditModalForm.vue';
