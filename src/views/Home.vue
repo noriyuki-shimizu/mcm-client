@@ -1,19 +1,18 @@
 <template>
   <div class="home">
-    <breadcrumb :hierarchyList="hierarchyList"></breadcrumb>
+    <breadcrumb :hierarchyList="hierarchyList" />
 
-    <head-title titleName="Home" />
+    <head-title title-name="Home" />
 
     <home-top />
 
-    <hr class="uk-divider-icon">
+    <hr class="uk-divider-icon" />
 
     <home-brand />
 
-    <hr class="uk-divider-icon">
+    <hr class="uk-divider-icon" />
 
     <home-shop />
-
   </div>
 </template>
 
@@ -37,7 +36,4 @@ import HomeShop from '@/components/shops/Article.vue';
 export default class Home extends Vue {
   private hierarchyList: string[] = ['Home'];
 }
-
 </script>
-
-

@@ -1,20 +1,23 @@
 <template>
-    <div class="uk-panel uk-margin-medium-top uk-margin-medium-bottom">
-
-        <div class="uk-margin-large-left">
-            <h3>Brand list</h3>
-        </div>
-        <div class="uk-flex uk-flex-wrap uk-flex-wrap-around uk-margin-medium-left uk-margin-medium-right">
-            <div v-bind:key="brand.id" v-for="brand in brandList">
-                <div id="custom_card" class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-small-top">
-                    <a :href="brand.link" target="_blank">
-                        <img class="uk-align-center" :src="brand.image.path" width="170px" height="100px">
-                    </a>
-                </div>
-            </div>
-        </div>
-
+  <div class="uk-panel uk-margin-medium-top uk-margin-medium-bottom">
+    <div class="uk-margin-large-left">
+      <h3>Brand list</h3>
     </div>
+    <div
+      class="uk-flex uk-flex-wrap uk-flex-wrap-around uk-margin-medium-left uk-margin-medium-right"
+    >
+      <div v-bind:key="brand.id" v-for="brand in brandList">
+        <div
+          id="custom_card"
+          class="uk-card uk-card-default uk-card-hover uk-card-body uk-margin-small-top"
+        >
+          <a :href="brand.link" target="_blank">
+            <img :src="brand.image.path" class="uk-align-center" width="170px" height="100px">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,8 +25,8 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class HomeBrand extends Vue {
-    // TODO: axiosを用いて以下のリストデータを取得する
-    private brandList: any[] = [
+  // TODO: axiosを用いて以下のリストデータを取得する
+  private brandList: any[] = [
     {
       id: 1,
       name: '',
@@ -117,7 +120,6 @@ export default class HomeBrand extends Vue {
     },
   ];
 }
-
 </script>
 
 <style>
@@ -125,4 +127,3 @@ export default class HomeBrand extends Vue {
   height: 180px;
 }
 </style>
-
