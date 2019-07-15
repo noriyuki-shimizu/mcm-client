@@ -58,14 +58,14 @@
                     Password should be at least 6 characters
                   </div>
                 </div>
+                <div class="uk-margin">
+                  <button class="uk-button uk-custome-button-color-green uk-button-large uk-width-1-1" type="submit">
+                    Signin
+                  </button>
+                </div>
               </form>
             </div>
 
-            <div class="uk-margin">
-              <button class="uk-button uk-custome-button-color-green uk-button-large uk-width-1-1" type="submit">
-                Signin
-              </button>
-            </div>
             <div class="uk-text-small uk-text-center">
               Not registered? <router-link to="/signup">
                 Create an account

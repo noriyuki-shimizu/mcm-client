@@ -68,14 +68,12 @@
                   <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: lock" />
                     <input
-:class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger':
+                      :class="{'uk-input': true, 'uk-form-large': true, 'uk-form-danger':
                       isAction && (!validation().confirmPassword.required ||
                       !validation().confirmPassword.match)}"
-                           }"
                            type="password"
                            v-model="confirmPassword"
-                           placeholder="Confirm
-                    password"
+                           placeholder="Confirm password"
                     >
                   </div>
                   <div
