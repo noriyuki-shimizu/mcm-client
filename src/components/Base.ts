@@ -4,9 +4,9 @@ import config from 'config';
 
 @Component
 export default class Base extends Vue {
-  protected config?: any;
+    protected config?: any;
 
-  protected created() {
-    this.config = config;
-  }
+    protected created() {
+        this.config = config;
+    }
 }

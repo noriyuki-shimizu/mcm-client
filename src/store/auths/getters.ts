@@ -14,7 +14,7 @@ const getters: GetterTree<AuthsState, RootState> = {
     },
     allItem: (state: AuthsState): AuthsState => {
         return state;
-    },
+    }
 };
 
 export default getters;

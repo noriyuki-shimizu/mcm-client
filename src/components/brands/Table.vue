@@ -1,57 +1,60 @@
 <template>
-  <div class="brand-table">
-    <div class="uk-overflow-auto uk-margin-small-top">
-      <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
-        <caption>
-          Brand list
-        </caption>
-        <thead>
-          <tr>
-            <th class="uk-table-shrink">
-              Image
-            </th>
-            <th class="uk-table-shrink uk-text-nowrap">
-              Name
-            </th>
-            <th class="uk-width-shrink">
-              Link
-            </th>
-            <th class="uk-table-shrink uk-text-nowrap">
-              Country
-            </th>
-            <th class="uk-table-small">
-              Delete flag
-            </th>
-          </tr>
-        </thead>
-        <tbody v-for="brand in brandList" :key="brand.id">
-          <tr v-on:dblclick="$emit('openModal', brand)">
-            <td>
-              <img
-                v-fallback-image
-                :src="brand.image.path"
-                class="uk-preserve-width"
-                height="200"
-                width="200"
-              />
-            </td>
-            <td class="uk-text-nowrap">
-              {{ brand.name }}
-            </td>
-            <td class="uk-text-truncate">
-              {{ brand.link }}
-            </td>
-            <td class="uk-text--nowrap">
-              {{ brand.country }}
-            </td>
-            <td>{{ brand.deleteFlag | formatByDeleteFlag }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="brand-table">
+        <div class="uk-overflow-auto uk-margin-small-top">
+            <table
+                class="uk-table uk-table-hover uk-table-middle uk-table-divider"
+            >
+                <caption>
+                    Brand list
+                </caption>
+                <thead>
+                    <tr>
+                        <th class="uk-table-shrink">
+                            Image
+                        </th>
+                        <th class="uk-table-shrink uk-text-nowrap">
+                            Name
+                        </th>
+                        <th class="uk-width-shrink">
+                            Link
+                        </th>
+                        <th class="uk-table-shrink uk-text-nowrap">
+                            Country
+                        </th>
+                        <th class="uk-table-small">
+                            Delete flag
+                        </th>
+                    </tr>
+                </thead>
+                <tbody v-for="brand in brandList"
+:key="brand.id">
+                    <tr v-on:dblclick="$emit('openModal', brand)">
+                        <td>
+                            <img
+                                v-fallback-image
+                                :src="brand.image.path"
+                                class="uk-preserve-width"
+                                height="200"
+                                width="200"
+                            >
+                        </td>
+                        <td class="uk-text-nowrap">
+                            {{ brand.name }}
+                        </td>
+                        <td class="uk-text-truncate">
+                            {{ brand.link }}
+                        </td>
+                        <td class="uk-text--nowrap">
+                            {{ brand.country }}
+                        </td>
+                        <td>{{ brand.deleteFlag | formatByDeleteFlag }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <hr>
-  </div>
+        <hr >
+    </div>
 </template>
 
 <script lang="ts">
@@ -63,13 +66,13 @@ import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 type CustomProp<T> = () => T;
 
 @Component({
-  mixins: [CustomFormatMixin],
-  directives: {
-    FallbackImage,
-  },
+    mixins: [CustomFormatMixin],
+    directives: {
+        FallbackImage
+    }
 })
 export default class BrandTable extends Vue {
-  @Prop({ type: Array as CustomProp<any[]> })
-  private brandList!: any[];
+    @Prop({ type: Array as CustomProp<any[]> })
+    private brandList!: any[];
 }
 </script>

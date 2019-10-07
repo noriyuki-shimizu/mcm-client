@@ -11,5 +11,6 @@ export default abstract class Storage {
     }
 
     public abstract upload(callback: CallbackType): void;
+
     public abstract delete(): void;
 }

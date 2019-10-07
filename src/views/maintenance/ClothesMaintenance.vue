@@ -1,25 +1,31 @@
 <template>
-  <div class="clothes-maintenance">
-    <breadcrumb :hierarchyList="hierarchyList" />
+    <div class="clothes-maintenance">
+        <breadcrumb :hierarchyList="hierarchyList" />
 
-    <head-title title-name="Clothes" />
+        <head-title title-name="Clothes" />
 
-    <clothes-search-form v-on:searchResultData="gridReflect" />
+        <clothes-search-form v-on:searchResultData="gridReflect" />
 
-    <clothes-table v-on:openModal="edit" :clothesTableDataList="clothesTableDataList" />
+        <clothes-table
+            v-on:openModal="edit"
+            :clothesTableDataList="clothesTableDataList"
+        />
 
-    <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
-      <button @click="add()" class="uk-button uk-button-primary uk-button-large">
-        New Clothes
-      </button>
-    </p>
+        <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
+            <button
+                @click="add()"
+                class="uk-button uk-button-primary uk-button-large"
+            >
+                New Clothes
+            </button>
+        </p>
 
-    <clothes-edit-modal-form
-      ref="clothesEditModalForm"
-      :addFlag="addFlag"
-      :clothesData="clothesData"
-    />
-  </div>
+        <clothes-edit-modal-form
+            ref="clothesEditModalForm"
+            :addFlag="addFlag"
+            :clothesData="clothesData"
+        />
+    </div>
 </template>
 
 <script lang="ts">
@@ -34,95 +40,95 @@ import ClothesEditModalForm from '@/components/clothes/EditModalForm.vue';
 const UIkit = require('uikit');
 
 @Component({
-  components: {
-    HeadTitle,
-    Breadcrumb,
-    ClothesTable,
-    ClothesSearchForm,
-    ClothesEditModalForm,
-  },
+    components: {
+        HeadTitle,
+        Breadcrumb,
+        ClothesTable,
+        ClothesSearchForm,
+        ClothesEditModalForm
+    }
 })
 export default class ClothesMaintenance extends Vue {
-  private hierarchyList: string[] = ['Maintenance', 'Clothes'];
+    private hierarchyList: string[] = ['Maintenance', 'Clothes'];
 
-  private addFlag: boolean = false;
+    private addFlag: boolean = false;
 
-  private initClothesData: any = {
-    id: null,
-    image: {
-      id: null,
-      name: '',
-      path: '',
-      deleteFlag: false,
-    },
-    genre: {
-      id: null,
-      name: '',
-      deleteFlag: false,
-    },
-    brand: {
-      id: null,
-      name: '',
-      link: '',
-      image: {
+    private initClothesData: any = {
         id: null,
-        name: '',
-        path: '',
-        deleteFlag: false,
-      },
-      country: '',
-      deleteFlag: false,
-    },
-    shop: {
-      id: null,
-      name: '',
-      link: '',
-      stationName: '',
-      image: {
-        id: null,
-        name: '',
-        path: '',
-        deleteFlag: false,
-      },
-      address: '',
-      businessHours: '',
-      tel: '',
-      deleteFlag: false,
-    },
-    price: 0,
-    buyDate: null,
-    deleteFlag: false,
-  };
+        image: {
+            id: null,
+            name: '',
+            path: '',
+            deleteFlag: false
+        },
+        genre: {
+            id: null,
+            name: '',
+            deleteFlag: false
+        },
+        brand: {
+            id: null,
+            name: '',
+            link: '',
+            image: {
+                id: null,
+                name: '',
+                path: '',
+                deleteFlag: false
+            },
+            country: '',
+            deleteFlag: false
+        },
+        shop: {
+            id: null,
+            name: '',
+            link: '',
+            stationName: '',
+            image: {
+                id: null,
+                name: '',
+                path: '',
+                deleteFlag: false
+            },
+            address: '',
+            businessHours: '',
+            tel: '',
+            deleteFlag: false
+        },
+        price: 0,
+        buyDate: null,
+        deleteFlag: false
+    };
 
-  private clothesData: any = { ...this.initClothesData };
+    private clothesData: any = { ...this.initClothesData };
 
-  private clothesTableDataList: any[] = [];
+    private clothesTableDataList: any[] = [];
 
-  @Emit('edit')
-  private edit(clothesData: any): void {
-    this.addFlag = false;
-    this.clothesData = { ...clothesData };
+    @Emit('edit')
+    private edit(clothesData: any): void {
+        this.addFlag = false;
+        this.clothesData = { ...clothesData };
 
-    this.modalShow();
-  }
+        this.modalShow();
+    }
 
-  @Emit('gridReflect')
-  private gridReflect(searchResultDataList: any[]): void {
-    console.log(searchResultDataList);
-    this.clothesTableDataList = searchResultDataList;
-  }
+    @Emit('gridReflect')
+    private gridReflect(searchResultDataList: any[]): void {
+        console.log(searchResultDataList);
+        this.clothesTableDataList = searchResultDataList;
+    }
 
-  private add(): void {
-    this.addFlag = true;
-    this.clothesData = { ...this.initClothesData };
+    private add(): void {
+        this.addFlag = true;
+        this.clothesData = { ...this.initClothesData };
 
-    this.modalShow();
-  }
+        this.modalShow();
+    }
 
-  private modalShow(): void {
-    (this.$refs.clothesEditModalForm as any).inputAllCheck();
+    private modalShow(): void {
+        (this.$refs.clothesEditModalForm as any).inputAllCheck();
 
-    (this.$refs.clothesEditModalForm as any).modalFormShow();
-  }
+        (this.$refs.clothesEditModalForm as any).modalFormShow();
+    }
 }
 </script>

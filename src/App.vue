@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+    <div id="app">
+        <router-view />
+    </div>
 </template>
 
 <script lang="ts">
@@ -16,8 +16,8 @@ export default class App extends Vue {}
 @import url('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css');
 
 .uk-custome-button-color-green {
-  background-color: lightgreen;
-  color: white;
-  border: 1px solid transparent;
+    background-color: lightgreen;
+    color: white;
+    border: 1px solid transparent;
 }
 </style>

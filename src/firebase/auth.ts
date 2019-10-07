@@ -9,16 +9,26 @@ export default {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
     },
 
-    async createUserWithEmailAndPassword(username: string, password: string): Promise<any> {
-        return await firebase.auth().createUserWithEmailAndPassword(username, password)
-            .then((result) => [null, result])
-            .catch((error) => [error, null]);
+    async createUserWithEmailAndPassword(
+        username: string,
+        password: string
+    ): Promise<any> {
+        return await firebase
+            .auth()
+            .createUserWithEmailAndPassword(username, password)
+            .then(result => [null, result])
+            .catch(error => [error, null]);
     },
 
-    async signInWithEmailAndPassword(username: string, password: string): Promise<any> {
-        return await firebase.auth().signInWithEmailAndPassword(username, password)
-            .then((response) => [null, response])
-            .catch((error) => [error, null]);
+    async signInWithEmailAndPassword(
+        username: string,
+        password: string
+    ): Promise<any> {
+        return await firebase
+            .auth()
+            .signInWithEmailAndPassword(username, password)
+            .then(response => [null, response])
+            .catch(error => [error, null]);
     },
 
     async loginWithGoogle(): Promise<any> {
@@ -38,20 +48,31 @@ export default {
     async onAuth(): Promise<any> {
         const user = firebase.auth().currentUser;
 
-        const { authState, userStatus, token } = user ? ({
-            authState: user,
-            userStatus: user.uid ? true : false,
-            token: await user.getIdToken(true),
-        }) : ({
-            authState: {},
-            userStatus: false,
-            token: '',
-        });
+        const { authState, userStatus, token } = user
+            ? {
+                  authState: user,
+                  userStatus: !!user.uid,
+                  token: await user.getIdToken(true)
+              }
+            : {
+                  authState: {},
+                  userStatus: false,
+                  token: ''
+              };
 
         console.info('login user : ', user);
 
-        store.commit(`${config.vuex.namespace.auths}/onAuthStateChanged`, authState);
-        store.commit(`${config.vuex.namespace.auths}/onUserStatusChanged`, userStatus);
-        store.commit(`${config.vuex.namespace.auths}/onTokenStateChanged`, token);
-    },
+        store.commit(
+            `${config.vuex.namespace.auths}/onAuthStateChanged`,
+            authState
+        );
+        store.commit(
+            `${config.vuex.namespace.auths}/onUserStatusChanged`,
+            userStatus
+        );
+        store.commit(
+            `${config.vuex.namespace.auths}/onTokenStateChanged`,
+            token
+        );
+    }
 };

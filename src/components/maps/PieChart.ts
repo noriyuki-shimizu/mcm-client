@@ -4,10 +4,11 @@ import { Pie, mixins } from 'vue-chartjs';
 
 @Component({})
 export default class PieChart extends Mixins(Pie, mixins.reactiveProp) {
-  @Prop() public chartData!: Chart.ChartData;
-  @Prop() public chartOptions!: Chart.ChartOptions;
+    @Prop() public chartData!: Chart.ChartData;
 
-  public mounted() {
-    this.renderChart(this.chartData, this.chartOptions);
-  }
+    @Prop() public chartOptions!: Chart.ChartOptions;
+
+    public mounted() {
+        this.renderChart(this.chartData, this.chartOptions);
+    }
 }

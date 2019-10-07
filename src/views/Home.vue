@@ -1,19 +1,19 @@
 <template>
-  <div class="home">
-    <breadcrumb :hierarchyList="hierarchyList" />
+    <div class="home">
+        <breadcrumb :hierarchyList="hierarchyList" />
 
-    <head-title title-name="Home" />
+        <head-title title-name="Home" />
 
-    <home-top />
+        <home-top />
 
-    <hr class="uk-divider-icon" />
+        <hr class="uk-divider-icon" >
 
-    <home-brand />
+        <home-brand />
 
-    <hr class="uk-divider-icon" />
+        <hr class="uk-divider-icon" >
 
-    <home-shop />
-  </div>
+        <home-shop />
+    </div>
 </template>
 
 <script lang="ts">
@@ -25,15 +25,15 @@ import HomeBrand from '@/components/brands/Panel.vue';
 import HomeShop from '@/components/shops/Article.vue';
 
 @Component({
-  components: {
-    HeadTitle,
-    Breadcrumb,
-    HomeBrand,
-    HomeTop,
-    HomeShop,
-  },
+    components: {
+        HeadTitle,
+        Breadcrumb,
+        HomeBrand,
+        HomeTop,
+        HomeShop
+    }
 })
 export default class Home extends Vue {
-  private hierarchyList: string[] = ['Home'];
+    private hierarchyList: string[] = ['Home'];
 }
 </script>

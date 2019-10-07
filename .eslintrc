@@ -5,9 +5,9 @@
     },
     "extends": [
         "airbnb-base",
-        "prettier",
         "plugin:vue/recommended",
         "plugin:@typescript-eslint/recommended",
+        "prettier",
         "prettier/@typescript-eslint"
     ],
     "overrides": [
@@ -29,19 +29,20 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "prettier/prettier": "error",
-        "semi": ["error", "always"],
-        "vue/attributes-order": ["error"],
-        "vue/max-attributes-per-line": [
-            2,
+        "prettier/prettier": [
+            "error",
             {
-                "singleline": 20,
-                "multiline": {
-                    "max": 1,
-                    "allowFirstLine": false
-                }
+                "singleQuote": true,
+                "tabWidth": 4
             }
         ],
+        "vue/html-indent": ["error", 4, {
+            "attribute": 1,
+            "baseIndent": 1,
+            "closeBracket": 0,
+            "alignAttributesVertically": true,
+            "ignores": []
+        }],
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
     }

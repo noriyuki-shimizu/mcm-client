@@ -13,7 +13,7 @@ const mutations: MutationTree<AuthsState> = {
     },
     onUserStatusChanged(state: AuthsState, status: any) {
         state.status = status;
-    },
+    }
 };
 
 export default mutations;

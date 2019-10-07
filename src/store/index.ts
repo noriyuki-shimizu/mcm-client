@@ -7,15 +7,17 @@ import auths from '@/store/auths';
 Vue.use(Vuex);
 
 const store: StoreOptions<RootState> = {
-  state: {
-    version: '1.0.0',
-  },
-  modules: {
-    auths,
-  },
-  plugins: [createPersistedState({
-    key: 'mcmApp',
-  })],
+    state: {
+        version: '1.0.0'
+    },
+    modules: {
+        auths
+    },
+    plugins: [
+        createPersistedState({
+            key: 'mcmApp'
+        })
+    ]
 };
 
 export default new Vuex.Store<RootState>(store);

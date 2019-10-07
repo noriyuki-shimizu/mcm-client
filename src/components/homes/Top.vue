@@ -1,16 +1,16 @@
 <template>
-  <div class="home-top">
-    <div class="uk-section uk-section-muted">
-      <div class="uk-panel uk-margin-xlarge-left">
-        <img
-          class="uk-align-left uk-margin-remove-adjacent"
-          src="../../images/home/home.jpg"
-          width="600"
-        />
-        <h1>My clothes.</h1>
-      </div>
+    <div class="home-top">
+        <div class="uk-section uk-section-muted">
+            <div class="uk-panel uk-margin-xlarge-left">
+                <img
+                    class="uk-align-left uk-margin-remove-adjacent"
+                    src="../../images/home/home.jpg"
+                    width="600"
+                >
+                <h1>My clothes.</h1>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">

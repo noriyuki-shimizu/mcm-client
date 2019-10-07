@@ -6,6 +6,7 @@ type CallbackType = (arg: string) => void;
 
 export default class ImageStorage extends Storage {
     private readonly IMAGE_FOLDER_NAME = 'images/';
+
     private imageRef!: Filebase.storage.Reference;
 
     private file!: File;
@@ -26,8 +27,8 @@ export default class ImageStorage extends Storage {
             throw new Error('Necessary information is missing!!');
         }
 
-        this.imageRef.put(this.file).then((snapshot) => {
-            snapshot.ref.getDownloadURL().then((downloadURL) => {
+        this.imageRef.put(this.file).then(snapshot => {
+            snapshot.ref.getDownloadURL().then(downloadURL => {
                 callback(downloadURL);
             });
         });
@@ -35,13 +36,16 @@ export default class ImageStorage extends Storage {
 
     public delete(): void {
         // Delete the file
-        this.imageRef.delete().then(() => {
-            // File deleted successfully
-            console.info('File deleted successfully.');
-        }).catch(function(this: ImageStorage, error: any) {
-            // Uh-oh, an error occurred!
-            console.error(error);
-            console.error('Image file is %o', this.file);
-        });
+        this.imageRef
+            .delete()
+            .then(() => {
+                // File deleted successfully
+                console.info('File deleted successfully.');
+            })
+            .catch(function(this: ImageStorage, error: any) {
+                // Uh-oh, an error occurred!
+                console.error(error);
+                console.error('Image file is %o', this.file);
+            });
     }
 }

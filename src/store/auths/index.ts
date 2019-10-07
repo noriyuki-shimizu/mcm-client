@@ -5,13 +5,13 @@ import getters from '@/store/auths/getters';
 import actions from '@/store/auths/actions';
 import mutations from '@/store/auths/mutations';
 
-const namespaced: boolean = true;
+const namespaced = true;
 
 const state: AuthsState = {
     userId: 0,
     user: {},
     token: '',
-    status: false,
+    status: false
 };
 
 const auths: Module<AuthsState, RootState> = {
@@ -19,7 +19,7 @@ const auths: Module<AuthsState, RootState> = {
     state,
     getters,
     actions,
-    mutations,
+    mutations
 };
 
 export default auths;
