@@ -246,12 +246,12 @@ export default class ShopEditModalForm extends Vue {
               console.log('Confirmed.');
 
               const storage: Storage = new ImageStorage(this.shopData.image.name, this.file);
-              storage.upload(
-                  (this: ShopEditModalForm, downloadURL: string) => {
-                      this.shopData.image.path = downloadURL;
-                      console.log(this.shopData.image.path);
-                  },
-              );
+            //   storage.upload(
+            //       (this: ShopEditModalForm, downloadURL: string) => {
+            //           this.shopData.image.path = downloadURL;
+            //           console.log(this.shopData.image.path);
+            //       },
+            //   );
           },
           () => {
               UIkit.modal('#shop_edit_modal').show();

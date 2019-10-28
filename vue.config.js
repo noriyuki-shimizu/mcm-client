@@ -8,7 +8,7 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                config: path.resolve(`src/configs/${process.env.NODE_ENV}.ts`)
+                config: path.resolve(`configs/${process.env.NODE_ENV}.ts`)
             }
         }
     }

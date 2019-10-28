@@ -1,6 +1,6 @@
 import * as Filebase from 'firebase/app';
 
-import Storage from '@/firebase/storage/Storage';
+import Storage from '@/plugins/firebase/storage/Storage';
 
 type CallbackType = (arg: string) => void;
 
