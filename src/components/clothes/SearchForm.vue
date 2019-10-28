@@ -8,8 +8,7 @@
                     uk-grid　v-on:submit.prevent="search"
                 >
                     <div class="uk-width-1-2@s">
-                        <label class="uk-form-label"
-for="form-stacked-brand">
+                        <label class="uk-form-label" for="form-stacked-brand">
                             Brand</label
                         >
                         <div class="uk-form-controls">
@@ -30,8 +29,7 @@ for="form-stacked-brand">
                     </div>
 
                     <div class="uk-width-1-2@s">
-                        <label class="uk-form-label"
-for="form-stacked-shop">
+                        <label class="uk-form-label" for="form-stacked-shop">
                             Shop</label
                         >
                         <div class="uk-form-controls">
@@ -52,13 +50,11 @@ for="form-stacked-shop">
                     </div>
 
                     <div class="uk-width-1-4@s">
-                        <label class="uk-form-label"
-for="form-stacked-price">
+                        <label class="uk-form-label" for="form-stacked-price">
                             Price</label
                         >
                         <div class="uk-form-controls">
-                            <select id="form-stacked-price"
-class="uk-select">
+                            <select id="form-stacked-price" class="uk-select">
                                 <option
                                     v-for="assistPrice in assistPriceList"
                                     :key="assistPrice.id"

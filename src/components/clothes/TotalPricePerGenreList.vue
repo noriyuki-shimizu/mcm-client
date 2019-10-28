@@ -9,20 +9,17 @@
                     class="uk-grid-small"
                     uk-grid
                 >
-                    <div class="uk-width-expand"
-uk-leader>
+                    <div class="uk-width-expand" uk-leader>
                         {{ totalPricePerGenre.genre }}
                     </div>
                     <div>
                         {{ totalPricePerGenre.totalPrice | formatByPrice }}
                     </div>
                 </div>
-                <hr >
+                <hr />
                 <b>
-                    <div class="uk-grid-small"
-uk-grid>
-                        <div class="uk-width-expand"
-uk-leader>Total</div>
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-expand" uk-leader>Total</div>
                         <div>{{ getTotalPrice() | formatByPrice }}</div>
                     </div>
                 </b>

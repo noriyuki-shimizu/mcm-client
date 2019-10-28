@@ -26,8 +26,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody v-for="brand in brandList"
-:key="brand.id">
+                <tbody v-for="brand in brandList" :key="brand.id">
                     <tr v-on:dblclick="$emit('openModal', brand)">
                         <td>
                             <img
@@ -36,7 +35,7 @@
                                 class="uk-preserve-width"
                                 height="200"
                                 width="200"
-                            >
+                            />
                         </td>
                         <td class="uk-text-nowrap">
                             {{ brand.name }}
@@ -53,7 +52,7 @@
             </table>
         </div>
 
-        <hr >
+        <hr />
     </div>
 </template>
 

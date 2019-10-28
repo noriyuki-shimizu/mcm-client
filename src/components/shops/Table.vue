@@ -35,8 +35,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody v-for="shop in shopList"
-:key="shop.id">
+                <tbody v-for="shop in shopList" :key="shop.id">
                     <tr v-on:dblclick="$emit('openModal', shop)">
                         <td>
                             <img
@@ -44,7 +43,7 @@
                                 class="uk-preserve-width"
                                 height="200"
                                 width="200"
-                            >
+                            />
                         </td>
                         <td class="uk-text-nowrap">
                             {{ shop.name }}
@@ -70,7 +69,7 @@
             </table>
         </div>
 
-        <hr >
+        <hr />
     </div>
 </template>
 

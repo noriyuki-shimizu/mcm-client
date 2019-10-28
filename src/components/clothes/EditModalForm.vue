@@ -1,9 +1,7 @@
 <template>
-    <div id="clothes-edit-modal-form"
-class="uk-modal-container" uk-modal>
+    <div id="clothes-edit-modal-form" class="uk-modal-container" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default"
-type="button" uk-close />
+            <button class="uk-modal-close-default" type="button" uk-close />
             <h2 class="uk-modal-title">
                 Clothes input
             </h2>
@@ -93,7 +91,7 @@ type="button" uk-close />
                                     id="form-stacked-price"
                                     v-model="clothesData.price"
                                     type="text"
-                                >
+                                />
                             </div>
                         </div>
 
@@ -109,12 +107,11 @@ type="button" uk-close />
                                     class="uk-input"
                                     type="text"
                                     placeholder="YYYY/MM/DD"
-                                >
+                                />
                             </div>
                         </div>
 
-                        <div class="uk-width-1-1"
-uk-margin>
+                        <div class="uk-width-1-1" uk-margin>
                             <label
                                 class="uk-form-label"
                                 for="form-stacked-image-path"
@@ -129,7 +126,7 @@ uk-margin>
                                         @change="imageChange"
                                         type="file"
                                         accept="image/*"
-                                    >
+                                    />
                                     <input
                                         :placeholder="
                                             clothesData.image.name
@@ -140,7 +137,7 @@ uk-margin>
                                         type="text"
                                         disabled
                                         tabindex="-1"
-                                    >
+                                    />
                                     <button
                                         class="uk-button uk-button-default uk-custome-button-color-green"
                                         type="button"

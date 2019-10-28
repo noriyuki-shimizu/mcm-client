@@ -7,12 +7,10 @@
             uk-toggle="target: #offcanvas-push"
         />
 
-        <div id="offcanvas-push"
-uk-offcanvas="mode: push; overlay: true">
+        <div id="offcanvas-push" uk-offcanvas="mode: push; overlay: true">
             <div class="uk-offcanvas-bar">
                 <div class="uk-width-1-1@s uk-width-2-4@m">
-                    <ul class="uk-nav-default uk-nav-parent-icon"
-uk-nav>
+                    <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
                         <li>
                             <router-link to="/home">
                                 <span uk-icon="icon: home" /> Home
@@ -76,8 +74,7 @@ uk-nav>
                         </li>
                         <li class="uk-nav-divider" />
                         <li>
-                            <a @click="signout"
-href="#">
+                            <a @click="signout" href="#">
                                 <span
                                     class="uk-margin-small-right"
                                     uk-icon="icon:  sign-out"

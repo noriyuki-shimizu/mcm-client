@@ -7,8 +7,7 @@
                     :key="(hierarchy, index)"
                 >
                     <span v-if="isLast(index)">{{ hierarchy }}</span>
-                    <a v-else
-href="#">{{ hierarchy }}</a>
+                    <a v-else href="#">{{ hierarchy }}</a>
                 </li>
             </ul>
         </div>

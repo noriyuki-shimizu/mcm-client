@@ -6,8 +6,7 @@
 
         <brand-search-form />
 
-        <brand-table v-on:openModal="edit"
-:brandList="brandList" />
+        <brand-table v-on:openModal="edit" :brandList="brandList" />
 
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button

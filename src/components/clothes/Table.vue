@@ -41,7 +41,7 @@
                             class="uk-preserve-width"
                             width="200px"
                             height="200px"
-                        >
+                        />
                     </td>
                     <td class="uk-text-nowrap">
                         {{ clothesData.genre.name }}
@@ -63,7 +63,7 @@
             </tbody>
         </table>
 
-        <hr >
+        <hr />
     </div>
 </template>
 

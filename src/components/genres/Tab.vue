@@ -1,7 +1,6 @@
 <template>
     <div class="genre-tab">
-        <ul class="uk-child-width-expand"
-uk-tab>
+        <ul class="uk-child-width-expand" uk-tab>
             <li
                 v-for="(genre, index) in genreList"
                 :key="(genre, index)"

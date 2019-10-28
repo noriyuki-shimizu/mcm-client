@@ -6,11 +6,11 @@
 
         <home-top />
 
-        <hr class="uk-divider-icon" >
+        <hr class="uk-divider-icon" />
 
         <home-brand />
 
-        <hr class="uk-divider-icon" >
+        <hr class="uk-divider-icon" />
 
         <home-shop />
     </div>

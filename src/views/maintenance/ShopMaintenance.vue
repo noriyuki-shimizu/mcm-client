@@ -6,8 +6,7 @@
 
         <shop-search-form />
 
-        <shop-table v-on:openModal="edit"
-:shopList="shopList" />
+        <shop-table v-on:openModal="edit" :shopList="shopList" />
 
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button

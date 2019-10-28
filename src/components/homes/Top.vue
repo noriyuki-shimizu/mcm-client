@@ -6,7 +6,7 @@
                     class="uk-align-left uk-margin-remove-adjacent"
                     src="../../images/home/home.jpg"
                     width="600"
-                >
+                />
                 <h1>My clothes.</h1>
             </div>
         </div>

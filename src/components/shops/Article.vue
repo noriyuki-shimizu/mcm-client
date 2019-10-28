@@ -6,8 +6,7 @@
         <div
             class="uk-margin-small-top uk-margin-medium-left uk-margin-medium-right"
         >
-            <div v-bind:key="shop.id"
-v-for="shop in shopList">
+            <div v-bind:key="shop.id" v-for="shop in shopList">
                 <article class="uk-comment">
                     <header
                         class="uk-comment-header uk-grid-medium uk-flex-middle"
@@ -20,7 +19,7 @@ v-for="shop in shopList">
                                 width="250"
                                 height="250"
                                 alt=""
-                            >
+                            />
                         </div>
                         <div class="uk-width-expand">
                             <a

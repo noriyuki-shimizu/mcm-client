@@ -19,7 +19,7 @@
                                 id="form-stacked-shop-name"
                                 v-model="shopDto.name"
                                 type="text"
-                            >
+                            />
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                                 type="text"
                                 autocomplete="on"
                                 list="auto_station"
-                            >
+                            />
                             <datalist id="auto_station">
                                 <option value="渋谷" />
                                 <option value="代官山" />
@@ -54,7 +54,7 @@
                                 id="form-stacked-address"
                                 v-model="shopDto.address"
                                 type="text"
-                            >
+                            />
                         </div>
                     </div>
 

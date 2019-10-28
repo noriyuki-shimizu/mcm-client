@@ -13,8 +13,7 @@
         </div>
 
         <!-- TODO: ページングの仕様が決定したら、コンポーネントに分けること -->
-        <ul class="uk-pagination uk-flex-center"
-uk-margin>
+        <ul class="uk-pagination uk-flex-center" uk-margin>
             <li>
                 <a href="#"><span uk-pagination-previous/></a>
             </li>

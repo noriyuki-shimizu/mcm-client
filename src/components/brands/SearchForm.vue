@@ -18,7 +18,7 @@
                                 id="form-stacked-brand-name"
                                 v-model="brandData.name"
                                 type="text"
-                            >
+                            />
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
                                 id="form-stacked-country"
                                 v-model="brandData.country"
                                 type="text"
-                            >
+                            />
                         </div>
                     </div>
 

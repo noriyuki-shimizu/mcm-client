@@ -1,9 +1,7 @@
 <template>
-    <div id="brand_edit_modal"
-class="uk-modal-container" uk-modal>
+    <div id="brand_edit_modal" class="uk-modal-container" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default"
-type="button" uk-close />
+            <button class="uk-modal-close-default" type="button" uk-close />
             <h2 class="uk-modal-title">
                 Brand input
             </h2>
@@ -27,7 +25,7 @@ type="button" uk-close />
                                     id="form-stacked-brand-name"
                                     v-model="brandData.name"
                                     type="text"
-                                >
+                                />
                             </div>
                         </div>
 
@@ -41,7 +39,7 @@ type="button" uk-close />
                                     v-model="brandData.link"
                                     class="uk-input"
                                     type="text"
-                                >
+                                />
                             </div>
                         </div>
 
@@ -60,8 +58,7 @@ type="button" uk-close />
                             </div>
                         </div>
 
-                        <div class="uk-width-1-1"
-uk-margin>
+                        <div class="uk-width-1-1" uk-margin>
                             <label
                                 class="uk-form-label"
                                 for="form-stacked-image-path"
@@ -76,7 +73,7 @@ uk-margin>
                                         @change="imageChange"
                                         type="file"
                                         accept="image/*"
-                                    >
+                                    />
                                     <input
                                         :placeholder="
                                             brandData.image.name
@@ -87,7 +84,7 @@ uk-margin>
                                         type="text"
                                         disabled
                                         tabindex="-1"
-                                    >
+                                    />
                                     <button
                                         class="uk-button uk-button-default uk-custome-button-color-green"
                                         type="button"
