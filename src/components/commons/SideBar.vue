@@ -90,7 +90,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import auth from '@/firebase/auth';
+import auth from '@/plugins/firebase/auth';
 
 @Component
 export default class SideBar extends Vue {

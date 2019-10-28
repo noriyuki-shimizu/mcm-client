@@ -181,7 +181,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import auth from '@/firebase/auth';
+import auth from '@/plugins/firebase/auth';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');

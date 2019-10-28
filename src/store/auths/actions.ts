@@ -1,7 +1,7 @@
 import { ActionTree } from 'vuex';
 import { RootState } from '@/store/types';
 import { AuthsState } from '@/store/auths/types';
-import api from '@/api';
+import api from '@/plugins/api';
 
 const actions: ActionTree<AuthsState, RootState> = {
     saveToken: async ({ commit }): Promise<any> => {

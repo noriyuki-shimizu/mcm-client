@@ -1,7 +1,7 @@
 import { ActionTree } from 'vuex';
 import { RootState } from '@/store/types';
 import { BrandDto } from '@/store/brands/types';
-import api from '@/api';
+import api from '@/plugins/api';
 
 const actions: ActionTree<BrandDto[], RootState> = {
     search: async ({ commit }, { userId, params }) => {

@@ -124,7 +124,7 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import VueRouter from 'vue-router';
-import auth from '@/firebase/auth';
+import auth from '@/plugins/firebase/auth';
 import store from '@/store';
 import { AuthsState } from '@/store/auths/types';
 import Base from '@/components/Base';

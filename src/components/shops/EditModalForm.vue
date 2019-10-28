@@ -199,8 +199,8 @@ import {
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import Storage from '@/firebase/storage/Storage';
-import ImageStorage from '@/firebase/storage/ImageStorage';
+import Storage from '@/plugins/firebase/storage/Storage';
+import ImageStorage from '@/plugins/firebase/storage/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
