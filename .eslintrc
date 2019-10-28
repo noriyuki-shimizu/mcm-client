@@ -5,10 +5,10 @@
     },
     "extends": [
         "airbnb-base",
-        "plugin:vue/recommended",
         "plugin:@typescript-eslint/recommended",
         "prettier",
-        "prettier/@typescript-eslint"
+        "prettier/vue",
+        "plugin:prettier/recommended"
     ],
     "overrides": [
         {
