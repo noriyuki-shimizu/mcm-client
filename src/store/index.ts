@@ -3,6 +3,7 @@ import Vuex, { StoreOptions } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import { RootState } from '@/store/types';
 import auths from '@/store/auths';
+import brands from '@/store/brands';
 
 Vue.use(Vuex);
 
@@ -11,7 +12,8 @@ const store: StoreOptions<RootState> = {
         version: '1.0.0'
     },
     modules: {
-        auths
+        auths,
+        brands
     },
     plugins: [
         createPersistedState({

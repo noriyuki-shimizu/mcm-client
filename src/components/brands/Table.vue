@@ -26,7 +26,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody v-for="brand in brandList" :key="brand.id">
+                <tbody v-for="brand in brands" :key="brand.id">
                     <tr v-on:dblclick="$emit('openModal', brand)">
                         <td>
                             <img
@@ -60,6 +60,9 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import FallbackImage from '@/directives/fallback-image';
 
+import store from '@/store';
+import { Brand } from '@/store/brands/types';
+
 import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 
 type CustomProp<T> = () => T;
@@ -71,7 +74,7 @@ type CustomProp<T> = () => T;
     }
 })
 export default class BrandTable extends Vue {
-    @Prop({ type: Array as CustomProp<any[]> })
-    private brandList!: any[];
+    @Prop({ type: Array as CustomProp<Brand[]> })
+    private brands!: Brand[];
 }
 </script>

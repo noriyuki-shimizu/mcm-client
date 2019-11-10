@@ -5,13 +5,16 @@ import api from '@/plugins/api';
 
 const actions: ActionTree<AuthsState, RootState> = {
     saveToken: async ({ commit }): Promise<any> => {
-        const [error, response] = await api({
-            method: 'POST',
-            url: '/preLogin'
-        });
+        try {
+            const response = await api({
+                method: 'POST',
+                url: '/preLogin'
+            });
 
-        console.log('preLogin result: %o, error: %o', response, error);
-        commit(`onUserIdStateChanged`, response.data);
+            commit(`onUserIdStateChanged`, response.data);
+        } catch (err) {
+            throw err;
+        }
     }
 };
 

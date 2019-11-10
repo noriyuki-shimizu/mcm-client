@@ -5,9 +5,9 @@ interface Image {
     isDelete: boolean;
 }
 
-export interface BrandDto {
-    id: number;
-    userId: number;
+export interface Brand {
+    id: number | null;
+    userId: number | null;
     name: string;
     link: string;
     image: Image;

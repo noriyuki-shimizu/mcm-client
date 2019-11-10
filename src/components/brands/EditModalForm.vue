@@ -152,7 +152,7 @@ type CallbackType = () => void;
 @Component
 export default class EditModalForm extends Vue {
     @Prop({ type: Object as CustomProp<any> })
-    private brandData!: any;
+    private brand!: any;
 
     @Prop({ type: Boolean })
     private addFlag!: boolean;
@@ -163,7 +163,7 @@ export default class EditModalForm extends Vue {
         this.file = ev.target.files[0];
 
         if (this.file === undefined) {
-            this.brandData.image = {
+            this.brand.image = {
                 id: null,
                 name: '',
                 path: '',
@@ -172,7 +172,7 @@ export default class EditModalForm extends Vue {
             return;
         }
 
-        this.brandData.image.name = this.file.name;
+        this.brand.image.name = this.file.name;
     }
 
     private hasError(): boolean {
@@ -180,7 +180,7 @@ export default class EditModalForm extends Vue {
     }
 
     private registration(): void {
-        console.log(this.brandData);
+        console.log(this.brand);
 
         UIkit.modal.confirm('I will register. Is it OK?').then(
             () => {
@@ -188,14 +188,14 @@ export default class EditModalForm extends Vue {
                 console.log('Confirmed.');
 
                 const storage: Storage = new ImageStorage(
-                    this.brandData.image.name,
+                    this.brand.image.name,
                     this.file
                 );
                 storage.upload(
                     function(this: any, downloadURL: string) {
                         this.image.path = downloadURL;
                         console.log(this.image.path);
-                    }.bind(this.brandData)
+                    }.bind(this.brand)
                 );
             },
             () => {

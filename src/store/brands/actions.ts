@@ -1,22 +1,29 @@
 import { ActionTree } from 'vuex';
 import { RootState } from '@/store/types';
-import { BrandDto } from '@/store/brands/types';
+import { Brand } from '@/store/brands/types';
 import api from '@/plugins/api';
+import config from 'config';
+import store from '@/store';
 
-const actions: ActionTree<BrandDto[], RootState> = {
-    search: async ({ commit }, { userId, params }) => {
-        const [error, result] = await api({
-            method: 'GET',
-            url: `${userId}/brands`,
-            params
-        });
+const actions: ActionTree<Brand[], RootState> = {
+    search: async ({ commit }, { params }) => {
+        try {
+            const userId = store.getters[`${config.vuex.namespace.auths}/userId`];
+            const result = await api({
+                method: 'GET',
+                url: `${userId}/brands/`,
+                params: {
+                    inputDataJson: {
+                        ...params
+                    }
+                }
+            });
 
-        if (error) {
-            throw new Error(error);
+            commit('onBrandsStateChanged', result.data);
+        } catch (err) {
+            throw err;
         }
-
-        commit('onBrandDtoStateChanged', result.data);
-    }
+    },
 };
 
 export default actions;

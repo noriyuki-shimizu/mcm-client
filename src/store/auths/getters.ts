@@ -3,6 +3,9 @@ import { RootState } from '@/store/types';
 import { AuthsState } from '@/store/auths/types';
 
 const getters: GetterTree<AuthsState, RootState> = {
+    userId: (state: AuthsState) => {
+        return state.userId;
+    },
     user: (state: AuthsState) => {
         return state.user;
     },

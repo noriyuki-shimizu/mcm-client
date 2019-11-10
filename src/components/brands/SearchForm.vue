@@ -16,20 +16,23 @@
                         <div class="uk-form-controls">
                             <input
                                 id="form-stacked-brand-name"
-                                v-model="brandData.name"
+                                class="uk-input"
+                                v-model="name"
                                 type="text"
+                                placeholder="Brand name here..."
                             />
                         </div>
                     </div>
 
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-country"
                             >Country</label
                         >
                         <div class="uk-form-controls">
                             <input
                                 id="form-stacked-country"
-                                v-model="brandData.country"
+                                class="uk-input"
+                                v-model="country"
                                 type="text"
                             />
                         </div>
@@ -44,7 +47,7 @@
                         <div class="uk-form-controls">
                             <select
                                 id="form-stacked-delete-flg"
-                                v-model="brandData.deleteFlag"
+                                v-model="isDeleted"
                                 class="uk-select"
                             >
                                 <option value="true">
@@ -75,37 +78,26 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import store from '@/store';
+import { Brand } from '@/store/brands/types';
+import Base from '@/components/Base';
 
 @Component
-export default class BrandSearchForm extends Vue {
-    private brandData: any = {
-        id: -1,
-        name: '',
-        link: '',
-        image: {
-            id: null,
-            name: '',
-            path: '',
-            deleteFlag: false
-        },
-        country: '',
-        deleteFlag: false
-    };
+export default class BrandSearchForm extends Base {
+    private name: string = '';
 
-    private brandValidators: any = {
-        name: {
-            validate: false,
-            errorMessage: ''
-        },
-        country: {
-            validate: false,
-            errorMessage: ''
-        }
-    };
+    private country: string = '';
+
+    private isDeleted: boolean = false;
 
     private search(): void {
-        console.log('search event!');
-        // TODO: 検索処理
+        store.dispatch(`${this.config.vuex.namespace.brands}/search`, {
+            params: {
+                name: this.name,
+                country: this.country,
+                isDeleted: this.isDeleted
+            }
+        });
     }
 }
 </script>

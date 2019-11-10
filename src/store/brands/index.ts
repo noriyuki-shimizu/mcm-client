@@ -1,16 +1,14 @@
 import { Module } from 'vuex';
 import { RootState } from '@/store/types';
-import { BrandDto } from '@/store/brands/types';
+import { Brand } from '@/store/brands/types';
 import getters from '@/store/brands/getters';
 import actions from '@/store/brands/actions';
 import mutations from '@/store/brands/mutations';
 
-const namespaced = true;
-
-const state: BrandDto[] = [
+const state: Brand[] = [
     {
-        id: -1,
-        userId: -1,
+        id: null,
+        userId: null,
         name: '',
         link: '',
         image: {
@@ -24,8 +22,8 @@ const state: BrandDto[] = [
     }
 ];
 
-const brands: Module<BrandDto[], RootState> = {
-    namespaced,
+const brands: Module<Brand[], RootState> = {
+    namespaced: true,
     state,
     getters,
     actions,

@@ -6,7 +6,7 @@
 
         <brand-search-form />
 
-        <brand-table v-on:openModal="edit" :brandList="brandList" />
+        <brand-table v-on:openModal="edit" :brands="getBrands" />
 
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button
@@ -20,7 +20,6 @@
         <brand-edit-modal-form
             ref="brandEditModalForm"
             :addFlag="addFlag"
-            :brandData="brandData"
         />
     </div>
 </template>
@@ -32,6 +31,10 @@ import Breadcrumb from '@/components/commons/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brands/SearchForm.vue';
 import BrandTable from '@/components/brands/Table.vue';
 import BrandEditModalForm from '@/components/brands/EditModalForm.vue';
+
+import Base from '@/components/Base';
+import store from '@/store';
+import { Brand } from '@/store/brands/types';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -45,103 +48,26 @@ const UIkit = require('uikit');
         BrandEditModalForm
     }
 })
-export default class BrandMaintenance extends Vue {
+export default class BrandMaintenance extends Base {
     private hierarchyList: string[] = ['Maintenance', 'Brand'];
 
     private addFlag: boolean = false;
 
-    private brandData: any = {
-        id: -1,
-        name: '',
-        link: '',
-        image: {
-            id: null,
-            name: '',
-            path: '',
-            deleteFlag: false
-        },
-        country: '',
-        deleteFlag: false
-    };
-
-    private brandList: any[] = [
-        {
-            id: 1,
-            name: 'bukht',
-            link: 'http://bukht.com/',
-            image: {
-                id: null,
-                name: 'bukht_icon.jpg',
-                path: require('@/images/brand/icon/bukht_icon.jpg'),
-                deleteFlag: false
-            },
-            country: '日本',
-            deleteFlag: false
-        },
-        {
-            id: 2,
-            name: 'NEON SIGN',
-            link: 'http://ne-on-sign.com/',
-            image: {
-                id: null,
-                name: 'neon-sign_icon.jpg',
-                path: require('@/images/brand/icon/neon-sign_icon.jpg'),
-                deleteFlag: false
-            },
-            country: '日本',
-            deleteFlag: false
-        },
-        {
-            id: 3,
-            name: 'MIN',
-            link: 'https://www.fashion-press.net/brands/3332',
-            image: {
-                id: null,
-                name: 'min_icon.png',
-                path: require('@/images/brand/icon/min_icon.png'),
-                deleteFlag: false
-            },
-            country: '日本',
-            deleteFlag: false
-        },
-        {
-            id: 4,
-            name: 'AURALEE',
-            link: 'https://auralee.jp/',
-            image: {
-                id: null,
-                name: 'auralee_icon.png',
-                path: require('@/images/brand/icon/auralee_icon.png'),
-                deleteFlag: false
-            },
-            country: '日本',
-            deleteFlag: false
-        }
-    ];
+    private brands: Brand[] = store.getters['brands/get'];
 
     @Emit('edit')
-    private edit(brandData: any): void {
+    private edit(brand: Brand): void {
         this.addFlag = false;
-        this.brandData = { ...brandData };
 
         this.modalShow();
     }
 
+    public get getBrands(): Brand[]{
+        return store.getters['brands/get'];
+    }
+
     private add(): void {
         this.addFlag = true;
-        this.brandData = {
-            id: -1,
-            name: '',
-            link: '',
-            image: {
-                id: null,
-                name: '',
-                path: '',
-                deleteFlag: false
-            },
-            country: '',
-            deleteFlag: false
-        };
 
         this.modalShow();
     }

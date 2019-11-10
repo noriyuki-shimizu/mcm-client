@@ -4,7 +4,8 @@ export default {
     },
     vuex: {
         namespace: {
-            auths: 'auths'
+            auths: 'auths',
+            brands: 'brands'
         }
     },
     firebase: {
