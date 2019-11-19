@@ -77,27 +77,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import { Vue, Prop, Watch } from 'vue-property-decorator';
+import { namespace } from 'vuex-class'
+import Component from 'vue-class-component'
+
 import store from '@/store';
-import { Brand } from '@/store/brands/types';
-import Base from '@/components/Base';
+import { Brand, brandNamespace } from '@/store/brands/types';
+
+const BrandStore = namespace(brandNamespace);
 
 @Component
-export default class BrandSearchForm extends Base {
+export default class BrandSearchForm extends Vue {
     private name: string = '';
 
     private country: string = '';
 
     private isDeleted: boolean = false;
 
-    private search(): void {
-        store.dispatch(`${this.config.vuex.namespace.brands}/search`, {
+    @BrandStore.Action('fetchBrands')
+    private fetchBrands!: any;
+
+    @BrandStore.State('brands')
+    private brands!: Brand[];
+
+    private async search(): Promise<void> {
+        await this.fetchBrands({
             params: {
                 name: this.name,
                 country: this.country,
                 isDeleted: this.isDeleted
             }
         });
+
+        this.$emit('searchResult', this.brands ? this.brands : []);
     }
 }
 </script>

@@ -1,10 +1,10 @@
 import { MutationTree } from 'vuex';
-import { Brand } from '@/store/brands/types';
+import { Brand, BrandsState } from '@/store/brands/types';
 
-const mutations: MutationTree<Brand[]> = {
-    onBrandsStateChanged(state: Brand[], brands: Brand[]) {
-        console.log('state: %o, brands: %o', state, brands);
-        state = brands;
+const mutations: MutationTree<BrandsState> = {
+    onBrandsStateChanged(state: BrandsState, brands: Brand[]) {
+        console.log('update brands: ', brands);
+        state.brands = brands;
     }
 };
 

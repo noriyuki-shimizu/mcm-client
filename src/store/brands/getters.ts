@@ -1,14 +1,14 @@
 import { GetterTree } from 'vuex';
 import { RootState } from '@/store/types';
-import { Brand } from '@/store/brands/types';
+import { Brand, BrandsState } from '@/store/brands/types';
 import config from 'config';
 import store from '@/store';
 
-const getters: GetterTree<Brand[], RootState> = {
-    get: (state: Brand[]) => state,
+const getters: GetterTree<BrandsState, RootState> = {
+    getBrands: (state: BrandsState) => state.brands,
 
-    findOne: (state: Brand[], id: number) =>
-        state.find(brandDto => brandDto.id === id),
+    findOne: (state: BrandsState, id: number) =>
+        state.brands.find(brand => brand.id === id),
 
     initializeData: (): Brand => {
         const userId = store.getters[`${config.vuex.namespace.auths}/userId`];

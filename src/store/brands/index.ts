@@ -1,28 +1,30 @@
 import { Module } from 'vuex';
 import { RootState } from '@/store/types';
-import { Brand } from '@/store/brands/types';
+import { BrandsState } from '@/store/brands/types';
 import getters from '@/store/brands/getters';
 import actions from '@/store/brands/actions';
 import mutations from '@/store/brands/mutations';
 
-const state: Brand[] = [
-    {
-        id: null,
-        userId: null,
-        name: '',
-        link: '',
-        image: {
+const state: BrandsState = {
+    brands: [
+        {
             id: null,
+            userId: null,
             name: '',
-            path: '',
+            link: '',
+            image: {
+                id: null,
+                name: '',
+                path: '',
+                isDelete: false
+            },
+            country: '',
             isDelete: false
-        },
-        country: '',
-        isDelete: false
-    }
-];
+        }
+    ]
+};
 
-const brands: Module<Brand[], RootState> = {
+const brands: Module<BrandsState, RootState> = {
     namespaced: true,
     state,
     getters,

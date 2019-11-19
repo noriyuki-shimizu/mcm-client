@@ -1,9 +1,6 @@
-interface Image {
-    id: number | null;
-    name: string;
-    path: string;
-    isDelete: boolean;
-}
+import { Image } from '../../images/types';
+
+export const brandNamespace = 'brands';
 
 export interface Brand {
     id: number | null;
@@ -13,4 +10,8 @@ export interface Brand {
     image: Image;
     country: string;
     isDelete: boolean;
+}
+
+export interface BrandsState {
+    brands: Brand[];
 }
