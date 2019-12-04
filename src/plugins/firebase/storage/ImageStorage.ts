@@ -1,51 +1,46 @@
 import * as Filebase from 'firebase/app';
 
-import Storage from '@/plugins/firebase/storage/Storage';
-
 type CallbackType = (arg: string) => void;
 
-export default class ImageStorage extends Storage {
-    private readonly IMAGE_FOLDER_NAME = 'images/';
+export default {
+    getImageRef(name: string) {
+        const storageRef = Filebase.storage().ref();
 
-    private imageRef!: Filebase.storage.Reference;
-
-    private file!: File;
-
-    constructor(name: string, file: File | undefined) {
-        super();
-
-        if (!name || !file) {
+        if (!name) {
             throw new Error('ImageStorage instance feild.');
         }
 
-        this.file = file;
-        this.imageRef = this.storageRef.child(this.IMAGE_FOLDER_NAME + name);
-    }
+        const IMAGE_FOLDER_NAME = 'images/';
+        return storageRef.child(IMAGE_FOLDER_NAME + name);
+    },
 
-    public upload(callback: CallbackType): void {
-        if (this.file === undefined) {
+    upload(name: string, file: File | undefined, callback: CallbackType): void {
+        if (!file) {
             throw new Error('Necessary information is missing!!');
         }
 
-        this.imageRef.put(this.file).then(snapshot => {
+        const imageRef = this.getImageRef(name);
+
+        imageRef.put(file).then(snapshot => {
             snapshot.ref.getDownloadURL().then(downloadURL => {
                 callback(downloadURL);
             });
         });
-    }
+    },
 
-    public delete(): void {
+    delete(name: string): void {
+        const imageRef = this.getImageRef(name);
         // Delete the file
-        this.imageRef
+        imageRef
             .delete()
             .then(() => {
                 // File deleted successfully
                 console.info('File deleted successfully.');
             })
-            .catch(function(this: ImageStorage, error: any) {
+            .catch((error: any) => {
                 // Uh-oh, an error occurred!
                 console.error(error);
-                console.error('Image file is %o', this.file);
+                console.error('Image name is %o', name);
             });
     }
 }
