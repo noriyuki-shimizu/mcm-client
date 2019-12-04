@@ -4,7 +4,7 @@ import { AuthsState } from '@/store/auths/types';
 import api from '@/plugins/api';
 
 const actions: ActionTree<AuthsState, RootState> = {
-    saveToken: async ({ commit }): Promise<any> => {
+    saveToken: async ({ commit }): Promise<void> => {
         try {
             const response = await api({
                 method: 'POST',
