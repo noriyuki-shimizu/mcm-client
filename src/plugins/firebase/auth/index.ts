@@ -5,7 +5,6 @@ import store from '@/store';
 
 export default {
     init(): void {
-        firebase.initializeApp(config.firebase);
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
     },
 
@@ -13,22 +12,18 @@ export default {
         username: string,
         password: string
     ): Promise<any> {
-        return await firebase
+        return firebase
             .auth()
-            .createUserWithEmailAndPassword(username, password)
-            .then(result => [null, result])
-            .catch(error => [error, null]);
+            .createUserWithEmailAndPassword(username, password);
     },
 
     async signInWithEmailAndPassword(
         username: string,
         password: string
     ): Promise<any> {
-        return await firebase
+        return firebase
             .auth()
-            .signInWithEmailAndPassword(username, password)
-            .then(response => [null, response])
-            .catch(error => [error, null]);
+            .signInWithEmailAndPassword(username, password);
     },
 
     async loginWithGoogle(): Promise<any> {
@@ -42,7 +37,7 @@ export default {
     },
 
     async logout(): Promise<any> {
-        return await firebase.auth().signOut();
+        return firebase.auth().signOut();
     },
 
     async onAuth(): Promise<any> {
