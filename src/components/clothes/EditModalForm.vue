@@ -195,8 +195,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import Pikaday from 'pikaday';
 
-import Storage from '@/plugins/firebase/storage/Storage';
-import ImageStorage from '@/plugins/firebase/storage/ImageStorage';
+import imageStorage from '@/plugins/firebase/storage/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -270,15 +269,13 @@ export default class ClothesEditModalForm extends Vue {
                 // TODO: 登録処理
                 console.log('Confirmed.');
 
-                const storage: Storage = new ImageStorage(
+                imageStorage.upload(
                     this.clothesData.image.name,
-                    this.file
-                );
-                storage.upload(
-                    function(this: ClothesEditModalForm, downloadURL: string) {
+                    this.file,
+                    (downloadURL: string) => {
                         this.clothesData.image.path = downloadURL;
                         console.log(this.clothesData.image.path);
-                    }.bind(this)
+                    }
                 );
             },
             () => {

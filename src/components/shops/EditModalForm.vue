@@ -199,8 +199,7 @@ import {
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import Storage from '@/plugins/firebase/storage/Storage';
-import ImageStorage from '@/plugins/firebase/storage/ImageStorage';
+import imageStorage from '@/plugins/firebase/storage/ImageStorage';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -245,13 +244,14 @@ export default class ShopEditModalForm extends Vue {
               // TODO: 登録処理
               console.log('Confirmed.');
 
-              const storage: Storage = new ImageStorage(this.shopData.image.name, this.file);
-              //   storage.upload(
-              //       (this: ShopEditModalForm, downloadURL: string) => {
-              //           this.shopData.image.path = downloadURL;
-              //           console.log(this.shopData.image.path);
-              //       },
-              //   );
+              imageStorage.upload(
+                  this.shopData.image.name,
+                  this.file,
+                  (downloadURL: string) => {
+                        this.shopData.image.path = downloadURL;
+                        console.log(this.shopData.image.path);
+                    }
+                );
           },
           () => {
               UIkit.modal('#shop_edit_modal').show();
