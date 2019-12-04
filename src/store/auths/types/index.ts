@@ -1,3 +1,5 @@
+export const authNamespace = 'auths'
+
 export interface AuthsState {
     userId: number;
     user: {};
