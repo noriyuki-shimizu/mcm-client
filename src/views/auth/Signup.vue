@@ -236,6 +236,10 @@ export default class Signup extends Vue {
 
     private isLoading: boolean = false;
 
+    private created() {
+        auth.init();
+    }
+
     private validation(): Validation {
         return {
             username: {
@@ -283,16 +287,14 @@ export default class Signup extends Vue {
         this.progress = true;
         this.isLoading = true;
 
-        const [createErr, result] = await auth.createUserWithEmailAndPassword(
+        const result = await auth.createUserWithEmailAndPassword(
             this.username,
             this.password
-        );
-        if (createErr) {
-            console.log(createErr);
-            UIkit.notification({ message: createErr, status: 'danger' });
+        ).catch(error => {
+            console.log(error);
+            UIkit.notification({ message: error, status: 'danger' });
             this.isLoading = false;
-            return;
-        }
+        });
 
         this.username = '';
         this.password = '';

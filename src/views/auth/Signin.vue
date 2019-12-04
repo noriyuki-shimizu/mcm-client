@@ -122,12 +122,13 @@
 </template>
 
 <script lang="ts">
-import { Component } from 'vue-property-decorator';
-import VueRouter from 'vue-router';
+import Vue from 'vue';
+import { namespace } from 'vuex-class';
+import Component from 'vue-class-component';
 import auth from '@/plugins/firebase/auth';
-import store from '@/store';
-import { AuthsState } from '@/store/auths/types';
-import Base from '@/components/Base';
+import { AuthsState, authNamespace } from '@/store/auths/types';
+
+const AuthStore = namespace(authNamespace);
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -158,7 +159,7 @@ const weakPassword = (val: string) => val.length >= 6;
  * ログインに関するコンポーネントです.
  */
 @Component
-export default class Signin extends Base {
+export default class Signin extends Vue {
     private username: string = '';
 
     private password: string = '';
@@ -166,6 +167,13 @@ export default class Signin extends Base {
     private isAction: boolean = false;
 
     private isLoading: boolean = false;
+
+    @AuthStore.Action('saveToken')
+    private saveToken!: () => void;
+
+    private created() {
+        auth.init();
+    }
 
     /**
    * フィールドに対するバリデーションチェック結果を返します.
@@ -219,12 +227,11 @@ export default class Signin extends Base {
         this.isAction = false;
         this.isLoading = true;
 
-        const [authErr, result] = await auth.signInWithEmailAndPassword(this.username, this.password);
-        if (authErr) {
-            UIkit.notification({ message: authErr, status: 'danger' });
+        const result = await auth.signInWithEmailAndPassword(this.username, this.password).catch(error => {
+            UIkit.notification({ message: error, status: 'danger' });
             this.isLoading = false;
-            return;
-        }
+            throw error;
+        });
 
         await auth.onAuth();
 
@@ -266,7 +273,7 @@ export default class Signin extends Base {
     }
 
     private getUserIdAndSaveUserInfo(): void {
-        store.dispatch(`${this.config.vuex.namespace.auths}/saveToken`);
+        this.saveToken();
     }
 }
 </script>
