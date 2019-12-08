@@ -6,22 +6,7 @@ import actions from '@/store/brands/actions';
 import mutations from '@/store/brands/mutations';
 
 const state: BrandsState = {
-    brands: [
-        {
-            id: null,
-            userId: null,
-            name: '',
-            link: '',
-            image: {
-                id: null,
-                name: '',
-                path: '',
-                isDelete: false
-            },
-            country: '',
-            isDelete: false
-        }
-    ]
+    brands: []
 };
 
 const brands: Module<BrandsState, RootState> = {

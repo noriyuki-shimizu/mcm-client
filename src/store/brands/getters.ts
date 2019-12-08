@@ -5,10 +5,10 @@ import config from 'config';
 import store from '@/store';
 
 const getters: GetterTree<BrandsState, RootState> = {
-    getBrands: (state: BrandsState) => state.brands,
-
-    findOne: (state: BrandsState, id: number) =>
-        state.brands.find(brand => brand.id === id),
+    getBrands: (state: BrandsState): Brand[] => {
+        console.log('state: ', state);
+        return state.brands;
+    },
 
     initializeData: (): Brand => {
         const userId = store.getters[`${config.vuex.namespace.auths}/userId`];
@@ -21,10 +21,10 @@ const getters: GetterTree<BrandsState, RootState> = {
                 id: null,
                 name: '',
                 path: '',
-                isDelete: false,
+                isDeleted: false,
             },
             country: '',
-            isDelete: false,
+            isDeleted: false,
         }
     }
 };
