@@ -4,9 +4,9 @@
 
         <head-title title-name="Brand" />
 
-        <brand-search-form v-on:searchResult="searchResult" />
+        <brand-search-form v-on:searchResult="reloadBrands" />
 
-        <brand-table v-on:openModal="edit" :brands="brands" />
+        <brand-table v-on:openModal="edit" :brands="tableBrands" />
 
         <p class="uk-align-right uk-margin-medium uk-margin-medium-right">
             <button
@@ -17,25 +17,39 @@
             </button>
         </p>
 
-        <brand-edit-modal-form
-            ref="brandEditModalForm"
-            :addFlag="addFlag"
-        />
+        <div id="brand_edit_modal" class="uk-modal-container" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <button class="uk-modal-close-default" type="button" uk-close />
+                <h2 class="uk-modal-title">
+                    Brand input
+                </h2>
+
+                <edit-modal-form
+                    v-on:reload="reloadBrands"
+                    :brand="targetBrand"
+                    :addFlag="addFlag"
+                />
+            </div>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { Prop, Vue, Emit } from 'vue-property-decorator';
+import { namespace } from 'vuex-class'
+import Component from 'vue-class-component'
 
 import HeadTitle from '@/components/commons/HeadTitle.vue';
 import Breadcrumb from '@/components/commons/Breadcrumb.vue';
 import BrandSearchForm from '@/components/brands/SearchForm.vue';
 import BrandTable from '@/components/brands/Table.vue';
-import BrandEditModalForm from '@/components/brands/EditModalForm.vue';
-import { Brand } from '@/store/brands/types';
+import EditModalForm from '@/components/brands/EditModalForm.vue';
+import { Brand, brandNamespace } from '@/store/brands/types';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
+
+const BrandStore = namespace(brandNamespace);
 
 @Component({
     components: {
@@ -43,7 +57,7 @@ const UIkit = require('uikit');
         Breadcrumb,
         BrandSearchForm,
         BrandTable,
-        BrandEditModalForm
+        EditModalForm
     }
 })
 export default class BrandMaintenance extends Vue {
@@ -51,29 +65,55 @@ export default class BrandMaintenance extends Vue {
 
     private addFlag: boolean = false;
 
-    private brands: Brand[] = [];
+    private targetBrand: Brand = {
+        id: null,
+        userId: null,
+        name: '',
+        link: '',
+        image: {
+            id: null,
+            name: '',
+            path: '',
+            isDeleted: false,
+        },
+        country: '',
+        isDeleted: false,
+    };
 
-    @Emit('searchResult')
-    private searchResult(brands: Brand[]): void {
-        this.brands = brands;
+    private tableBrands: Brand[] = [];
+
+    @BrandStore.Getter('getBrands')
+    private getBrands!: Brand[];
+
+    @BrandStore.Getter('initializeData')
+    private initializeData!: Brand;
+
+    @Emit('reloadBrands')
+    private reloadBrands(): void {
+        this.tableBrands = this.getBrands;
     }
 
     @Emit('edit')
-    private edit(brand: Brand): void {
+    private edit(id: number): void {
+        const brand = this.tableBrands.find(tableBrand => tableBrand.id === id);
+        if (!brand) {
+            UIkit.notification({ message: 'Select brand is not exists.', status: 'danger' });
+            return;
+        }
+        this.targetBrand = brand;
         this.addFlag = false;
 
         this.modalShow();
     }
 
     private add(): void {
+        this.targetBrand = this.initializeData;
         this.addFlag = true;
 
         this.modalShow();
     }
 
     private modalShow(): void {
-        (this.$refs.brandEditModalForm as any).inputAllCheck();
-
         UIkit.modal('#brand_edit_modal').show();
     }
 }

@@ -1,111 +1,103 @@
 <template>
-    <div id="brand_edit_modal" class="uk-modal-container" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body">
-            <button class="uk-modal-close-default" type="button" uk-close />
-            <h2 class="uk-modal-title">
-                Brand input
-            </h2>
-
-            <div class="uk-section uk-section-muted">
-                <div class="uk-container">
-                    <h3>Input form</h3>
-                    <form
-                        v-on:submit.prevent="registration"
-                        class="uk-grid-small"
-                        uk-grid
+    <div id="edit_modal_form" class="uk-section uk-section-muted">
+        <div class="uk-container">
+            <h3>Input form</h3>
+            <form
+                v-on:submit.prevent="registration"
+                class="uk-grid-small"
+                uk-grid
+            >
+                <div class="uk-width-1-2@s">
+                    <label
+                        class="uk-form-label"
+                        for="form-stacked-brand-name"
+                        >Brand name</label
                     >
-                        <div class="uk-width-1-2@s">
-                            <label
-                                class="uk-form-label"
-                                for="form-stacked-brand-name"
-                                >Brand name</label
-                            >
-                            <div class="uk-form-controls">
-                                <input
-                                    id="form-stacked-brand-name"
-                                    v-model="brandData.name"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-
-                        <div class="uk-width-1-2@s">
-                            <label class="uk-form-label" for="form-stacked-link"
-                                >Site link</label
-                            >
-                            <div class="uk-form-controls">
-                                <input
-                                    id="form-stacked-link"
-                                    v-model="brandData.link"
-                                    class="uk-input"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-
-                        <div class="uk-width-1-2@s">
-                            <label
-                                class="uk-form-label"
-                                for="form-stacked-country"
-                                >Country</label
-                            >
-                            <div class="uk-form-controls">
-                                <input
-                                    id="form-stacked-country"
-                                    v-model="brandData.country"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-
-                        <div class="uk-width-1-1" uk-margin>
-                            <label
-                                class="uk-form-label"
-                                for="form-stacked-image-path"
-                                >Image</label
-                            >
-                            <div class="uk-form-controls">
-                                <div
-                                    uk-form-custom="target: true"
-                                    class="js-upload uk-width-1-1"
-                                >
-                                    <input
-                                        @change="imageChange"
-                                        type="file"
-                                        accept="image/*"
-                                    />
-                                    <input
-                                        :placeholder="
-                                            brandData.image.name
-                                                ? brandData.image.name
-                                                : 'Select file'
-                                        "
-                                        class="uk-input uk-width-1-2@s"
-                                        type="text"
-                                        disabled
-                                        tabindex="-1"
-                                    />
-                                    <button
-                                        class="uk-button uk-button-default uk-custome-button-color-green"
-                                        type="button"
-                                        tabindex="-1"
-                                    >
-                                        Select
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="uk-form-controls">
+                        <input
+                            id="form-stacked-brand-name"
+                            v-model="brand.name"
+                            class="uk-input"
+                            type="text"
+                        />
+                    </div>
                 </div>
 
+                <div class="uk-width-1-2@s">
+                    <label class="uk-form-label" for="form-stacked-link"
+                        >Site link</label
+                    >
+                    <div class="uk-form-controls">
+                        <input
+                            id="form-stacked-link"
+                            v-model="brand.link"
+                            class="uk-input"
+                            type="text"
+                        />
+                    </div>
+                </div>
+
+                <div class="uk-width-1-2@s">
+                    <label
+                        class="uk-form-label"
+                        for="form-stacked-country"
+                        >Country</label
+                    >
+                    <div class="uk-form-controls">
+                        <input
+                            id="form-stacked-country"
+                            v-model="brand.country"
+                            class="uk-input"
+                            type="text"
+                        />
+                    </div>
+                </div>
+
+                <div class="uk-width-1-1" uk-margin>
+                    <label
+                        class="uk-form-label"
+                        for="form-stacked-image-path"
+                        >Image</label
+                    >
+                    <div class="uk-form-controls">
+                        <div
+                            uk-form-custom="target: true"
+                            class="js-upload uk-width-1-1"
+                        >
+                            <input
+                                @change="imageChange"
+                                type="file"
+                                accept="image/*"
+                            />
+                            <input
+                                :placeholder="
+                                    brand.image.name
+                                        ? brand.image.name
+                                        : 'Select file'
+                                "
+                                class="uk-input uk-width-1-2@s"
+                                type="text"
+                                disabled
+                                tabindex="-1"
+                            />
+                            <button
+                                class="uk-button uk-button-default uk-custome-button-color-green"
+                                type="button"
+                                tabindex="-1"
+                            >
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="uk-width-1-4@s">
                     <label class="uk-form-label" for="form-stacked-delete-flg"
-                        >Delete flg</label
+                        >Is Delete</label
                     >
                     <div class="uk-form-controls">
                         <select
                             id="form-stacked-delete-flg"
-                            v-model="brandData.deleteFlag"
+                            v-model="brand.isDeleted"
                             :disabled="addFlag"
                             class="uk-select"
                         >
@@ -130,32 +122,41 @@
                         </button>
                     </p>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Prop, Vue } from 'vue-property-decorator';
+import { namespace } from 'vuex-class'
+import Component from 'vue-class-component'
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
-import Storage from '@/plugins/firebase/storage/Storage';
-import ImageStorage from '@/plugins/firebase/storage/ImageStorage';
+import imageStorage from '@/plugins/firebase/storage/ImageStorage';
+import { Brand, brandNamespace } from '@/store/brands/types';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
 
 type CustomProp<T> = () => T;
-type CallbackType = () => void;
+
+const BrandStore = namespace(brandNamespace);
 
 @Component
 export default class EditModalForm extends Vue {
-    @Prop({ type: Object as CustomProp<any> })
-    private brand!: any;
+    @BrandStore.Getter('initializeData')
+    private initializeData!: Brand;
+
+    @BrandStore.Action('save')
+    private save!: (brand: Brand) => Promise<void>;
 
     @Prop({ type: Boolean })
     private addFlag!: boolean;
+
+    @Prop({ type: Object as CustomProp<Brand> })
+    private brand!: Brand;
 
     private file?: File;
 
@@ -167,7 +168,7 @@ export default class EditModalForm extends Vue {
                 id: null,
                 name: '',
                 path: '',
-                deleteFlag: false
+                isDeleted: false
             };
             return;
         }
@@ -176,27 +177,21 @@ export default class EditModalForm extends Vue {
     }
 
     private hasError(): boolean {
-        return true;
+        return false;
     }
 
     private registration(): void {
-        console.log(this.brand);
-
         UIkit.modal.confirm('I will register. Is it OK?').then(
-            () => {
-                // TODO: 登録処理
-                console.log('Confirmed.');
-
-                const storage: Storage = new ImageStorage(
+            async () => {
+                this.brand.image.path = await imageStorage.upload(
                     this.brand.image.name,
-                    this.file
+                    this.file,
                 );
-                storage.upload(
-                    function(this: any, downloadURL: string) {
-                        this.image.path = downloadURL;
-                        console.log(this.image.path);
-                    }.bind(this.brand)
-                );
+                console.log(this.brand.image.path);
+
+                this.save(this.brand);
+
+                this.$emit('reload');
             },
             () => {
                 UIkit.modal('#brand_edit_modal').show();

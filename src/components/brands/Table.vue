@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody v-for="brand in brands" :key="brand.id">
-                    <tr v-on:dblclick="$emit('openModal', brand)">
+                    <tr v-on:dblclick="$emit('openModal', brand.id)">
                         <td>
                             <img
                                 v-fallback-image

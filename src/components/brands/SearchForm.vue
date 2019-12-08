@@ -97,19 +97,14 @@ export default class BrandSearchForm extends Vue {
     @BrandStore.Action('fetchBrands')
     private fetchBrands!: any;
 
-    @BrandStore.State('brands')
-    private brands!: Brand[];
-
     private async search(): Promise<void> {
         await this.fetchBrands({
-            params: {
-                name: this.name,
-                country: this.country,
-                isDeleted: this.isDeleted
-            }
+            name: this.name,
+            country: this.country,
+            isDeleted: this.isDeleted
         });
 
-        this.$emit('searchResult', this.brands ? this.brands : []);
+        this.$emit('searchResult');
     }
 }
 </script>
