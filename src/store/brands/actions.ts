@@ -4,15 +4,7 @@ import { Brand, BrandsState } from '@/store/brands/types';
 import api from '@/plugins/api';
 import config from 'config';
 import store from '@/store';
-
-type SerializeBrand = {
-    [k: string]: number | string | Brand['image'] | boolean | null,
-};
-
-const serialize = (brand: Brand, keys: string[]): SerializeBrand => {
-    return keys.map(key => ({[key]: brand[key]}))
-        .reduce((acc, cur) => Object.assign(acc, cur), {});
-}
+import serialize from '@/store/convert/serialize';
 
 const actions: ActionTree<BrandsState, RootState> = {
     fetchBrands: async ({ commit }, params): Promise<void> => {
@@ -34,7 +26,8 @@ const actions: ActionTree<BrandsState, RootState> = {
 
     save: async ({ commit }, brand: Readonly<Brand>): Promise<void> => {
         const userId = store.getters[`${config.vuex.namespace.auths}/userId`];
-        const { image }: Pick<Brand, 'image'> = brand;
+        const brandParamKey: string[] = ['name', 'link', 'country'];
+        const imageParamKey: string[] = ['name', 'path'];
 
         if (brand.id) {
             const result = await api({
@@ -42,10 +35,10 @@ const actions: ActionTree<BrandsState, RootState> = {
                 url: `${userId}/brands/`,
                 params: {
                     inputDataJson: {
-                        ...serialize(brand, ['id', 'name', 'link', 'country', 'isDeleted']),
-                        imageId: image.id,
-                        imageName: image.name,
-                        imagePath: image.path,
+                        ...serialize<Brand>(brand, brandParamKey.concat(['id'])),
+                        image: brand.image
+                            ? serialize<Brand['image']>(brand.image, imageParamKey.concat(['id']))
+                            : null,
                     }
                 }
             });
@@ -58,9 +51,10 @@ const actions: ActionTree<BrandsState, RootState> = {
             url: `${userId}/brands/`,
             params: {
                 inputDataJson: {
-                    ...serialize(brand, ['name', 'link', 'country']),
-                    imageName: image.name,
-                    imagePath: image.path,
+                    ...serialize<Brand>(brand, brandParamKey),
+                    image: brand.image
+                        ? serialize<Brand['image']>(brand.image, imageParamKey)
+                        : null,
                 }
             }
         });

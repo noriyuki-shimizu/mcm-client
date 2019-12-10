@@ -269,14 +269,10 @@ export default class ClothesEditModalForm extends Vue {
                 // TODO: 登録処理
                 console.log('Confirmed.');
 
-                imageStorage.upload(
-                    this.clothesData.image.name,
-                    this.file,
-                    (downloadURL: string) => {
-                        this.clothesData.image.path = downloadURL;
-                        console.log(this.clothesData.image.path);
-                    }
+                this.clothesData.image.path = imageStorage.upload(
+                    this.file
                 );
+                console.log(this.clothesData.image.path);
             },
             () => {
                 this.modalFormShow();

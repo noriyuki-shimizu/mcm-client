@@ -7,8 +7,8 @@ export interface Brand {
     id: number | null;
     userId: number | null;
     name: string;
-    link: string;
-    image: Image;
+    link: string | null;
+    image: Image | null;
     country: string;
     isDeleted: boolean;
 }

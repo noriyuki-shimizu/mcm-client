@@ -31,10 +31,10 @@
                         <td>
                             <img
                                 v-fallback-image
-                                :src="brand.image.path"
+                                :src="brand.image ? brand.image.path : '@/images/no-img.png'"
                                 class="uk-preserve-width"
-                                height="200"
-                                width="200"
+                                height="200px"
+                                width="200px"
                             />
                         </td>
                         <td class="uk-text-nowrap">
@@ -62,7 +62,6 @@ import FallbackImage from '@/directives/fallback-image';
 
 import store from '@/store';
 import { Brand } from '@/store/brands/types';
-
 import CustomFormatMixin from '@/mixins/CustomFormatMixin';
 
 type CustomProp<T> = () => T;

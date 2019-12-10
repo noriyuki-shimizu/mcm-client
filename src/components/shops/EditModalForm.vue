@@ -244,14 +244,10 @@ export default class ShopEditModalForm extends Vue {
               // TODO: 登録処理
               console.log('Confirmed.');
 
-              imageStorage.upload(
-                  this.shopData.image.name,
-                  this.file,
-                  (downloadURL: string) => {
-                        this.shopData.image.path = downloadURL;
-                        console.log(this.shopData.image.path);
-                    }
-                );
+              this.shopData.image.path = imageStorage.upload(
+                  this.file
+              );
+              console.log(this.shopData.image.path);
           },
           () => {
               UIkit.modal('#shop_edit_modal').show();

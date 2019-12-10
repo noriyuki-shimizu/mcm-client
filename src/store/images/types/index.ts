@@ -1,6 +1,6 @@
 export interface Image {
     id: number | null;
     name: string;
-    path: string;
-    isDeleted: boolean;
+    path: string | null;
+    isDeleted?: boolean;
 }

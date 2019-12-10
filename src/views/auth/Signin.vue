@@ -107,17 +107,12 @@
                         </div>
 
                         <div v-show="isLoading">
-                            <div class="uk-overlay-default uk-position-cover" />
-                            <div class="ui-margin uk-overlay uk-position-center uk-dark">
-                                <span uk-spinner="ratio: 4.5" />
-                            </div>
+                            <spinner />
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -127,6 +122,7 @@ import { namespace } from 'vuex-class';
 import Component from 'vue-class-component';
 import auth from '@/plugins/firebase/auth';
 import { AuthsState, authNamespace } from '@/store/auths/types';
+import Spinner from '@/components/commons/Spinner.vue';
 
 const AuthStore = namespace(authNamespace);
 
@@ -158,7 +154,11 @@ const weakPassword = (val: string) => val.length >= 6;
 /**
  * ログインに関するコンポーネントです.
  */
-@Component
+@Component({
+    components: {
+        Spinner,
+    }
+})
 export default class Signin extends Vue {
     private username: string = '';
 

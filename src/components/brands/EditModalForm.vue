@@ -71,7 +71,7 @@
                             />
                             <input
                                 :placeholder="
-                                    brand.image.name
+                                    brand.image && brand.image.name
                                         ? brand.image.name
                                         : 'Select file'
                                 "
@@ -90,6 +90,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="uk-width-1-1">
+                    <img
+                        v-fallback-image
+                        :src="brand.image && brand.image.path ? brand.image.path : '@/images/no-img.png'"
+                        class="uk-preserve-width"
+                        height="200px"
+                        width="200px"
+                    />
+                </div>
+
                 <div class="uk-width-1-4@s">
                     <label class="uk-form-label" for="form-stacked-delete-flg"
                         >Is Delete</label
@@ -134,6 +145,7 @@ import Component from 'vue-class-component'
 import * as Filebase from 'firebase/app';
 import 'firebase/storage';
 
+import FallbackImage from '@/directives/fallback-image';
 import imageStorage from '@/plugins/firebase/storage/ImageStorage';
 import { Brand, brandNamespace } from '@/store/brands/types';
 
@@ -144,11 +156,12 @@ type CustomProp<T> = () => T;
 
 const BrandStore = namespace(brandNamespace);
 
-@Component
+@Component({
+    directives: {
+        FallbackImage
+    },
+})
 export default class EditModalForm extends Vue {
-    @BrandStore.Getter('initializeData')
-    private initializeData!: Brand;
-
     @BrandStore.Action('save')
     private save!: (brand: Brand) => Promise<void>;
 
@@ -158,22 +171,19 @@ export default class EditModalForm extends Vue {
     @Prop({ type: Object as CustomProp<Brand> })
     private brand!: Brand;
 
+    @Prop({ type: String })
+    private beforeImageName!: string | null;
+
     private file?: File;
 
     private imageChange(ev: any): void {
-        this.file = ev.target.files[0];
+        ([this.file] = ev.target.files);
 
-        if (this.file === undefined) {
-            this.brand.image = {
-                id: null,
-                name: '',
-                path: '',
-                isDeleted: false
-            };
-            return;
-        }
-
-        this.brand.image.name = this.file.name;
+        this.brand.image = this.file ? {
+            id: null,
+            name: this.file.name,
+            path: null,
+        } : null;
     }
 
     private hasError(): boolean {
@@ -183,15 +193,29 @@ export default class EditModalForm extends Vue {
     private registration(): void {
         UIkit.modal.confirm('I will register. Is it OK?').then(
             async () => {
-                this.brand.image.path = await imageStorage.upload(
-                    this.brand.image.name,
-                    this.file,
-                );
-                console.log(this.brand.image.path);
+                if (this.beforeImageName) {
+                    await imageStorage.deleteImage(this.beforeImageName)
+                        .catch(error => {
+                            UIkit.notification({ message: error, status: 'danger' });
+                        });
+                }
 
-                this.save(this.brand);
+                this.brand.image = this.file ? {
+                    id: null,
+                    name: this.file.name,
+                    path: await imageStorage.upload(
+                        this.file,
+                    )
+                } : null;
+
+                await this.save(this.brand).catch(error => {
+                    UIkit.notification({ message: error, status: 'danger' });
+                    return;
+                });
 
                 this.$emit('reload');
+
+                UIkit.notification({ message: 'Update Success!', status: 'success' });
             },
             () => {
                 UIkit.modal('#brand_edit_modal').show();

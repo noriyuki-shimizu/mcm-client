@@ -161,14 +161,7 @@
                                 </div>
 
                                 <div v-show="isLoading">
-                                    <div
-                                        class="uk-overlay-default uk-position-cover"
-                                    />
-                                    <div
-                                        class="ui-margin uk-overlay uk-position-center uk-dark"
-                                    >
-                                        <span uk-spinner="ratio: 4.5" />
-                                    </div>
+                                    <spinner />
                                 </div>
                             </form>
                         </div>
@@ -182,6 +175,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import auth from '@/plugins/firebase/auth';
+import Spinner from '@/components/commons/Spinner.vue';
 
 // tslint:disable-next-line:no-var-requires
 const UIkit = require('uikit');
@@ -222,7 +216,11 @@ const format = (val: string) => !val || REGEX_EMAIL.test(val);
 const match = (target: string, val: string) => target === val;
 const weakPassword = (val: string) => val.length >= 6;
 
-@Component
+@Component({
+    components: {
+        Spinner,
+    }
+})
 export default class Signup extends Vue {
     private username: string = '';
 

@@ -11,12 +11,12 @@ const getImageRef = (name: string) => {
     return storageRef.child(IMAGE_FOLDER_NAME + name);
 };
 
-const upload = async (name: string, file: File | undefined): Promise<string> => {
+const upload = async (file: File | undefined): Promise<string> => {
     if (!file) {
         throw new Error('Necessary information is missing!!');
     }
 
-    const imageRef = getImageRef(name);
+    const imageRef = getImageRef(file.name);
 
     const snapshot = await imageRef.put(file);
     const downloadURL: string = await snapshot.ref.getDownloadURL();
@@ -24,19 +24,12 @@ const upload = async (name: string, file: File | undefined): Promise<string> => 
     return downloadURL;
 };
 
-const deleteImage = (name: string): void => {
+const deleteImage = async (name: string): Promise<void> => {
     const imageRef = getImageRef(name);
-    // Delete the file
     imageRef
         .delete()
-        .then(() => {
-            // File deleted successfully
-            console.info('File deleted successfully.');
-        })
         .catch((error: any) => {
-            // Uh-oh, an error occurred!
-            console.error(error);
-            console.error('Image name is %o', name);
+            throw error;
         });
 };
 

@@ -28,6 +28,7 @@
                     v-on:reload="reloadBrands"
                     :brand="targetBrand"
                     :addFlag="addFlag"
+                    :beforeImageName="beforeImageName"
                 />
             </div>
         </div>
@@ -82,6 +83,8 @@ export default class BrandMaintenance extends Vue {
 
     private tableBrands: Brand[] = [];
 
+    private beforeImageName: string | null = null;
+
     @BrandStore.Getter('getBrands')
     private getBrands!: Brand[];
 
@@ -90,6 +93,7 @@ export default class BrandMaintenance extends Vue {
 
     @Emit('reloadBrands')
     private reloadBrands(): void {
+        console.log('reloadBrands: ', this.getBrands);
         this.tableBrands = this.getBrands;
     }
 
@@ -100,8 +104,9 @@ export default class BrandMaintenance extends Vue {
             UIkit.notification({ message: 'Select brand is not exists.', status: 'danger' });
             return;
         }
-        this.targetBrand = brand;
+        this.targetBrand = Object.assign({}, brand);
         this.addFlag = false;
+        this.beforeImageName = brand.image ? brand.image.name : null;
 
         this.modalShow();
     }
@@ -109,6 +114,7 @@ export default class BrandMaintenance extends Vue {
     private add(): void {
         this.targetBrand = this.initializeData;
         this.addFlag = true;
+        this.beforeImageName = null;
 
         this.modalShow();
     }
